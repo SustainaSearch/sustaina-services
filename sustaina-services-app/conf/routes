@@ -6,4 +6,4 @@ GET         /catalog            com.sustainasearch.services.catalog.CatalogContr
 #GET         /api-doc            controllers.Assets.at(path="/public/api-doc", file="/index.html")
 #GET         /api-doc/           controllers.Assets.at(path="/public/api-doc", file="/index.html")
 #GET         /api-doc/*file      controllers.Assets.at(path="/public/api-doc", file)
-#GET         /swagger.json       controllers.ApiHelpController.getResources
+GET         /swagger.json       controllers.ApiHelpController.getResources

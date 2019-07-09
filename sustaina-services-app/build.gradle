@@ -14,6 +14,9 @@ model {
             }
         }
     }
+    distributions {
+
+    }
 }
 
 idea {
@@ -26,8 +29,14 @@ idea {
     }
 }
 
+configurations {
+    play {
+        extendsFrom compile
+    }
+}
+
 dependencies {
-    compile project(':sustaina-services-core')
+//    compile project(':sustaina-services-core')
 
     compile "com.typesafe.play:play-cache_$scalaPlatform:$playVersion"
     compile "io.swagger:swagger-play2_$scalaPlatform:$swaggerVersion"
