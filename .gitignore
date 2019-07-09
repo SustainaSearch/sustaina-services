@@ -6,6 +6,7 @@ target
 .idea_modules
 .classpath
 .project
-.settings
+.settings/
 .cache-main
 .cache-tests
+*.iml
