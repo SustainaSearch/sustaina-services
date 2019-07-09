@@ -3,7 +3,7 @@
 GET         /catalog            com.sustainasearch.services.catalog.CatalogController.search()
 
 # Swagger
-#GET         /api-doc            controllers.Assets.at(path="/public/api-doc", file="/index.html")
-#GET         /api-doc/           controllers.Assets.at(path="/public/api-doc", file="/index.html")
-#GET         /api-doc/*file      controllers.Assets.at(path="/public/api-doc", file)
+GET         /api-doc            controllers.Assets.at(path="/public/api-doc", file="/index.html")
+GET         /api-doc/           controllers.Assets.at(path="/public/api-doc", file="/index.html")
+GET         /api-doc/*file      controllers.Assets.at(path="/public/api-doc", file)
 GET         /swagger.json       controllers.ApiHelpController.getResources
