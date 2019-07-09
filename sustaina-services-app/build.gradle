@@ -1,0 +1,49 @@
+apply plugin: 'play'
+apply plugin: 'scala'
+
+model {
+    components {
+        play {
+            platform play: playVersion, scala: scalaPlatform, java: '1.8'
+            injectedRoutesGenerator = true
+
+            sources {
+                twirlTemplates {
+                    defaultImports = TwirlImports.SCALA
+                }
+            }
+        }
+    }
+}
+
+idea {
+    module {
+        sourceDirs += file("app")
+        testSourceDirs += file("test")
+        scopes.COMPILE = [plus: [configurations.play], minus: []]
+        scopes.RUNTIME = [plus: [configurations.playRun], minus:[configurations.play]]
+        scopes.TEST = [plus: [configurations.playTest], minus: [configurations.playRun]]
+    }
+}
+
+dependencies {
+    compile project(':sustaina-services-core')
+
+    compile "com.typesafe.play:play-cache_$scalaPlatform:$playVersion"
+    compile "io.swagger:swagger-play2_$scalaPlatform:$swaggerVersion"
+
+//    playTest "org.scalatestplus.play:scalatestplus-play_$scalaVersion:3.1.2"
+}
+
+repositories {
+    jcenter()
+    maven {
+        name "lightbend-maven-releases"
+        url "https://repo.lightbend.com/lightbend/maven-release"
+    }
+    ivy {
+        name "lightbend-ivy-release"
+        url "https://repo.lightbend.com/lightbend/ivy-releases"
+        layout "ivy"
+    }
+}

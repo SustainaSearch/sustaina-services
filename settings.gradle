@@ -1,0 +1,4 @@
+rootProject.name = 'sustaina-services'
+
+include 'sustaina-services-core'
+include 'sustaina-services-app'
