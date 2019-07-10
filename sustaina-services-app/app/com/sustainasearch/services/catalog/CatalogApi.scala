@@ -4,6 +4,6 @@ import play.api.libs.json.{JsValue, Json}
 
 object CatalogApi {
 
-  def toJson(result: CatalogSearchResult): JsValue =
-    Json.toJson(CatalogSearchResultApiModel(result.value))
+  def toJson(result: CatalogQueryResponse): JsValue =
+    Json.toJson(CatalogQueryResponseApiModel(result.value))
 }

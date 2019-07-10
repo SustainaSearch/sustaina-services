@@ -15,5 +15,11 @@ subprojects {
     tasks.withType(ScalaCompile) {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
+
+        ScalaCompileOptions.metaClass.daemonServer = true
+        ScalaCompileOptions.metaClass.fork = true
+        ScalaCompileOptions.metaClass.useAnt = false
+        ScalaCompileOptions.metaClass.useCompileDaemon = false
+        ScalaCompileOptions.metaClass.additionalParameters = ["-feature"]
     }
 }

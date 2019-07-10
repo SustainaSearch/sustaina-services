@@ -1,6 +1,6 @@
 
 # Catalog
-GET         /api/v1/catalog         com.sustainasearch.services.catalog.CatalogController.search(q: String)
+GET         /api/v1/catalog         com.sustainasearch.services.catalog.CatalogController.query(q: String)
 
 # Swagger
 GET         /api-doc                controllers.Assets.at(path="/public/api-doc", file="/index.html")

@@ -1,7 +1,6 @@
 apply plugin: 'play'
 apply plugin: 'scala'
 
-
 dependencies {
     compile project(':sustaina-services-core')
 
@@ -24,9 +23,7 @@ model {
             }
         }
     }
-//    distributions {
-//
-//    }
+
 }
 
 idea {

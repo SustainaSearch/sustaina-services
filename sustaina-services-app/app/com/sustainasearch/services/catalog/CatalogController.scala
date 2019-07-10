@@ -12,15 +12,15 @@ class CatalogController @Inject()(catalogService: CatalogService)(implicit ec: E
 
   @ApiOperation(
     httpMethod = "GET",
-    value = "Searches the SustainaCatalog",
+    value = "Queries the SustainaCatalog",
     produces = "application/json",
-    response = classOf[CatalogSearchResultApiModel]
+    response = classOf[CatalogQueryResponseApiModel]
   )
-  def search(@ApiParam(value = "Main query") q: String) = Action.async { implicit request =>
+  def query(@ApiParam(value = "Main query") q: String) = Action.async { implicit request =>
     for {
-      result <- catalogService.search(CatalogQuery(q))
+      response <- catalogService.query(CatalogQuery(q))
     } yield {
-      Ok(CatalogApi.toJson(result))
+      Ok(CatalogApi.toJson(response))
     }
   }
 

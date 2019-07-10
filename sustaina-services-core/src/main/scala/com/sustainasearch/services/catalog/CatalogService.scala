@@ -7,8 +7,8 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class CatalogService @Inject()(implicit ec: ExecutionContext) {
 
-  def search(query: CatalogQuery): Future[CatalogSearchResult] = {
-    Future.successful(CatalogSearchResult(s"Result for main query ${query.mainQuery}"))
+  def query(query: CatalogQuery): Future[CatalogQueryResponse] = {
+    Future.successful(CatalogQueryResponse(s"Query response for main query ${query.mainQuery}"))
   }
 
 }
