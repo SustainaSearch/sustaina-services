@@ -1,6 +1,16 @@
 apply plugin: 'play'
 apply plugin: 'scala'
 
+
+dependencies {
+    compile project(':sustaina-services-core')
+
+    compile "com.typesafe.play:play-cache_$scalaPlatform:$playVersion"
+    compile "io.swagger:swagger-play2_$scalaPlatform:$swaggerVersion"
+
+//    playTest "org.scalatestplus.play:scalatestplus-play_$scalaVersion:3.1.2"
+}
+
 model {
     components {
         play {
@@ -14,9 +24,9 @@ model {
             }
         }
     }
-    distributions {
-
-    }
+//    distributions {
+//
+//    }
 }
 
 idea {
@@ -35,15 +45,7 @@ configurations {
     }
 }
 
-dependencies {
-//    compile project(':sustaina-services-core')
-
-    compile "com.typesafe.play:play-cache_$scalaPlatform:$playVersion"
-    compile "io.swagger:swagger-play2_$scalaPlatform:$swaggerVersion"
-
-//    playTest "org.scalatestplus.play:scalatestplus-play_$scalaVersion:3.1.2"
-}
-
+// TODO: make it possible to define repositories only once in root project build.gradle
 repositories {
     jcenter()
     maven {

@@ -1,9 +1,9 @@
 
 # Catalog
-GET         /catalog            com.sustainasearch.services.catalog.CatalogController.search()
+GET         /api/v1/catalog         com.sustainasearch.services.catalog.CatalogController.search(q: String)
 
 # Swagger
-GET         /api-doc            controllers.Assets.at(path="/public/api-doc", file="/index.html")
-GET         /api-doc/           controllers.Assets.at(path="/public/api-doc", file="/index.html")
-GET         /api-doc/*file      controllers.Assets.at(path="/public/api-doc", file)
-GET         /swagger.json       controllers.ApiHelpController.getResources
+GET         /api-doc                controllers.Assets.at(path="/public/api-doc", file="/index.html")
+GET         /api-doc/               controllers.Assets.at(path="/public/api-doc", file="/index.html")
+GET         /api-doc/*file          controllers.Assets.at(path="/public/api-doc", file)
+GET         /swagger.json           controllers.ApiHelpController.getResources
