@@ -5,6 +5,16 @@
 
 ### Run locally
 
+#### Using provided bash script
+
+Execute the following bash script in the root directory:
+
+`./run-locally.sh`
+
+#### Using Gradle tasks
+
+Execute the following Gradle tasks in the root directory:
+
 1) `./gradlew clean` (optional)
 2) `./gradlew runPlayBinary -t` (omit `-t` if you don't want to enable continous build)
 
