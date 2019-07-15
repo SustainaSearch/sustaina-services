@@ -65,7 +65,7 @@ class SolrSearchEngineTest extends WordSpec with Matchers with SolrTestFixture w
       response2.numFound shouldBe 1
       response2.documents.head shouldBe secondDoc
 
-      val response3 = underTest.query(Query(mainQuery = "name:Secd", fuzzy = false))
+      val response3 = underTest.query(Query(mainQuery = "name:Secd"))
       response3.numFound shouldBe 0
     }
 
