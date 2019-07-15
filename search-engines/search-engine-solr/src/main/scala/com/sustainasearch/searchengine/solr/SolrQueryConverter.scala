@@ -11,8 +11,11 @@ object SolrQueryConverter extends QueryConverter[SolrParams] {
     val sortParam = query
       .maybeSort
       .fold(Map.empty[String, String])(sort => Map("sort" -> s"${sort.field} ${sort.order.value}"))
+    val mainQuery = {
+      if (query.fuzzy) s"${query.mainQuery}~" else query.mainQuery
+    }
     val queryParams = Map(
-      "q" -> query.mainQuery,
+      "q" -> mainQuery,
       "qt" -> "/select"
     ) ++ sortParam
     new MapSolrParams(queryParams.asJava)

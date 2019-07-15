@@ -56,9 +56,17 @@ class SolrSearchEngineTest extends WordSpec with Matchers with SolrTestFixture w
     }
 
     "find documents with fuzzy search" in {
-      val response = underTest.query(Query(mainQuery = "name:Secd~2"))
-      response.numFound shouldBe 1
-      response.documents.head shouldBe secondDoc
+      val response1 = underTest.query(Query(mainQuery = "name:Secd", fuzzy = true))
+      response1.numFound shouldBe 1
+      response1.documents.head shouldBe secondDoc
+
+      // Finds the actual value as well
+      val response2 = underTest.query(Query(mainQuery = "name:Second", fuzzy = true))
+      response2.numFound shouldBe 1
+      response2.documents.head shouldBe secondDoc
+
+      val response3 = underTest.query(Query(mainQuery = "name:Secd", fuzzy = false))
+      response3.numFound shouldBe 0
     }
 
     "sort documents" in {
