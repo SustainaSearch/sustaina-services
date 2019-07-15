@@ -5,13 +5,12 @@ import org.apache.solr.client.solrj.SolrClient
 import org.apache.solr.client.solrj.embedded.EmbeddedSolrServer
 import org.apache.solr.core.CoreContainer
 
-trait EmbeddedSolrClientFactory extends SolrClientFactory {
-  self: EmbeddedSolrConfig =>
+class EmbeddedSolrClientFactory(config: EmbeddedSolrConfig) extends SolrClientFactory {
 
   override def createSolrClient: SolrClient = {
-//    val container = new CoreContainer(solrHomeDirectory.)
-//    container.load()
-//    new EmbeddedSolrServer(container, coreName)
-    ???
+    val container = new CoreContainer(config.solrHomeDirectory)
+    container.load()
+    new EmbeddedSolrServer(container, config.coreName)
   }
+
 }

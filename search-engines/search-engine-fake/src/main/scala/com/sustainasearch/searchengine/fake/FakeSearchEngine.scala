@@ -9,12 +9,17 @@ class FakeSearchEngine[D] extends SearchEngine[D] {
 
   override def query(query: Query): QueryResponse[D] = {
     val documents = index
-      .filter(_.indexEntry.contains(query.query.toLowerCase()))
+      .filter(_.indexEntry.contains(query.mainQuery.toLowerCase()))
       .map(_.document)
       .toList
-    QueryResponse(documents)
+    QueryResponse(
+      numFound = documents.size,
+      documents
+    )
   }
 
-  override def add(document: D): Unit = index += FakeInputDocument(document)
+  override def add(documents: D*): Unit = documents.foreach { document =>
+    index += FakeInputDocument(document)
+  }
 
 }
