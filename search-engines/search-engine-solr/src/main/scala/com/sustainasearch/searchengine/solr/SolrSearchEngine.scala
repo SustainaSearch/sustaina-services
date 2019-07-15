@@ -1,11 +1,12 @@
 package com.sustainasearch.searchengine.solr
 
 import com.sustainasearch.searchengine._
+
 import scala.collection.JavaConverters._
 
-class SolrSearchEngine[D] (solrClientFactory: SolrClientFactory,
-                                    inputDocumentConverter: SolrInputDocumentConverter[D],
-                                    queryResponseConverter: SolrQueryResponseConverter[D]) extends SearchEngine[D] {
+class SolrSearchEngine[D](solrClientFactory: SolrClientFactory,
+                          inputDocumentConverter: SolrInputDocumentConverter[D],
+                          queryResponseConverter: SolrQueryResponseConverter[D]) extends SearchEngine[D] {
   private val solrClient = solrClientFactory.createSolrClient
 
   override def query(query: Query): QueryResponse[D] = {
