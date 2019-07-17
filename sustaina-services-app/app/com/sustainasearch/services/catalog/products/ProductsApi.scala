@@ -4,7 +4,6 @@ import java.util.UUID
 
 import com.sustainasearch.searchengine.QueryResponse
 import scalaz.Isomorphism.<=>
-import scalaz.
 
 object ProductsApi {
 
