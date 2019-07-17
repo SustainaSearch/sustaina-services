@@ -1,9 +1,23 @@
 package com.sustainasearch.services.catalog
 
-import play.api.libs.json.{JsValue, Json}
+import com.sustainasearch.services.catalog.products.ProductsApi
+import scalaz.Isomorphism.<=>
 
 object CatalogApi {
 
-  def toJson(result: CatalogQueryResponse): JsValue =
-    Json.toJson(CatalogQueryResponseApiModel(result.value))
+
+  val queryResponse = new (CatalogQueryResponse <=> CatalogQueryResponseApiModel) {
+    val to: CatalogQueryResponse => CatalogQueryResponseApiModel = { response =>
+      CatalogQueryResponseApiModel(
+        products = ProductsApi.queryResponse.to(response.products)
+      )
+    }
+    val from: CatalogQueryResponseApiModel => CatalogQueryResponse = { response =>
+      CatalogQueryResponse(
+        products = ProductsApi.queryResponse.from(response.products)
+      )
+    }
+  }
+
+
 }

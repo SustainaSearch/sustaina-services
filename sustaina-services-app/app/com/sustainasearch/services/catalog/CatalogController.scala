@@ -1,7 +1,9 @@
 package com.sustainasearch.services.catalog
 
+import com.sustainasearch.searchengine.Query
 import io.swagger.annotations.{Api, ApiOperation, ApiParam}
 import javax.inject.{Inject, Singleton}
+import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 
 import scala.concurrent.ExecutionContext
@@ -18,9 +20,9 @@ class CatalogController @Inject()(catalogService: CatalogService)(implicit ec: E
   )
   def query(@ApiParam(value = "Main query") q: String) = Action.async { implicit request =>
     for {
-      response <- catalogService.query(CatalogQuery(q))
+      response <- catalogService.query(Query(q))
     } yield {
-      Ok(CatalogApi.toJson(response))
+      Ok(Json.toJson(CatalogApi.queryResponse.to(response)))
     }
   }
 

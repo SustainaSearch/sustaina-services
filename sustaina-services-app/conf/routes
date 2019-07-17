@@ -2,6 +2,9 @@
 # Catalog
 GET         /api/v1/catalog         com.sustainasearch.services.catalog.CatalogController.query(q: String)
 
+# Produtcs
+POST        /api/v1/products        com.sustainasearch.services.catalog.products.ProductsController.add()
+
 # Swagger
 GET         /api-doc                controllers.Assets.at(path="/public/api-doc", file="/index.html")
 GET         /api-doc/               controllers.Assets.at(path="/public/api-doc", file="/index.html")

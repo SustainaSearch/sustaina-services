@@ -9,18 +9,16 @@ trait SolrTestFixture {
 
   case class SolrTestDocument(id: String, name: String)
 
-  sealed class SolrTestDocumentSolrInputDocumentConverter extends SolrInputDocumentConverter[SolrTestDocument] {
-    override def convertFrom(document: SolrTestDocument): SolrInputDocument = {
+  object TestSolrMorphism$ extends SolrMorphism[SolrTestDocument] {
+    override def toSolrInputDocument(document: SolrTestDocument): SolrInputDocument = {
       val solrInputDocument = new SolrInputDocument()
       solrInputDocument.addField("id", document.id)
       solrInputDocument.addField("name", document.name)
       solrInputDocument
     }
-  }
 
-  sealed class SolrTestDocumentSolrQueryResponseConverter extends SolrQueryResponseConverter[SolrTestDocument] {
-    override def convertFrom(searchEngineQueryResponse: SolrQueryResponse): QueryResponse[SolrTestDocument] = {
-      val results = searchEngineQueryResponse.getResults
+    override def fromSolrQueryResponse(response: SolrQueryResponse): QueryResponse[SolrTestDocument] = {
+      val results = response.getResults
       val documents = results.asScala.map { document =>
         val id = document.getFirstValue("id").asInstanceOf[String]
         val name = document.getFirstValue("name").asInstanceOf[String]
