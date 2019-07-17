@@ -1,0 +1,24 @@
+apply plugin: 'scala'
+
+dependencies {
+    compile "org.scala-lang:scala-library:$scalaVersion"
+
+    compile "org.apache.solr:solr-solrj:$solrVersion"
+    compile "org.apache.solr:solr-core:$solrVersion"
+
+    compile project(":search-engines:search-engine-common")
+
+    // Use Scalatest for testing our library
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.scalatest:scalatest_2.11:3.0.5'
+
+    // Need scala-xml at test runtime
+    testRuntime 'org.scala-lang.modules:scala-xml_2.11:1.1.0'
+}
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+}

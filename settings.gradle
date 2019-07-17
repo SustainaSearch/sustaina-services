@@ -1,4 +1,12 @@
 rootProject.name = 'sustaina-services'
 
-include 'sustaina-services-core'
+include 'search-engines:search-engine-common'
+include 'search-engines:search-engine-fake'
+include 'search-engines:search-engine-solr'
+
+include 'sustaina-services-catalog:sustaina-services-catalog-core'
+include 'sustaina-services-catalog:sustaina-services-products-solr-client'
+include 'sustaina-services-catalog:sustaina-services-products-solr-core'
+
+//include 'sustaina-services-core'
 include 'sustaina-services-app'
