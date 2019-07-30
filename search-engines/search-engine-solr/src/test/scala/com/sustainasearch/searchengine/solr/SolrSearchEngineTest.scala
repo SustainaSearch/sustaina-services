@@ -27,7 +27,7 @@ class SolrSearchEngineTest extends WordSpec with Matchers with SolrTestFixture w
 
     underTest = new SolrSearchEngine[SolrTestDocument](
       new EmbeddedSolrClientFactory(config),
-      TestSolrMorphism$
+      TestSolrMorphism
     )
 
     underTest.add(firstDoc, secondDoc)

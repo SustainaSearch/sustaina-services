@@ -1,6 +1,12 @@
 package com.sustainasearch.searchengine
 
-case class Query(mainQuery: String, fuzzy: Boolean = false, maybeSort: Option[Sort] = None) {
+case class Query(mainQuery: String,
+                 filterQueries: Seq[String] = Seq.empty,
+                 fuzzy: Boolean = false,
+                 maybeSort: Option[Sort] = None) {
+
+  def withFilterQuery(filterQuery: String): Query = copy(filterQueries = filterQueries :+ filterQuery)
+
   def withAscendingSort(field: String): Query = copy(maybeSort = Some(Sort(field = field, order = Ascending)))
 
   def withDescendingSort(field: String): Query = copy(maybeSort = Some(Sort(field = field, order = Descending)))

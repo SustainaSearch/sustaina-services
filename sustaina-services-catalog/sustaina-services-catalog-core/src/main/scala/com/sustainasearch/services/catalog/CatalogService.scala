@@ -11,7 +11,7 @@ class CatalogService @Inject()(productService: ProductService)(implicit ec: Exec
 
   def query(query: Query): Future[CatalogQueryResponse] = {
     for {
-      products <- productService.query(query)
+      products <- productService.query(query.withDescendingSort("sustainaIndex"))
     } yield {
       CatalogQueryResponse(
         products

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="https://item.validoo.se/SyncCode/xslt/en/CIN0.0toHTML.xsl"?>
+<catalogue_item_notification:catalogueItemNotificationMessage
+        xmlns:sh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader"
+        xsi:schemaLocation="urn:gs1:gdsn:catalogue_item_notification:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/CatalogueItemNotification.xsd"
+        xmlns:catalogue_item_notification="urn:gs1:gdsn:catalogue_item_notification:xsd:3"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <sh:StandardBusinessDocumentHeader>
+        <sh:HeaderVersion>1.0</sh:HeaderVersion>
+        <sh:Sender>
+            <sh:Identifier Authority="GS1">7300029300000</sh:Identifier>
+        </sh:Sender>
+        <sh:Receiver>
+            <sh:Identifier Authority="GS1">7381000009709</sh:Identifier>
+        </sh:Receiver>
+        <sh:DocumentIdentification>
+            <sh:Standard>GS1</sh:Standard>
+            <sh:TypeVersion>3.1</sh:TypeVersion>
+            <sh:InstanceIdentifier>MSG-e68ad020-c55d-4d11-86c9-4fbc38d62253</sh:InstanceIdentifier>
+            <sh:Type>catalogueItemNotification</sh:Type>
+            <sh:CreationDateAndTime>2018-10-29T13:57:22.1683232Z</sh:CreationDateAndTime>
+        </sh:DocumentIdentification>
+    </sh:StandardBusinessDocumentHeader>
+    <transaction>
+        <transactionIdentification>
+            <entityIdentification>TRN-e68ad020-c55d-4d11-86c9-4fbc38d62253</entityIdentification>
+            <contentOwner>
+                <gln>7310760018843</gln>
+            </contentOwner>
+        </transactionIdentification>
+        <documentCommand>
+            <documentCommandHeader type="ADD">
+                <documentCommandIdentification>
+                    <entityIdentification>CMD-e68ad020-c55d-4d11-86c9-4fbc38d62253</entityIdentification>
+                    <contentOwner>
+                        <gln>7310760018843</gln>
+                    </contentOwner>
+                </documentCommandIdentification>
+            </documentCommandHeader>
+            <catalogue_item_notification:catalogueItemNotification>
+                <creationDateTime>2018-10-29T13:57:22.1683232Z</creationDateTime>
+                <documentStatusCode>ORIGINAL</documentStatusCode>
+                <catalogueItemNotificationIdentification>
+                    <entityIdentification>DOC-20171107002519.834475fd-1ff5-458b-8df9-cae8f0d2e682</entityIdentification>
+                    <contentOwner>
+                        <gln>7310760018843</gln>
+                    </contentOwner>
+                </catalogueItemNotificationIdentification>
+                <isReload>false</isReload>
+                <catalogueItem>
+                    <dataRecipient>7381000009709</dataRecipient>
+                    <sourceDataPool>7300021122334</sourceDataPool>
+                    <catalogueItemState>
+                        <catalogueItemStateCode>REGISTERED</catalogueItemStateCode>
+                    </catalogueItemState>
+                    <tradeItem>
+                        <gtin>04062300078789</gtin>
+                        <isTradeItemABaseUnit>true</isTradeItemABaseUnit>
+                        <isTradeItemAConsumerUnit>true</isTradeItemAConsumerUnit>
+                        <isTradeItemADespatchUnit>false</isTradeItemADespatchUnit>
+                        <isTradeItemAnInvoiceUnit>false</isTradeItemAnInvoiceUnit>
+                        <isTradeItemAnOrderableUnit>false</isTradeItemAnOrderableUnit>
+                        <isTradeItemAService>false</isTradeItemAService>
+                        <tradeItemUnitDescriptorCode codeListVersion="1">BASE_UNIT_OR_EACH</tradeItemUnitDescriptorCode>
+                        <informationProviderOfTradeItem>
+                            <gln>7310760018843</gln>
+                            <partyName>Arvid Nordquist Handelsaktiebolag</partyName>
+                        </informationProviderOfTradeItem>
+                        <gdsnTradeItemClassification>
+                            <gpcCategoryCode>10000610</gpcCategoryCode>
+                            <gpcCategoryDefinition>Includes any products that can be described/observed as two or more
+                                distinct Baby and Infant Foods or Beverages sold together, which exist within the schema
+                                belonging to different bricks but to the same class, that is two or more products
+                                contained within the same pack which cross bricks within the Baby and Infant - Foods and
+                                Beverages class. Includes products such as Baby Formula and jars of Baby Food sold
+                                together. Items that are received free with purchases should be removed from the
+                                classification decision-making process. Excludes products such as Baby Formula and Milk
+                                variety packs.
+                            </gpcCategoryDefinition>
+                            <gpcCategoryName>Mat/Drycker för spädbarn/småbarn - blandförpackningar</gpcCategoryName>
+                        </gdsnTradeItemClassification>
+                        <targetMarket>
+                            <targetMarketCountryCode codeListVersion="2">752</targetMarketCountryCode>
+                        </targetMarket>
+                        <tradeItemInformation>
+                            <extension>
+                                <allergen_information:allergenInformationModule
+                                        xmlns:allergen_information="urn:gs1:gdsn:allergen_information:xsd:3"
+                                        xsi_allergen_information:schemaLocation="urn:gs1:gdsn:allergen_information:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/AllergenInformationModule.xsd"
+                                        xmlns:xsi_allergen_information="http://www.w3.org/2001/XMLSchema-instance">
+                                    <allergenRelatedInformation>
+                                        <allergenSpecificationAgency>SLV</allergenSpecificationAgency>
+                                        <allergenSpecificationName>LIVSFS 2004:27</allergenSpecificationName>
+                                        <allergen>
+                                            <allergenTypeCode codeListVersion="3">AM</allergenTypeCode>
+                                            <levelOfContainmentCode codeListVersion="2">CONTAINS
+                                            </levelOfContainmentCode>
+                                        </allergen>
+                                    </allergenRelatedInformation>
+                                </allergen_information:allergenInformationModule>
+                                <delivery_purchasing_information:deliveryPurchasingInformationModule
+                                        xmlns:delivery_purchasing_information="urn:gs1:gdsn:delivery_purchasing_information:xsd:3"
+                                        xsi_delivery_purchasing_information:schemaLocation="urn:gs1:gdsn:delivery_purchasing_information:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/DeliveryPurchasingInformationModule.xsd"
+                                        xmlns:xsi_delivery_purchasing_information="http://www.w3.org/2001/XMLSchema-instance">
+                                    <deliveryPurchasingInformation>
+                                        <isOneTimeBuy>FALSE</isOneTimeBuy>
+                                        <startAvailabilityDateTime>2013-10-06T23:00:00+01:00</startAvailabilityDateTime>
+                                    </deliveryPurchasingInformation>
+                                </delivery_purchasing_information:deliveryPurchasingInformationModule>
+                                <duty_fee_tax_information:dutyFeeTaxInformationModule
+                                        xmlns:duty_fee_tax_information="urn:gs1:gdsn:duty_fee_tax_information:xsd:3"
+                                        xsi_duty_fee_tax_information:schemaLocation="urn:gs1:gdsn:duty_fee_tax_information:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/DutyFeeTaxInformationModule.xsd"
+                                        xmlns:xsi_duty_fee_tax_information="http://www.w3.org/2001/XMLSchema-instance">
+                                    <dutyFeeTaxInformation>
+                                        <dutyFeeTaxAgencyCode codeListVersion="5">9SE</dutyFeeTaxAgencyCode>
+                                        <dutyFeeTaxTypeCode>VAT</dutyFeeTaxTypeCode>
+                                        <dutyFeeTax>
+                                            <dutyFeeTaxRate>12</dutyFeeTaxRate>
+                                        </dutyFeeTax>
+                                    </dutyFeeTaxInformation>
+                                </duty_fee_tax_information:dutyFeeTaxInformationModule>
+                                <food_and_beverage_ingredient:foodAndBeverageIngredientModule
+                                        xmlns:food_and_beverage_ingredient="urn:gs1:gdsn:food_and_beverage_ingredient:xsd:3"
+                                        xsi_food_and_beverage_ingredient:schemaLocation="urn:gs1:gdsn:food_and_beverage_ingredient:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/FoodAndBeverageIngredientModule.xsd"
+                                        xmlns:xsi_food_and_beverage_ingredient="http://www.w3.org/2001/XMLSchema-instance">
+                                    <ingredientStatement languageCode="sv" codeListVersion="1">Ingredienser:
+                                        Mjölkblandning (MJÖLK* 40 %, vatten, rapsolja*), grönsaker* 30 % (morot* 25 %,
+                                        majs* 5 %), ris* 8 % (rismannagryn*, fullkornsrisflingor* 1 %), kalciumkarbonat,
+                                        vitaminer (A, B1 , D). *Ekologisk (DE-ÖKO-001).
+                                    </ingredientStatement>
+                                </food_and_beverage_ingredient:foodAndBeverageIngredientModule>
+                                <marketing_information:marketingInformationModule
+                                        xmlns:marketing_information="urn:gs1:gdsn:marketing_information:xsd:3"
+                                        xsi_marketing_information:schemaLocation="urn:gs1:gdsn:marketing_information:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/MarketingInformationModule.xsd"
+                                        xmlns:xsi_marketing_information="http://www.w3.org/2001/XMLSchema-instance">
+                                    <marketingInformation>
+                                        <season>
+                                            <isTradeItemSeasonal>FALSE</isTradeItemSeasonal>
+                                        </season>
+                                    </marketingInformation>
+                                </marketing_information:marketingInformationModule>
+                                <nutritional_information:nutritionalInformationModule
+                                        xmlns:nutritional_information="urn:gs1:gdsn:nutritional_information:xsd:3"
+                                        xsi_nutritional_information:schemaLocation="urn:gs1:gdsn:nutritional_information:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/NutritionalInformationModule.xsd"
+                                        xmlns:xsi_nutritional_information="http://www.w3.org/2001/XMLSchema-instance">
+                                    <nutrientHeader>
+                                        <preparationStateCode codeListVersion="3">UNPREPARED</preparationStateCode>
+                                        <nutrientBasisQuantity measurementUnitCode="GRM" codeListVersion="1">100
+                                        </nutrientBasisQuantity>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">ENER-</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="KJO" codeListVersion="1">355
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">ENER-</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="E14" codeListVersion="1">85
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">FAT</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="GRM" codeListVersion="1">3.60
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">FASAT</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="GRM" codeListVersion="1">1.10
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">CHOAVL</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="GRM" codeListVersion="1">10.40
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">SUGAR-</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="GRM" codeListVersion="1">3.20
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">FIBTG</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="GRM" codeListVersion="1">1.10
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">PRO-</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="GRM" codeListVersion="1">2.10
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">SALTEQ</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="GRM" codeListVersion="1">0.08
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">NA</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="GRM" codeListVersion="1">0.03
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">VITA-</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="MC" codeListVersion="1">80
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">VITD-</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="MC" codeListVersion="1">1.20
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">THIA</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="MGM" codeListVersion="1">0.10
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                        <nutrientDetail>
+                                            <nutrientTypeCode codeListVersion="4">CA</nutrientTypeCode>
+                                            <measurementPrecisionCode codeListVersion="2">APPROXIMATELY
+                                            </measurementPrecisionCode>
+                                            <quantityContained measurementUnitCode="MGM" codeListVersion="1">72
+                                            </quantityContained>
+                                        </nutrientDetail>
+                                    </nutrientHeader>
+                                </nutritional_information:nutritionalInformationModule>
+                                <packaging_information:packagingInformationModule
+                                        xmlns:packaging_information="urn:gs1:gdsn:packaging_information:xsd:3"
+                                        xsi_packaging_information:schemaLocation="urn:gs1:gdsn:packaging_information:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/PackagingInformationModule.xsd"
+                                        xmlns:xsi_packaging_information="http://www.w3.org/2001/XMLSchema-instance">
+                                    <packaging>
+                                        <packagingTermsAndConditionsCode codeListVersion="1">12
+                                        </packagingTermsAndConditionsCode>
+                                        <packagingTypeCode codeListVersion="2">JR</packagingTypeCode>
+                                    </packaging>
+                                </packaging_information:packagingInformationModule>
+                                <packaging_marking:packagingMarkingModule
+                                        xmlns:packaging_marking="urn:gs1:gdsn:packaging_marking:xsd:3"
+                                        xsi_packaging_marking:schemaLocation="urn:gs1:gdsn:packaging_marking:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/PackagingMarkingModule.xsd"
+                                        xmlns:xsi_packaging_marking="http://www.w3.org/2001/XMLSchema-instance">
+                                    <packagingMarking>
+                                        <isPackagingMarkedReturnable>false</isPackagingMarkedReturnable>
+                                        <packagingMarkedLabelAccreditationCode codeListVersion="5">EU_ORGANIC_FARMING
+                                        </packagingMarkedLabelAccreditationCode>
+                                        <packagingDate>
+                                            <tradeItemDateOnPackagingFormatName>mm yyyy
+                                            </tradeItemDateOnPackagingFormatName>
+                                            <tradeItemDateOnPackagingTypeCode codeListVersion="4">BEST_BEFORE_DATE
+                                            </tradeItemDateOnPackagingTypeCode>
+                                        </packagingDate>
+                                    </packagingMarking>
+                                </packaging_marking:packagingMarkingModule>
+                                <place_of_item_activity:placeOfItemActivityModule
+                                        xmlns:place_of_item_activity="urn:gs1:gdsn:place_of_item_activity:xsd:3"
+                                        xsi_place_of_item_activity:schemaLocation="urn:gs1:gdsn:place_of_item_activity:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/PlaceOfItemActivityModule.xsd"
+                                        xmlns:xsi_place_of_item_activity="http://www.w3.org/2001/XMLSchema-instance">
+                                    <importClassification>
+                                        <importClassificationTypeCode codeListVersion="2">
+                                            HARMONIZED_COMMODITY_DESCRIPTION_AND_CODING_SYSTEM
+                                        </importClassificationTypeCode>
+                                        <importClassificationValue>21042000</importClassificationValue>
+                                    </importClassification>
+                                    <placeOfProductActivity>
+                                        <countryOfOrigin>
+                                            <countryCode codeListVersion="2">276</countryCode>
+                                        </countryOfOrigin>
+                                    </placeOfProductActivity>
+                                </place_of_item_activity:placeOfItemActivityModule>
+                                <sales_information:salesInformationModule
+                                        xmlns:sales_information="urn:gs1:gdsn:sales_information:xsd:3"
+                                        xsi_sales_information:schemaLocation="urn:gs1:gdsn:sales_information:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/SalesInformationModule.xsd"
+                                        xmlns:xsi_sales_information="http://www.w3.org/2001/XMLSchema-instance">
+                                    <salesInformation>
+                                        <priceComparisonMeasurement measurementUnitCode="GRM" codeListVersion="1">190
+                                        </priceComparisonMeasurement>
+                                        <priceComparisonContentTypeCode codeListVersion="1">PER_KILOGRAM
+                                        </priceComparisonContentTypeCode>
+                                    </salesInformation>
+                                </sales_information:salesInformationModule>
+                                <trade_item_data_carrier_and_identification:tradeItemDataCarrierAndIdentificationModule
+                                        xmlns:trade_item_data_carrier_and_identification="urn:gs1:gdsn:trade_item_data_carrier_and_identification:xsd:3"
+                                        xsi_trade_item_data_carrier_and_identification:schemaLocation="urn:gs1:gdsn:trade_item_data_carrier_and_identification:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/TradeItemDataCarrierAndIdentificationModule.xsd"
+                                        xmlns:xsi_trade_item_data_carrier_and_identification="http://www.w3.org/2001/XMLSchema-instance">
+                                    <dataCarrier>
+                                        <dataCarrierFamilyTypeCode codeListVersion="1">EAN_UPC
+                                        </dataCarrierFamilyTypeCode>
+                                    </dataCarrier>
+                                </trade_item_data_carrier_and_identification:tradeItemDataCarrierAndIdentificationModule>
+                                <trade_item_description:tradeItemDescriptionModule
+                                        xmlns:trade_item_description="urn:gs1:gdsn:trade_item_description:xsd:3"
+                                        xsi_trade_item_description:schemaLocation="urn:gs1:gdsn:trade_item_description:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/TradeItemDescriptionModule.xsd"
+                                        xmlns:xsi_trade_item_description="http://www.w3.org/2001/XMLSchema-instance">
+                                    <tradeItemDescriptionInformation>
+                                        <descriptionShort languageCode="sv" codeListVersion="1">Godnatt Mildgröt6m
+                                        </descriptionShort>
+                                        <functionalName languageCode="sv" codeListVersion="1">God Natt! Mildgröt med
+                                            Grönsaker 6m
+                                        </functionalName>
+                                        <brandNameInformation>
+                                            <brandName>Hipp</brandName>
+                                        </brandNameInformation>
+                                    </tradeItemDescriptionInformation>
+                                </trade_item_description:tradeItemDescriptionModule>
+                                <trade_item_hierarchy:tradeItemHierarchyModule
+                                        xmlns:trade_item_hierarchy="urn:gs1:gdsn:trade_item_hierarchy:xsd:3"
+                                        xsi_trade_item_hierarchy:schemaLocation="urn:gs1:gdsn:trade_item_hierarchy:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/TradeItemHierarchyModule.xsd"
+                                        xmlns:xsi_trade_item_hierarchy="http://www.w3.org/2001/XMLSchema-instance">
+                                    <tradeItemHierarchy>
+                                        <isTradeItemPackedIrregularly>FALSE</isTradeItemPackedIrregularly>
+                                    </tradeItemHierarchy>
+                                </trade_item_hierarchy:tradeItemHierarchyModule>
+                                <trade_item_lifespan:tradeItemLifespanModule
+                                        xmlns:trade_item_lifespan="urn:gs1:gdsn:trade_item_lifespan:xsd:3"
+                                        xsi_trade_item_lifespan:schemaLocation="urn:gs1:gdsn:trade_item_lifespan:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/TradeItemLifespanModule.xsd"
+                                        xmlns:xsi_trade_item_lifespan="http://www.w3.org/2001/XMLSchema-instance">
+                                    <tradeItemLifespan>
+                                        <minimumTradeItemLifespanFromTimeOfArrival>90
+                                        </minimumTradeItemLifespanFromTimeOfArrival>
+                                        <minimumTradeItemLifespanFromTimeOfProduction>365
+                                        </minimumTradeItemLifespanFromTimeOfProduction>
+                                    </tradeItemLifespan>
+                                </trade_item_lifespan:tradeItemLifespanModule>
+                                <trade_item_measurements:tradeItemMeasurementsModule
+                                        xmlns:trade_item_measurements="urn:gs1:gdsn:trade_item_measurements:xsd:3"
+                                        xsi_trade_item_measurements:schemaLocation="urn:gs1:gdsn:trade_item_measurements:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/TradeItemMeasurementsModule.xsd"
+                                        xmlns:xsi_trade_item_measurements="http://www.w3.org/2001/XMLSchema-instance">
+                                    <tradeItemMeasurements>
+                                        <depth measurementUnitCode="MMT" codeListVersion="1">60</depth>
+                                        <height measurementUnitCode="MMT" codeListVersion="1">96</height>
+                                        <netContent measurementUnitCode="GRM" codeListVersion="1">190</netContent>
+                                        <width measurementUnitCode="MMT" codeListVersion="1">60</width>
+                                        <tradeItemWeight>
+                                            <grossWeight measurementUnitCode="GRM" codeListVersion="1">300</grossWeight>
+                                        </tradeItemWeight>
+                                    </tradeItemMeasurements>
+                                </trade_item_measurements:tradeItemMeasurementsModule>
+                                <trade_item_size:tradeItemSizeModule
+                                        xmlns:trade_item_size="urn:gs1:gdsn:trade_item_size:xsd:3"
+                                        xsi_trade_item_size:schemaLocation="urn:gs1:gdsn:trade_item_size:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/TradeItemSizeModule.xsd"
+                                        xmlns:xsi_trade_item_size="http://www.w3.org/2001/XMLSchema-instance">
+                                    <size>
+                                        <descriptiveSize languageCode="sv" codeListVersion="1">190 g</descriptiveSize>
+                                    </size>
+                                </trade_item_size:tradeItemSizeModule>
+                                <variable_trade_item_information:variableTradeItemInformationModule
+                                        xmlns:variable_trade_item_information="urn:gs1:gdsn:variable_trade_item_information:xsd:3"
+                                        xsi_variable_trade_item_information:schemaLocation="urn:gs1:gdsn:variable_trade_item_information:xsd:3 http://www.gdsregistry.org/3.1/schemas/gs1/gdsn/VariableTradeItemInformationModule.xsd"
+                                        xmlns:xsi_variable_trade_item_information="http://www.w3.org/2001/XMLSchema-instance">
+                                    <variableTradeItemInformation>
+                                        <isTradeItemAVariableUnit>false</isTradeItemAVariableUnit>
+                                    </variableTradeItemInformation>
+                                </variable_trade_item_information:variableTradeItemInformationModule>
+                            </extension>
+                        </tradeItemInformation>
+                        <tradeItemSynchronisationDates>
+                            <lastChangeDateTime>2016-05-16T14:59:30+01:00</lastChangeDateTime>
+                            <effectiveDateTime>2017-09-03T23:00:00+01:00</effectiveDateTime>
+                            <publicationDateTime>2017-09-03T23:00:00+01:00</publicationDateTime>
+                        </tradeItemSynchronisationDates>
+                    </tradeItem>
+                </catalogueItem>
+            </catalogue_item_notification:catalogueItemNotification>
+        </documentCommand>
+    </transaction>
+</catalogue_item_notification:catalogueItemNotificationMessage>
