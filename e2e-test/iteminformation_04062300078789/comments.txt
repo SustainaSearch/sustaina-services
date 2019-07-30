@@ -1,0 +1,2 @@
+placeOfProductActivity => countryCode = 276 => Tyskland
+targetMarketCountryCode => countryCode = 752 => Sverige

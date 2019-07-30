@@ -18,9 +18,14 @@ class CatalogController @Inject()(catalogService: CatalogService)(implicit ec: E
     produces = "application/json",
     response = classOf[CatalogQueryResponseApiModel]
   )
-  def query(@ApiParam(value = "Main query") q: String) = Action.async { implicit request =>
+  def query(@ApiParam(value = "Main query") q: String,
+            @ApiParam(value = "Fuzzy query", required = false, defaultValue = "false") fuzzy: Boolean = false) = Action.async { implicit request =>
+    val query = Query(
+      mainQuery = q,
+      fuzzy = fuzzy
+    )
     for {
-      response <- catalogService.query(Query(q))
+      response <- catalogService.query(query)
     } yield {
       Ok(Json.toJson(CatalogApi.queryResponse.to(response)))
     }

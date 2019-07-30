@@ -1,0 +1,30 @@
+{
+  "id": "00000000-0000-0000-0000-000000000001",
+  "functionalNames": [
+    {
+      "unparsedName": "God Natt! Mildgröt med Grönsaker 6m",
+      "languageCode": "sv"
+    }
+  ],
+  "brandName": {
+    "unparsedName": "Hipp"
+  },
+  "category": {
+    "categoryType": "BabyFood",
+    "names": [
+      {
+        "unparsedName": "Barnmat",
+        "languageCode": "sv"
+      }
+    ]
+  },
+  "sustainaIndex": 78.567,
+  "babyFood": {
+    "ingredientStatements": [
+      {
+        "languageCode": "sv",
+        "unparsedStatement": "Ingredienser: Mjölkblandning (MJÖLK* 40 %, vatten, rapsolja*), grönsaker* 30 % (morot* 25 %, majs* 5 %), ris* 8 % (rismannagryn*, fullkornsrisflingor* 1 %), kalciumkarbonat, vitaminer (A, B1 , D). *Ekologisk (DE-ÖKO-001)."
+      }
+    ]
+  }
+}

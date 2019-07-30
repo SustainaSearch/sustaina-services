@@ -28,11 +28,11 @@ class ProductsController @Inject()(productService: ProductService)(implicit ec: 
     )
   )
   def add(): Action[JsValue] = Action.async(parse.json) { implicit request =>
-    val product = request.body.as[ProductApiModel]
+    val productRequest = request.body.as[ProductApiModel]
     for {
-      productContainer <- productService.add(ProductsApi.product.from(product))
+      productResponse <- productService.add(ProductsApi.product.from(productRequest))
     } yield {
-      Ok(Json.toJson(ProductsApi.productContainer.to(productContainer)))
+      Ok(Json.toJson(ProductsApi.product.to(productResponse)))
     }
   }
 
