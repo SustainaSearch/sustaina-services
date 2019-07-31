@@ -57,8 +57,6 @@ object ProductSolrMorphism extends SolrMorphism[Product] {
     val documents = results
       .asScala
       .map { document =>
-        val id = document.getFirstValue("id").asInstanceOf[String]
-
         val functionalNames = ListBuffer.empty[Name]
 
         if (document.containsKey("functionalName"))
@@ -67,86 +65,58 @@ object ProductSolrMorphism extends SolrMorphism[Product] {
             languageCode = None
           )
 
-        if (document.containsKey("functionalName_en"))
-          functionalNames += Name(
-            unparsedName = document.getFirstValue("functionalName_en").asInstanceOf[String],
-            languageCode = Some(LanguageCode.English)
-          )
-
-        if (document.containsKey("functionalName_sv"))
-          functionalNames += Name(
-            unparsedName = document.getFirstValue("functionalName_sv").asInstanceOf[String],
-            languageCode = Some(LanguageCode.Swedish)
-          )
-
-        val brandName = Name(
-          unparsedName = document.getFirstValue("brandName").asInstanceOf[String],
-          languageCode = None
-        )
-
-        val categoryType = CategoryType.withName(
-          document.getFirstValue("categoryType").asInstanceOf[String]
-        )
-
         val categoryNames = ListBuffer.empty[Name]
-
-        if (document.containsKey("categoryName_en"))
-          categoryNames += Name(
-            unparsedName = document.getFirstValue("categoryName_en").asInstanceOf[String],
-            languageCode = Some(LanguageCode.English)
-          )
-
-        if (document.containsKey("categoryName_sv"))
-          categoryNames += Name(
-            unparsedName = document.getFirstValue("categoryName_sv").asInstanceOf[String],
-            languageCode = Some(LanguageCode.Swedish)
-          )
-
-        val category = Category(
-          categoryType = categoryType,
-          categoryNames
-        )
-
-        val sustainaIndex = document.getFirstValue("sustainaIndex").asInstanceOf[Double]
-
         val babyFoodIngredientStatements = ListBuffer.empty[IngredientStatement]
-
-        if (document.containsKey("babyFoodIngredientStatement_en"))
-          babyFoodIngredientStatements += IngredientStatement(
-            languageCode = LanguageCode.English,
-            unparsedStatement = document.getFirstValue("babyFoodIngredientStatement_en").asInstanceOf[String]
-          )
-
-        if (document.containsKey("babyFoodIngredientStatement_sv"))
-          babyFoodIngredientStatements += IngredientStatement(
-            languageCode = LanguageCode.Swedish,
-            unparsedStatement = document.getFirstValue("babyFoodIngredientStatement_sv").asInstanceOf[String]
-          )
-
-        val maybeBabyFood = if (babyFoodIngredientStatements.isEmpty) None else Some(BabyFood(babyFoodIngredientStatements))
-
         val clothesCompositions = ListBuffer.empty[Composition]
 
-        if (document.containsKey("clothesComposition_en"))
-          clothesCompositions += Composition(
-            languageCode = LanguageCode.English,
-            unparsedComposition = document.getFirstValue("clothesComposition_en").asInstanceOf[String]
-          )
+        LanguageCode.values.foreach { languageCode =>
+          val functionalNameField = s"functionalName_${languageCode.toString}"
+          if (document.containsKey(functionalNameField))
+            functionalNames += Name(
+              unparsedName = document.getFirstValue(functionalNameField).asInstanceOf[String],
+              languageCode = Some(languageCode)
+            )
 
-        if (document.containsKey("clothesComposition_sv"))
-          clothesCompositions += Composition(
-            languageCode = LanguageCode.Swedish,
-            unparsedComposition = document.getFirstValue("clothesComposition_sv").asInstanceOf[String]
-          )
+          val categoryNameField = s"categoryName_${languageCode.toString}"
+          if (document.containsKey(categoryNameField))
+            categoryNames += Name(
+              unparsedName = document.getFirstValue(categoryNameField).asInstanceOf[String],
+              languageCode = Some(languageCode)
+            )
+
+          val babyFoodIngredientStatementField = s"babyFoodIngredientStatement_${languageCode.toString}"
+          if (document.containsKey(babyFoodIngredientStatementField))
+            babyFoodIngredientStatements += IngredientStatement(
+              languageCode = languageCode,
+              unparsedStatement = document.getFirstValue(babyFoodIngredientStatementField).asInstanceOf[String]
+            )
+
+          val clothesCompositionField = s"clothesComposition_${languageCode.toString}"
+          if (document.containsKey(clothesCompositionField))
+            clothesCompositions += Composition(
+              languageCode = languageCode,
+              unparsedComposition = document.getFirstValue(clothesCompositionField).asInstanceOf[String]
+            )
+        }
+
+        val maybeBabyFood = if (babyFoodIngredientStatements.isEmpty) None else Some(BabyFood(babyFoodIngredientStatements))
 
         val maybeClothes = if (clothesCompositions.isEmpty) None else Some(Clothes(clothesCompositions))
 
         Product(
-          UUID.fromString(id),
+          id = UUID.fromString(document.getFirstValue("id").asInstanceOf[String]),
           functionalNames,
-          brandName,
-          category,
-          sustainaIndex,
+          brandName = Name(
+            unparsedName = document.getFirstValue("brandName").asInstanceOf[String],
+            languageCode = None
+          ),
+          category = Category(
+            categoryType = CategoryType.withName(
+              document.getFirstValue("categoryType").asInstanceOf[String]
+            ),
+            categoryNames
+          ),
+          sustainaIndex = document.getFirstValue("sustainaIndex").asInstanceOf[Double],
           maybeBabyFood,
           maybeClothes
         )
