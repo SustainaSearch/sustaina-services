@@ -18,11 +18,13 @@ class CatalogController @Inject()(catalogService: CatalogService)(implicit ec: E
     produces = "application/json",
     response = classOf[CatalogQueryResponseApiModel]
   )
-  def query(@ApiParam(value = "Main query") q: String,
-            @ApiParam(value = "Fuzzy query", required = false, defaultValue = "false") fuzzy: Boolean = false) = Action.async { implicit request =>
+  def query(@ApiParam(value = "Main query", required = true) q: String,
+            @ApiParam(value = "Fuzzy query", required = false, defaultValue = "false") fuzzy: Boolean = false,
+            @ApiParam(value = "Central point using the format \"lat,lon\"") pt: Option[String] = None) = Action.async { implicit request =>
     val query = Query(
       mainQuery = q,
-      fuzzy = fuzzy
+      fuzzy = fuzzy,
+      maybeLatitudeLongitude = pt
     )
     for {
       response <- catalogService.query(query)

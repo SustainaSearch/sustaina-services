@@ -24,6 +24,8 @@ object ProductSolrMorphism extends SolrMorphism[Product] {
     val solrInputDocument = new SolrInputDocument()
     solrInputDocument.addField("id", product.id.toString)
 
+    solrInputDocument.addField("representativePoint", s"${product.representativePoint.latitude},${product.representativePoint.longitude}")
+
     product.functionalNames.foreach { name =>
       solrInputDocument.addField(s"functionalName${nameLanguageCodeSuffix(name)}", name.unparsedName)
     }
@@ -57,6 +59,13 @@ object ProductSolrMorphism extends SolrMorphism[Product] {
     val documents = results
       .asScala
       .map { document =>
+        val representativePoint = {
+          val repPointValue = document.getFirstValue("representativePoint").asInstanceOf[String]
+          val latLon = repPointValue.split("," ).map(_.toDouble)
+          val (lat, lon) = (latLon.head, latLon.last)
+          RepresentativePoint(lat, lon)
+        }
+
         val functionalNames = ListBuffer.empty[Name]
 
         if (document.containsKey("functionalName"))
@@ -105,6 +114,7 @@ object ProductSolrMorphism extends SolrMorphism[Product] {
 
         Product(
           id = UUID.fromString(document.getFirstValue("id").asInstanceOf[String]),
+          representativePoint,
           functionalNames,
           brandName = Name(
             unparsedName = document.getFirstValue("brandName").asInstanceOf[String],

@@ -33,6 +33,7 @@ object ProductsApi {
     val to: Product => ProductApiModel = { product =>
       ProductApiModel(
         id = product.id.toString,
+        representativePoint = representativePoint.to(product.representativePoint),
         functionalNames = product.functionalNames.map(name.to),
         brandName = name.to(product.brandName),
         category = category.to(product.category),
@@ -44,12 +45,28 @@ object ProductsApi {
     val from: ProductApiModel => Product = { product =>
       Product(
         id = UUID.fromString(product.id),
+        representativePoint = representativePoint.from(product.representativePoint),
         functionalNames = product.functionalNames.map(name.from),
         brandName = name.from(product.brandName),
         category = category.from(product.category),
         sustainaIndex = product.sustainaIndex,
         maybeBabyFood = product.babyFood.map(BabyFoodApi.babyFood.from),
         maybeClothes = product.clothes.map(ClothesApi.clothes.from)
+      )
+    }
+  }
+
+  val representativePoint = new (RepresentativePoint <=> RepresentativePointApiModel) {
+    val to: RepresentativePoint => RepresentativePointApiModel = { representativePoint =>
+      RepresentativePointApiModel(
+        latitude = representativePoint.latitude,
+        longitude = representativePoint.longitude
+      )
+    }
+    val from: RepresentativePointApiModel => RepresentativePoint = { representativePoint =>
+      RepresentativePoint(
+        latitude = representativePoint.latitude,
+        longitude = representativePoint.longitude
       )
     }
   }

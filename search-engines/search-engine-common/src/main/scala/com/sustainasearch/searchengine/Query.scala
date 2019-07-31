@@ -1,30 +1,40 @@
 package com.sustainasearch.searchengine
 
+import com.sustainasearch.searchengine.Order.Order
+
 case class Query(mainQuery: String,
                  filterQueries: Seq[String] = Seq.empty,
                  fuzzy: Boolean = false,
-                 maybeSort: Option[Sort] = None) {
+                 sort: Seq[Sort] = Seq.empty,
+                 maybeLatitudeLongitude: Option[String] = None,
+                 maybeBoostFunction: Option[BoostFunction] = None) {
 
   def withFilterQuery(filterQuery: String): Query = copy(filterQueries = filterQueries :+ filterQuery)
 
-  def withAscendingSort(field: String): Query = copy(maybeSort = Some(Sort(field = field, order = Ascending)))
+  def withAscendingSort(field: String): Query = copy(sort = sort :+ Sort(field = field, order = Order.Ascending))
 
-  def withDescendingSort(field: String): Query = copy(maybeSort = Some(Sort(field = field, order = Descending)))
+  def withDescendingSort(field: String): Query = copy(sort = sort :+ Sort(field = field, order = Order.Descending))
+
+  def withBoostFunction(boostFunction: BoostFunction): Query = copy(maybeBoostFunction = Some(boostFunction))
+
+  def withNearestResultBoostFunction(spatialField: String): Query = {
+    require(maybeLatitudeLongitude.isDefined, "'maybeLatitudeLongitude' must be defined when NearestResult boost function should be used")
+    withBoostFunction(
+      NearestResult(
+        latitudeLongitude = maybeLatitudeLongitude.get,
+        spatialField)
+    )
+  }
 }
 
 case class Sort(field: String, order: Order)
 
-sealed trait Order {
-  def value: String
+object Order extends Enumeration {
+  type Order = Value
+  val Ascending, Descending = Value
 }
 
-case object Ascending extends Order {
-  val value = "asc"
-}
+trait BoostFunction
 
-case object Descending extends Order {
-  val value = "desc"
-}
-
-case class UnknownOrder(value: String) extends Order
+case class NearestResult(latitudeLongitude: String, spatialField: String) extends BoostFunction
 
