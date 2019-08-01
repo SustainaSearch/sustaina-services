@@ -11,7 +11,7 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
 
   "Products Search Engine" should {
     val searchEngineFactory = new EmbeddedSolrProductSearchEngineFactory
-    val underTest = searchEngineFactory.createSearchEngine
+    val underTest = searchEngineFactory.createSearchEngine(ProductSolrFieldRegister)
 
     val babyFoodProduct = Product(
       id = UUID.fromString("00000000-0000-0000-0000-000000000001"),

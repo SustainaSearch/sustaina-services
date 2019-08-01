@@ -6,8 +6,9 @@ case class Query(mainQuery: String,
                  filterQueries: Seq[String] = Seq.empty,
                  fuzzy: Boolean = false,
                  sort: Seq[Sort] = Seq.empty,
-                 maybeLatitudeLongitude: Option[String] = None,
-                 maybeBoostFunction: Option[BoostFunction] = None) {
+                 maybeSpatialPoint: Option[SpatialPoint] = None,
+                 maybeBoostFunction: Option[BoostFunction] = None,
+                 sortByBoostFunctionResultFirst: Boolean = false) {
 
   def withFilterQuery(filterQuery: String): Query = copy(filterQueries = filterQueries :+ filterQuery)
 
@@ -17,11 +18,11 @@ case class Query(mainQuery: String,
 
   def withBoostFunction(boostFunction: BoostFunction): Query = copy(maybeBoostFunction = Some(boostFunction))
 
-  def withNearestResultBoostFunction(spatialField: String): Query = {
-    require(maybeLatitudeLongitude.isDefined, "'maybeLatitudeLongitude' must be defined when NearestResult boost function should be used")
+  def withNearestSpatialResultBoostFunction(spatialField: String): Query = {
+    require(maybeSpatialPoint.isDefined, "'maybeSpatialPoint' must be defined when NearestResult boost function should be used")
     withBoostFunction(
-      NearestResult(
-        latitudeLongitude = maybeLatitudeLongitude.get,
+      NearestSpatialResult(
+        spatialPoint = maybeSpatialPoint.get,
         spatialField)
     )
   }
@@ -36,5 +37,5 @@ object Order extends Enumeration {
 
 trait BoostFunction
 
-case class NearestResult(latitudeLongitude: String, spatialField: String) extends BoostFunction
+case class NearestSpatialResult(spatialPoint: SpatialPoint, spatialField: String) extends BoostFunction
 

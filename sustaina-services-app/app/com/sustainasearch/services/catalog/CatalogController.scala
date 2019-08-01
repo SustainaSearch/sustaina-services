@@ -1,6 +1,6 @@
 package com.sustainasearch.services.catalog
 
-import com.sustainasearch.searchengine.Query
+import com.sustainasearch.searchengine.SpatialPoint
 import io.swagger.annotations.{Api, ApiOperation, ApiParam}
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.Json
@@ -20,11 +20,11 @@ class CatalogController @Inject()(catalogService: CatalogService)(implicit ec: E
   )
   def query(@ApiParam(value = "Main query", required = true) q: String,
             @ApiParam(value = "Fuzzy query", required = false, defaultValue = "false") fuzzy: Boolean = false,
-            @ApiParam(value = "Central point using the format \"lat,lon\"") pt: Option[String] = None) = Action.async { implicit request =>
-    val query = Query(
+            @ApiParam(value = "Spatial point using the format \"lat,lon\"") sp: Option[String] = None) = Action.async { implicit request =>
+    val query = CatalogQuery(
       mainQuery = q,
       fuzzy = fuzzy,
-      maybeLatitudeLongitude = pt
+      maybeSpatialPoint = sp.map(SpatialPoint(_))
     )
     for {
       response <- catalogService.query(query)

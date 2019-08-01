@@ -1,8 +1,8 @@
 {
   "id": "00000000-0000-0000-0000-000000000004",
   "representativePoint": {
-    "latitude": 52.5200,
-    "longitude": 13.4050
+    "latitude": 10.5200,
+    "longitude": 10.4050
   },
   "functionalNames": [
     {
@@ -22,7 +22,7 @@
       }
     ]
   },
-  "sustainaIndex": 36.517,
+  "sustainaIndex": 21.517,
   "clothes": {
     "compositions": [
       {

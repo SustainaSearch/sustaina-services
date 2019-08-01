@@ -1,5 +1,7 @@
 package com.sustainasearch.services.catalog
 
-case class CatalogQuery(mainQuery: String) {
+import com.sustainasearch.searchengine.SpatialPoint
 
-}
+case class CatalogQuery(mainQuery: String,
+                        fuzzy: Boolean = false,
+                        maybeSpatialPoint: Option[SpatialPoint] = None)
