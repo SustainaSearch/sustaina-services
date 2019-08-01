@@ -7,6 +7,7 @@ import com.sustainasearch.searchengine.solr.SolrSearchEngine
 import com.sustainasearch.searchengine.solr.embedded.{EmbeddedSolrClientFactory, EmbeddedSolrConfig}
 
 class EmbeddedSolrProductSearchEngineFactory extends ProductSearchEngineFactory {
+
   override def createSearchEngine(fieldRegister: ProductSearchEngineFieldRegister): SearchEngine[Product] = {
     val solrXmlUri = getClass
       .getResource("/sustaina-products/solr.xml")
