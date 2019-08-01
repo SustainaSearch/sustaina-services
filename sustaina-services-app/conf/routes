@@ -1,6 +1,6 @@
 
 # Catalog
-GET         /api/v1/catalog         com.sustainasearch.services.catalog.CatalogController.query(q: String, fuzzy: Boolean)
+GET         /api/v1/catalog         com.sustainasearch.services.catalog.CatalogController.query(q: String, fuzzy: Boolean, sp: Option[String])
 
 # Produtcs
 POST        /api/v1/products        com.sustainasearch.services.catalog.products.ProductsController.add()

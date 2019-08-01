@@ -6,10 +6,10 @@ import com.sustainasearch.searchengine.solr.http.{HttpSolrClientFactory, HttpSol
 
 class HttpSolrProductSearchEngineFactory(config: HttpSolrConfig) extends ProductSearchEngineFactory {
 
-  override def createSearchEngine: SearchEngine[Product] = {
+  override def createSearchEngine(fieldRegister: ProductSearchEngineFieldRegister): SearchEngine[Product] = {
     new SolrSearchEngine[Product](
       new HttpSolrClientFactory(config),
-      ProductSolrMorphism
+      new ProductSolrMorphism(fieldRegister)
     )
   }
 

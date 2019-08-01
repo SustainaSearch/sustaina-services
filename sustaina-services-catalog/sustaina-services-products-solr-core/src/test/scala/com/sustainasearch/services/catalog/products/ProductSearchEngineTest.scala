@@ -11,10 +11,14 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
 
   "Products Search Engine" should {
     val searchEngineFactory = new EmbeddedSolrProductSearchEngineFactory
-    val underTest = searchEngineFactory.createSearchEngine
+    val underTest = searchEngineFactory.createSearchEngine(ProductSolrFieldRegister)
 
     val babyFoodProduct = Product(
       id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
+      representativePoint = RepresentativePoint(
+        latitude = 52,
+        longitude = 13
+      ),
       functionalNames = Seq(
         Name(
           unparsedName = "God Natt! Mildgröt med Grönsaker 6m",
@@ -49,6 +53,10 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
 
     val clothesProduct = Product(
       id = UUID.fromString("00000000-0000-0000-0000-000000000002"),
+      representativePoint = RepresentativePoint(
+        latitude = 52,
+        longitude = 13
+      ),
       functionalNames = Seq(
         Name(
           unparsedName = "Skinny Fit Chinos",
@@ -130,6 +138,8 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
       response3.numFound shouldBe 2
       response3.documents should contain only(babyFoodProduct, clothesProduct)
     }
+
+    // TODO: add test for nearest point boost function
   }
 
 }

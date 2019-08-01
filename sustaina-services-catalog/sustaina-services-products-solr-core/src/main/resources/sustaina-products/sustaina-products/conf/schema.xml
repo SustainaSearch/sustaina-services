@@ -132,6 +132,8 @@
     <!-- General fields -->
     <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false"/>
 
+    <field name="representativePoint" type="location" indexed="true" stored="true"/>
+
     <field name="functionalName" type="text_general" indexed="true" stored="true"/>
     <field name="functionalName_en" type="text_en" indexed="true" stored="true"/>
     <field name="functionalName_sv" type="text_sv" indexed="true" stored="true"/>
@@ -166,8 +168,6 @@
     <field name="price" type="pfloat" indexed="true" stored="true"/>
     <field name="popularity" type="pint" indexed="true" stored="true"/>
     <field name="inStock" type="boolean" indexed="true" stored="true"/>
-
-    <field name="store" type="location" indexed="true" stored="true"/>
 
     <!-- Common metadata fields, named specifically to match up with
       SolrCell metadata when parsing rich documents such as Word, PDF.

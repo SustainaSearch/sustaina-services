@@ -4,7 +4,6 @@ import java.util.UUID
 
 import com.sustainasearch.searchengine.QueryResponse
 import com.sustainasearch.searchengine.solr.SolrMorphism
-import com.sustainasearch.services.catalog.products.LanguageCode.LanguageCode
 import com.sustainasearch.services.catalog.products.clothes.{Clothes, Composition}
 import com.sustainasearch.services.catalog.products.food.{BabyFood, IngredientStatement}
 import org.apache.solr.client.solrj.response.{QueryResponse => SolrQueryResponse}
@@ -13,43 +12,42 @@ import org.apache.solr.common.SolrInputDocument
 import scala.collection.JavaConverters._
 import scala.collection.mutable.ListBuffer
 
-object ProductSolrMorphism extends SolrMorphism[Product] {
+class ProductSolrMorphism(fieldRegister: ProductSearchEngineFieldRegister) extends SolrMorphism[Product] {
+
+  import fieldRegister._
 
   override def toSolrInputDocument(product: Product): SolrInputDocument = {
-    def languageCodeSuffix(languageCode: LanguageCode): String = s"_${languageCode.toString}"
+    val document = new SolrInputDocument()
+    document.addField(IdField, product.id.toString)
 
-    def nameLanguageCodeSuffix(name: Name): String =
-      name.languageCode.fold("")(languageCode => languageCodeSuffix(languageCode))
-
-    val solrInputDocument = new SolrInputDocument()
-    solrInputDocument.addField("id", product.id.toString)
+    document.addField(RepresentativePointField, s"${product.representativePoint.latitude},${product.representativePoint.longitude}")
 
     product.functionalNames.foreach { name =>
-      solrInputDocument.addField(s"functionalName${nameLanguageCodeSuffix(name)}", name.unparsedName)
+      document.addField(functionalNameWithNameLanguageCodeField(name), name.unparsedName)
     }
 
-    solrInputDocument.addField(s"brandName${nameLanguageCodeSuffix(product.brandName)}", product.brandName.unparsedName)
+    document.addField(brandNameWithNameLanguageCodeField(product.brandName), product.brandName.unparsedName)
 
-    solrInputDocument.addField("categoryType", product.category.categoryType.toString)
+    document.addField(CategoryTypeField, product.category.categoryType.toString)
     product.category.names.foreach { name =>
-      solrInputDocument.addField(s"categoryName${nameLanguageCodeSuffix(name)}", name.unparsedName)
+      document.addField(categoryNameWithNameLanguageCodeField(name), name.unparsedName)
     }
 
-    solrInputDocument.addField("sustainaIndex", product.sustainaIndex)
+    document.addField(SustainaIndexField, product.sustainaIndex)
 
     product.maybeBabyFood.foreach { babyFood =>
       babyFood.ingredientStatements.foreach { statement =>
-        solrInputDocument.addField(s"babyFoodIngredientStatement${languageCodeSuffix(statement.languageCode)}", statement.unparsedStatement)
+        document.addField(babyFoodIngredientStatemenWithLanguageCodeField(statement.languageCode), statement.unparsedStatement)
       }
     }
 
     product.maybeClothes.foreach { clothes =>
       clothes.compositions.foreach { composition =>
-        solrInputDocument.addField(s"clothesComposition${languageCodeSuffix(composition.languageCode)}", composition.unparsedComposition)
+        document.addField(clothesCompositionWithLanguageCodeField(composition.languageCode), composition.unparsedComposition)
       }
     }
 
-    solrInputDocument
+    document
   }
 
   override def fromSolrQueryResponse(response: SolrQueryResponse): QueryResponse[Product] = {
@@ -57,11 +55,18 @@ object ProductSolrMorphism extends SolrMorphism[Product] {
     val documents = results
       .asScala
       .map { document =>
+        val representativePoint = {
+          val repPointValue = document.getFirstValue(RepresentativePointField).asInstanceOf[String]
+          val latLon = repPointValue.split(",").map(_.toDouble)
+          val (lat, lon) = (latLon.head, latLon.last)
+          RepresentativePoint(lat, lon)
+        }
+
         val functionalNames = ListBuffer.empty[Name]
 
-        if (document.containsKey("functionalName"))
+        if (document.containsKey(FunctionalNameField))
           functionalNames += Name(
-            unparsedName = document.getFirstValue("functionalName").asInstanceOf[String],
+            unparsedName = document.getFirstValue(FunctionalNameField).asInstanceOf[String],
             languageCode = None
           )
 
@@ -70,28 +75,28 @@ object ProductSolrMorphism extends SolrMorphism[Product] {
         val clothesCompositions = ListBuffer.empty[Composition]
 
         LanguageCode.values.foreach { languageCode =>
-          val functionalNameField = s"functionalName_${languageCode.toString}"
+          val functionalNameField = functionalNameWithLanguageCodeField(languageCode)
           if (document.containsKey(functionalNameField))
             functionalNames += Name(
               unparsedName = document.getFirstValue(functionalNameField).asInstanceOf[String],
               languageCode = Some(languageCode)
             )
 
-          val categoryNameField = s"categoryName_${languageCode.toString}"
+          val categoryNameField = categoryNameWithLanguageCodeField(languageCode)
           if (document.containsKey(categoryNameField))
             categoryNames += Name(
               unparsedName = document.getFirstValue(categoryNameField).asInstanceOf[String],
               languageCode = Some(languageCode)
             )
 
-          val babyFoodIngredientStatementField = s"babyFoodIngredientStatement_${languageCode.toString}"
+          val babyFoodIngredientStatementField = babyFoodIngredientStatemenWithLanguageCodeField(languageCode)
           if (document.containsKey(babyFoodIngredientStatementField))
             babyFoodIngredientStatements += IngredientStatement(
               languageCode = languageCode,
               unparsedStatement = document.getFirstValue(babyFoodIngredientStatementField).asInstanceOf[String]
             )
 
-          val clothesCompositionField = s"clothesComposition_${languageCode.toString}"
+          val clothesCompositionField = clothesCompositionWithLanguageCodeField(languageCode)
           if (document.containsKey(clothesCompositionField))
             clothesCompositions += Composition(
               languageCode = languageCode,
@@ -104,19 +109,20 @@ object ProductSolrMorphism extends SolrMorphism[Product] {
         val maybeClothes = if (clothesCompositions.isEmpty) None else Some(Clothes(clothesCompositions))
 
         Product(
-          id = UUID.fromString(document.getFirstValue("id").asInstanceOf[String]),
+          id = UUID.fromString(document.getFirstValue(IdField).asInstanceOf[String]),
+          representativePoint,
           functionalNames,
           brandName = Name(
-            unparsedName = document.getFirstValue("brandName").asInstanceOf[String],
+            unparsedName = document.getFirstValue(BrandNameField).asInstanceOf[String],
             languageCode = None
           ),
           category = Category(
             categoryType = CategoryType.withName(
-              document.getFirstValue("categoryType").asInstanceOf[String]
+              document.getFirstValue(CategoryTypeField).asInstanceOf[String]
             ),
             categoryNames
           ),
-          sustainaIndex = document.getFirstValue("sustainaIndex").asInstanceOf[Double],
+          sustainaIndex = document.getFirstValue(SustainaIndexField).asInstanceOf[Double],
           maybeBabyFood,
           maybeClothes
         )

@@ -1,7 +1,6 @@
 package com.sustainasearch.services.catalog
 
-import com.sustainasearch.searchengine.Query
-import com.sustainasearch.services.catalog.products.ProductService
+import com.sustainasearch.services.catalog.products.{ProductQuery, ProductService}
 import javax.inject.{Inject, Singleton}
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -9,9 +8,13 @@ import scala.concurrent.{ExecutionContext, Future}
 @Singleton
 class CatalogService @Inject()(productService: ProductService)(implicit ec: ExecutionContext) {
 
-  def query(query: Query): Future[CatalogQueryResponse] = {
+  def query(catalogQuery: CatalogQuery): Future[CatalogQueryResponse] = {
+    val productQuery = ProductQuery(catalogQuery)
+      .withSortByDescendingSustainaIndex
+      .withSortByNearestSpatialResult
+
     for {
-      products <- productService.query(query.withDescendingSort("sustainaIndex"))
+      products <- productService.query(productQuery)
     } yield {
       CatalogQueryResponse(
         products

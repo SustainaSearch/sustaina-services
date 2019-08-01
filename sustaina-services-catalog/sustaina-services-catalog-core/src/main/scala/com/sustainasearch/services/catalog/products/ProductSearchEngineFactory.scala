@@ -4,5 +4,6 @@ import com.sustainasearch.searchengine.SearchEngine
 
 trait ProductSearchEngineFactory {
 
-  def createSearchEngine: SearchEngine[Product]
+  def createSearchEngine(fieldRegister: ProductSearchEngineFieldRegister): SearchEngine[Product]
+
 }
