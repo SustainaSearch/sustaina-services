@@ -19,6 +19,8 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
         .foldLeft(
           Query(
             mainQuery = productQuery.mainQuery,
+            start = productQuery.start,
+            rows = productQuery.rows,
             fuzzy = productQuery.fuzzy,
             maybeSpatialPoint = productQuery.maybeSpatialPoint
           )
@@ -43,4 +45,5 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
       product
     }
   }
+
 }

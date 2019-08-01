@@ -13,6 +13,7 @@ class FakeSearchEngine[D] extends SearchEngine[D] {
       .map(_.document)
       .toList
     QueryResponse(
+      start = 0,
       numFound = documents.size,
       documents
     )

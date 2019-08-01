@@ -129,7 +129,8 @@ class ProductSolrMorphism(fieldRegister: ProductSearchEngineFieldRegister) exten
       }
       .toList
     QueryResponse(
-      results.getNumFound,
+      start = results.getStart,
+      numFound = results.getNumFound,
       documents
     )
   }
