@@ -3,6 +3,8 @@ package com.sustainasearch.searchengine
 import com.sustainasearch.searchengine.Order.Order
 
 case class Query(mainQuery: String,
+                 start: Long = 0,
+                 rows: Long = 10,
                  filterQueries: Seq[String] = Seq.empty,
                  fuzzy: Boolean = false,
                  sort: Seq[Sort] = Seq.empty,

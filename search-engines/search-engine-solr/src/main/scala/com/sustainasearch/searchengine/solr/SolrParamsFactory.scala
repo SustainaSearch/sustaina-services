@@ -38,6 +38,8 @@ object SolrParamsFactory {
     }
     queryParams += ("q" -> Array(mainQuery))
     queryParams += ("fq" -> query.filterQueries.toArray)
+    queryParams += ("start" -> Array(query.start.toString))
+    queryParams += ("rows" -> Array(query.rows.toString))
 
     if (query.sortByBoostFunctionResultFirst) {
       addBoostFunctionParams()

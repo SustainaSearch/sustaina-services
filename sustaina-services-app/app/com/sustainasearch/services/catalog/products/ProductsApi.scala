@@ -12,6 +12,7 @@ object ProductsApi {
   val queryResponse = new (QueryResponse[Product] <=> ProductQueryResponseApiModel) {
     val to: QueryResponse[Product] => ProductQueryResponseApiModel = { response =>
       ProductQueryResponseApiModel(
+        start = response.start,
         numFound = response.numFound,
         documents = response
           .documents
@@ -20,6 +21,7 @@ object ProductsApi {
     }
     val from: ProductQueryResponseApiModel => QueryResponse[Product] = { response =>
       QueryResponse[Product](
+        start = response.start,
         numFound = response.numFound,
         documents = response
           .documents
