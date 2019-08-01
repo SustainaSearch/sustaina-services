@@ -23,7 +23,8 @@ case class Query(mainQuery: String,
     withBoostFunction(
       NearestSpatialResult(
         spatialPoint = maybeSpatialPoint.get,
-        spatialField)
+        spatialField = spatialField
+      )
     )
   }
 }
