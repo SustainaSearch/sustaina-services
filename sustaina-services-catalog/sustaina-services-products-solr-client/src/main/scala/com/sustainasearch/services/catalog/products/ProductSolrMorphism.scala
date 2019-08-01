@@ -17,37 +17,37 @@ class ProductSolrMorphism(fieldRegister: ProductSearchEngineFieldRegister) exten
   import fieldRegister._
 
   override def toSolrInputDocument(product: Product): SolrInputDocument = {
-    val solrInputDocument = new SolrInputDocument()
-    solrInputDocument.addField(IdField, product.id.toString)
+    val document = new SolrInputDocument()
+    document.addField(IdField, product.id.toString)
 
-    solrInputDocument.addField(RepresentativePointField, s"${product.representativePoint.latitude},${product.representativePoint.longitude}")
+    document.addField(RepresentativePointField, s"${product.representativePoint.latitude},${product.representativePoint.longitude}")
 
     product.functionalNames.foreach { name =>
-      solrInputDocument.addField(functionalNameWithNameLanguageCodeField(name), name.unparsedName)
+      document.addField(functionalNameWithNameLanguageCodeField(name), name.unparsedName)
     }
 
-    solrInputDocument.addField(brandNameWithNameLanguageCodeField(product.brandName), product.brandName.unparsedName)
+    document.addField(brandNameWithNameLanguageCodeField(product.brandName), product.brandName.unparsedName)
 
-    solrInputDocument.addField(CategoryTypeField, product.category.categoryType.toString)
+    document.addField(CategoryTypeField, product.category.categoryType.toString)
     product.category.names.foreach { name =>
-      solrInputDocument.addField(categoryNameWithNameLanguageCodeField(name), name.unparsedName)
+      document.addField(categoryNameWithNameLanguageCodeField(name), name.unparsedName)
     }
 
-    solrInputDocument.addField(SustainaIndexField, product.sustainaIndex)
+    document.addField(SustainaIndexField, product.sustainaIndex)
 
     product.maybeBabyFood.foreach { babyFood =>
       babyFood.ingredientStatements.foreach { statement =>
-        solrInputDocument.addField(babyFoodIngredientStatemenWithLanguageCodeField(statement.languageCode), statement.unparsedStatement)
+        document.addField(babyFoodIngredientStatemenWithLanguageCodeField(statement.languageCode), statement.unparsedStatement)
       }
     }
 
     product.maybeClothes.foreach { clothes =>
       clothes.compositions.foreach { composition =>
-        solrInputDocument.addField(clothesCompositionWithLanguageCodeField(composition.languageCode), composition.unparsedComposition)
+        document.addField(clothesCompositionWithLanguageCodeField(composition.languageCode), composition.unparsedComposition)
       }
     }
 
-    solrInputDocument
+    document
   }
 
   override def fromSolrQueryResponse(response: SolrQueryResponse): QueryResponse[Product] = {
