@@ -38,7 +38,7 @@ object ProductsApi {
     val to: Product => ProductApiModel = { product =>
       ProductApiModel(
         id = product.id.toString,
-        representativePoint = representativePoint.to(product.representativePoint),
+        productActivity = productActivity.to(product.productActivity),
         functionalNames = product.functionalNames.map(NameApi.name.to),
         brandName = NameApi.name.to(product.brandName),
         category = category.to(product.category),
@@ -50,13 +50,58 @@ object ProductsApi {
     val from: ProductApiModel => Product = { product =>
       Product(
         id = UUID.fromString(product.id),
-        representativePoint = representativePoint.from(product.representativePoint),
+        productActivity = productActivity.from(product.productActivity),
         functionalNames = product.functionalNames.map(NameApi.name.from),
         brandName = NameApi.name.from(product.brandName),
         category = category.from(product.category),
         sustainaIndex = product.sustainaIndex,
         maybeBabyFood = product.babyFood.map(BabyFoodApi.babyFood.from),
         maybeClothes = product.clothes.map(ClothesApi.clothes.from)
+      )
+    }
+  }
+
+  val productActivity = new (ProductActivity <=> ProductActivityApiModel) {
+    val to: ProductActivity => ProductActivityApiModel = { productActivity =>
+      ProductActivityApiModel(
+        country = country.to(productActivity.country),
+        city = productActivity.city.map(city.to),
+        representativePoint = representativePoint.to(productActivity.representativePoint)
+      )
+    }
+    val from: ProductActivityApiModel => ProductActivity = { productActivity =>
+      ProductActivity(
+        country = country.from(productActivity.country),
+        city = productActivity.city.map(city.from),
+        representativePoint = representativePoint.from(productActivity.representativePoint)
+      )
+    }
+  }
+
+  val country = new (Country <=> CountryApiModel) {
+    val to: Country => CountryApiModel = { country =>
+      CountryApiModel(
+        countryCode = country.countryCode.toString,
+        names = country.names.map(NameApi.name.to)
+      )
+    }
+    val from: CountryApiModel => Country = { country =>
+      Country(
+        countryCode = CountryCode.withName(country.countryCode),
+        names = country.names.map(NameApi.name.from)
+      )
+    }
+  }
+
+  val city = new (City <=> CityApiModel) {
+    val to: City => CityApiModel = { city =>
+      CityApiModel(
+        names = city.names.map(NameApi.name.to)
+      )
+    }
+    val from: CityApiModel => City = { city =>
+      City(
+        names = city.names.map(NameApi.name.from)
       )
     }
   }

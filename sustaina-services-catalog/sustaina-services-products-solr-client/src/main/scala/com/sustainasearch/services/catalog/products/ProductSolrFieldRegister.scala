@@ -8,6 +8,12 @@ import com.sustainasearch.services.catalog.products.LanguageCode.LanguageCode
 object ProductSolrFieldRegister extends ProductSearchEngineFieldRegister {
   override val IdField: String = "id"
 
+  override val CountryNameField: String = "countryName"
+
+  override val CountryCodeField: String = "countryCode"
+
+  override val CityNameField: String = "cityName"
+
   override val RepresentativePointField: String = "representativePoint"
 
   override val FunctionalNameField: String = "functionalName"
@@ -28,9 +34,17 @@ object ProductSolrFieldRegister extends ProductSearchEngineFieldRegister {
 
   override def functionalNameWithNameLanguageCodeField(name: Name): String = s"$FunctionalNameField${nameLanguageCodeSuffix(name)}"
 
+  override def countryNameWithNameLanguageCodeField(name: Name): String = s"$CountryNameField${nameLanguageCodeSuffix(name)}"
+
+  override def cityNameWithNameLanguageCodeField(name: Name): String = s"$CityNameField${nameLanguageCodeSuffix(name)}"
+
   override def brandNameWithNameLanguageCodeField(name: Name): String = s"$BrandNameField${nameLanguageCodeSuffix(name)}"
 
   override def categoryNameWithNameLanguageCodeField(name: Name): String = s"$CategoryNameField${nameLanguageCodeSuffix(name)}"
+
+  override def countryNameWithLanguageCodeField(languageCode: LanguageCode): String = s"${CountryNameField}${languageCodeSuffix(languageCode)}"
+
+  override def cityNameWithLanguageCodeField(languageCode: LanguageCode): String = s"${CityNameField}${languageCodeSuffix(languageCode)}"
 
   override def functionalNameWithLanguageCodeField(languageCode: LanguageCode): String = s"${FunctionalNameField}${languageCodeSuffix(languageCode)}"
 
@@ -44,4 +58,5 @@ object ProductSolrFieldRegister extends ProductSearchEngineFieldRegister {
 
   private def nameLanguageCodeSuffix(name: Name): String =
     name.languageCode.fold("")(languageCode => languageCodeSuffix(languageCode))
+
 }

@@ -22,7 +22,18 @@ class ProductSolrMorphism(fieldRegister: ProductSearchEngineFieldRegister) exten
     val document = new SolrInputDocument()
     document.addField(IdField, product.id.toString)
 
-    document.addField(RepresentativePointField, s"${product.representativePoint.latitude},${product.representativePoint.longitude}")
+    val countryCode = product.productActivity.country.countryCode.toString
+    println(countryCode)
+    document.addField(CountryCodeField, countryCode)
+    product.productActivity.country.names.foreach { name =>
+      document.addField(countryNameWithNameLanguageCodeField(name), name.unparsedName)
+    }
+    product.productActivity.city.foreach { city =>
+      city.names.foreach { name =>
+        document.addField(cityNameWithNameLanguageCodeField(name), name.unparsedName)
+      }
+    }
+    document.addField(RepresentativePointField, s"${product.productActivity.representativePoint.latitude},${product.productActivity.representativePoint.longitude}")
 
     product.functionalNames.foreach { name =>
       document.addField(functionalNameWithNameLanguageCodeField(name), name.unparsedName)
@@ -76,8 +87,24 @@ class ProductSolrMorphism(fieldRegister: ProductSearchEngineFieldRegister) exten
         val categoryNames = ListBuffer.empty[Name]
         val babyFoodIngredientStatements = ListBuffer.empty[IngredientStatement]
         val clothesCompositions = ListBuffer.empty[Composition]
+        val countryNames = ListBuffer.empty[Name]
+        val cityNames = ListBuffer.empty[Name]
 
         LanguageCode.values.foreach { languageCode =>
+          val countryNameField = countryNameWithLanguageCodeField(languageCode)
+          if (document.containsKey(countryNameField))
+            countryNames += Name(
+              unparsedName = document.getFirstValue(countryNameField).asInstanceOf[String],
+              languageCode = Some(languageCode)
+            )
+
+          val cityNameField = cityNameWithLanguageCodeField(languageCode)
+          if (document.containsKey(cityNameField))
+            cityNames += Name(
+              unparsedName = document.getFirstValue(cityNameField).asInstanceOf[String],
+              languageCode = Some(languageCode)
+            )
+
           val functionalNameField = functionalNameWithLanguageCodeField(languageCode)
           if (document.containsKey(functionalNameField))
             functionalNames += Name(
@@ -111,9 +138,20 @@ class ProductSolrMorphism(fieldRegister: ProductSearchEngineFieldRegister) exten
 
         val maybeClothes = if (clothesCompositions.isEmpty) None else Some(Clothes(clothesCompositions))
 
+        val city = if (cityNames.isEmpty) None else Some(City(cityNames))
+
         Product(
           id = UUID.fromString(document.getFirstValue(IdField).asInstanceOf[String]),
-          representativePoint,
+          productActivity = ProductActivity(
+            Country(
+              countryCode = CountryCode.withName(
+                document.getFirstValue(CountryCodeField).asInstanceOf[String]
+              ),
+              names = countryNames
+            ),
+            city,
+            representativePoint
+          ),
           functionalNames,
           brandName = Name(
             unparsedName = document.getFirstValue(BrandNameField).asInstanceOf[String],

@@ -5,6 +5,12 @@ import com.sustainasearch.services.catalog.products.LanguageCode.LanguageCode
 trait ProductSearchEngineFieldRegister {
   val IdField: String
 
+  val CountryCodeField: String
+
+  val CountryNameField: String
+
+  val CityNameField: String
+
   val RepresentativePointField: String
 
   val FunctionalNameField: String
@@ -23,11 +29,19 @@ trait ProductSearchEngineFieldRegister {
 
   val ClothesCompositionField: String
 
+  def countryNameWithNameLanguageCodeField(name: Name): String
+
+  def cityNameWithNameLanguageCodeField(name: Name): String
+
   def functionalNameWithNameLanguageCodeField(name: Name): String
 
   def brandNameWithNameLanguageCodeField(name: Name): String
 
   def categoryNameWithNameLanguageCodeField(name: Name): String
+
+  def countryNameWithLanguageCodeField(languageCode: LanguageCode): String
+
+  def cityNameWithLanguageCodeField(languageCode: LanguageCode): String
 
   def functionalNameWithLanguageCodeField(languageCode: LanguageCode): String
 

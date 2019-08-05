@@ -1,8 +1,27 @@
 {
   "id": "00000000-0000-0000-0000-000000000005",
-  "representativePoint": {
-    "latitude": 59.3293,
-    "longitude": 18.0686
+  "productActivity": {
+    "country": {
+      "countryCode": "SWE",
+      "names": [
+        {
+          "unparsedName": "Sverige",
+          "languageCode": "sv"
+        }
+      ]
+    },
+    "city": {
+      "names": [
+        {
+          "unparsedName": "Stockholm",
+          "languageCode": "sv"
+        }
+      ]
+    },
+    "representativePoint": {
+      "latitude": 59.3293,
+      "longitude": 18.0686
+    }
   },
   "functionalNames": [
     {

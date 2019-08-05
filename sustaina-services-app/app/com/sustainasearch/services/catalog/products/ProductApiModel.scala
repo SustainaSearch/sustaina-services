@@ -5,7 +5,7 @@ import com.sustainasearch.services.catalog.products.food.BabyFoodApiModel
 import play.api.libs.json.Json
 
 case class ProductApiModel(id: String,
-                           representativePoint: RepresentativePointApiModel,
+                           productActivity: ProductActivityApiModel,
                            functionalNames: Seq[NameApiModel],
                            brandName: NameApiModel,
                            category: CategoryApiModel,

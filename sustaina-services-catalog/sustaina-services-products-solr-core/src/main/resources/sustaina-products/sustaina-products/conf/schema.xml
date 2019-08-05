@@ -132,6 +132,12 @@
     <!-- General fields -->
     <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false"/>
 
+    <!-- Product activity -->
+    <field name="countryCode" type="string" indexed="true" stored="true" />
+    <field name="countryName_en" type="text_en" indexed="true" stored="true"/>
+    <field name="countryName_sv" type="text_sv" indexed="true" stored="true"/>
+    <field name="cityName_en" type="text_en" indexed="true" stored="true"/>
+    <field name="cityName_sv" type="text_sv" indexed="true" stored="true"/>
     <field name="representativePoint" type="location" indexed="true" stored="true"/>
 
     <field name="functionalName" type="text_general" indexed="true" stored="true"/>

@@ -6,7 +6,7 @@ import com.sustainasearch.services.catalog.products.clothes.Clothes
 import com.sustainasearch.services.catalog.products.food.BabyFood
 
 case class Product(id: UUID,
-                   representativePoint: RepresentativePoint,
+                   productActivity: ProductActivity,
                    functionalNames: Seq[Name],
                    brandName: Name,
                    category: Category,
