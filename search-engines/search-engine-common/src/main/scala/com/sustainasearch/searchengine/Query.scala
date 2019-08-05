@@ -10,7 +10,8 @@ case class Query(mainQuery: String,
                  sort: Seq[Sort] = Seq.empty,
                  maybeSpatialPoint: Option[SpatialPoint] = None,
                  maybeBoostFunction: Option[BoostFunction] = None,
-                 sortByBoostFunctionResultFirst: Boolean = false) {
+                 sortByBoostFunctionResultFirst: Boolean = false,
+                 facetFields: Seq[String] = Seq.empty) {
 
   def withFilterQuery(filterQuery: String): Query = copy(filterQueries = filterQueries :+ filterQuery)
 
@@ -29,6 +30,8 @@ case class Query(mainQuery: String,
       )
     )
   }
+
+  def withFacetField(facetField: String): Query = copy(facetFields = facetFields :+ facetField)
 }
 
 case class Sort(field: String, order: Order)

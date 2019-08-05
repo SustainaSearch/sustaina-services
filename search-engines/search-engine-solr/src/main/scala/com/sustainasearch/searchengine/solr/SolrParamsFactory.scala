@@ -51,6 +51,11 @@ object SolrParamsFactory {
 
     queryParams += ("sort" -> Array(sortParams.mkString(",")))
 
+    if (query.facetFields.nonEmpty) {
+      queryParams += ("facet.field" -> query.facetFields.toArray)
+      queryParams += ("facet" -> Array("on"))
+    }
+
     new ModifiableSolrParams(queryParams.asJava)
   }
 

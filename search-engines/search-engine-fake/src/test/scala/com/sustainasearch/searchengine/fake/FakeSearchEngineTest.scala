@@ -6,7 +6,7 @@ import org.scalatest.{FunSuite, Matchers}
 class FakeSearchEngineTest extends FunSuite with Matchers {
 
   test("FakeSearchEngine supports case insensitive queries") {
-    val underTest = new FakeSearchEngine[SimpleProduct]
+    val underTest = new FakeSearchEngine[SimpleProduct, Unit]
 
     val product1 = SimpleProduct(id = 1l, name = "Hipp")
     val product2 = SimpleProduct(id = 2l, name = "Semper")

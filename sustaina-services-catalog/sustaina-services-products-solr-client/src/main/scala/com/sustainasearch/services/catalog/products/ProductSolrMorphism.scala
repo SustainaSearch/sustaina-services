@@ -1,18 +1,20 @@
 package com.sustainasearch.services.catalog.products
 
+import java.util
 import java.util.UUID
 
 import com.sustainasearch.searchengine.QueryResponse
 import com.sustainasearch.searchengine.solr.SolrMorphism
 import com.sustainasearch.services.catalog.products.clothes.{Clothes, Composition}
+import com.sustainasearch.services.catalog.products.facets.{BrandFacet, CategoryFacet, ProductFacets}
 import com.sustainasearch.services.catalog.products.food.{BabyFood, IngredientStatement}
-import org.apache.solr.client.solrj.response.{QueryResponse => SolrQueryResponse}
+import org.apache.solr.client.solrj.response.{FacetField, QueryResponse => SolrQueryResponse}
 import org.apache.solr.common.SolrInputDocument
 
 import scala.collection.JavaConverters._
 import scala.collection.mutable.ListBuffer
 
-class ProductSolrMorphism(fieldRegister: ProductSearchEngineFieldRegister) extends SolrMorphism[Product] {
+class ProductSolrMorphism(fieldRegister: ProductSearchEngineFieldRegister) extends SolrMorphism[Product, ProductFacets] {
 
   import fieldRegister._
 
@@ -27,6 +29,7 @@ class ProductSolrMorphism(fieldRegister: ProductSearchEngineFieldRegister) exten
     }
 
     document.addField(brandNameWithNameLanguageCodeField(product.brandName), product.brandName.unparsedName)
+    document.addField(BrandNameExactField, product.brandName.unparsedName)
 
     document.addField(CategoryTypeField, product.category.categoryType.toString)
     product.category.names.foreach { name =>
@@ -50,7 +53,7 @@ class ProductSolrMorphism(fieldRegister: ProductSearchEngineFieldRegister) exten
     document
   }
 
-  override def fromSolrQueryResponse(response: SolrQueryResponse): QueryResponse[Product] = {
+  override def fromSolrQueryResponse(response: SolrQueryResponse): QueryResponse[Product, ProductFacets] = {
     val results = response.getResults
     val documents = results
       .asScala
@@ -128,10 +131,45 @@ class ProductSolrMorphism(fieldRegister: ProductSearchEngineFieldRegister) exten
         )
       }
       .toList
+
+    val facetFields: util.List[FacetField] = {
+      if (response.getFacetFields == null)
+        new util.ArrayList[FacetField]
+      else
+        response.getFacetFields
+    }
+
+    val productFacets = facetFields
+      .asScala
+      .foldLeft(ProductFacets()) { (facets, facetField) =>
+        facetField.getName match {
+          case BrandNameExactField =>
+            facetField.getValues.asScala.foldLeft(facets) { (prev, facetCount) =>
+              if (facetCount.getCount > 0) {
+                val brandFacet = BrandFacet(brandName = Name(facetCount.getName, languageCode = None), facetCount.getCount)
+                prev.withBrandFacet(brandFacet)
+              } else
+                prev
+            }
+          case CategoryTypeField =>
+            facetField.getValues.asScala.foldLeft(facets) { (prev, facetCount) =>
+              if (facetCount.getCount > 0) {
+                val categoryFacet = CategoryFacet(CategoryType.withName(facetCount.getName), facetCount.getCount)
+                prev.withCategoryFacet(categoryFacet)
+              } else
+                prev
+            }
+          case _ =>
+            // TODO: log?
+            facets
+        }
+      }
+
     QueryResponse(
       start = results.getStart,
       numFound = results.getNumFound,
-      documents
+      documents,
+      productFacets
     )
   }
 

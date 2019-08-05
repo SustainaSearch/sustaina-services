@@ -11,6 +11,8 @@ trait ProductSearchEngineFieldRegister {
 
   val BrandNameField: String
 
+  val BrandNameExactField: String
+
   val CategoryTypeField: String
 
   val CategoryNameField: String

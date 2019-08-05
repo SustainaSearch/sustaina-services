@@ -4,29 +4,32 @@ import java.util.UUID
 
 import com.sustainasearch.searchengine.QueryResponse
 import com.sustainasearch.services.catalog.products.clothes.ClothesApi
+import com.sustainasearch.services.catalog.products.facets.{ProductFacets, ProductFacetsApi}
 import com.sustainasearch.services.catalog.products.food._
 import scalaz.Isomorphism.<=>
 
 object ProductsApi {
 
-  val queryResponse = new (QueryResponse[Product] <=> ProductQueryResponseApiModel) {
-    val to: QueryResponse[Product] => ProductQueryResponseApiModel = { response =>
+  val queryResponse = new (QueryResponse[Product, ProductFacets] <=> ProductQueryResponseApiModel) {
+    val to: QueryResponse[Product, ProductFacets] => ProductQueryResponseApiModel = { response =>
       ProductQueryResponseApiModel(
         start = response.start,
         numFound = response.numFound,
         documents = response
           .documents
-          .map(product.to)
+          .map(product.to),
+        facets = ProductFacetsApi.productFacets.to(response.facets)
       )
     }
-    val from: ProductQueryResponseApiModel => QueryResponse[Product] = { response =>
-      QueryResponse[Product](
+    val from: ProductQueryResponseApiModel => QueryResponse[Product, ProductFacets] = { response =>
+      QueryResponse[Product, ProductFacets](
         start = response.start,
         numFound = response.numFound,
         documents = response
           .documents
           .map(product.from)
-          .toList
+          .toList,
+        facets = ProductFacetsApi.productFacets.from(response.facets)
       )
     }
   }
@@ -36,8 +39,8 @@ object ProductsApi {
       ProductApiModel(
         id = product.id.toString,
         representativePoint = representativePoint.to(product.representativePoint),
-        functionalNames = product.functionalNames.map(name.to),
-        brandName = name.to(product.brandName),
+        functionalNames = product.functionalNames.map(NameApi.name.to),
+        brandName = NameApi.name.to(product.brandName),
         category = category.to(product.category),
         sustainaIndex = product.sustainaIndex,
         babyFood = product.maybeBabyFood.map(BabyFoodApi.babyFood.to),
@@ -48,8 +51,8 @@ object ProductsApi {
       Product(
         id = UUID.fromString(product.id),
         representativePoint = representativePoint.from(product.representativePoint),
-        functionalNames = product.functionalNames.map(name.from),
-        brandName = name.from(product.brandName),
+        functionalNames = product.functionalNames.map(NameApi.name.from),
+        brandName = NameApi.name.from(product.brandName),
         category = category.from(product.category),
         sustainaIndex = product.sustainaIndex,
         maybeBabyFood = product.babyFood.map(BabyFoodApi.babyFood.from),
@@ -73,32 +76,17 @@ object ProductsApi {
     }
   }
 
-  val name = new (Name <=> NameApiModel) {
-    val to: Name => NameApiModel = { name =>
-      NameApiModel(
-        unparsedName = name.unparsedName,
-        languageCode = name.languageCode.map(_.toString)
-      )
-    }
-    val from: NameApiModel => Name = { name =>
-      Name(
-        unparsedName = name.unparsedName,
-        languageCode = name.languageCode.map(LanguageCode.withName)
-      )
-    }
-  }
-
   val category = new (Category <=> CategoryApiModel) {
     val to: Category => CategoryApiModel = { category =>
       CategoryApiModel(
         categoryType = category.categoryType.toString,
-        names = category.names.map(name.to)
+        names = category.names.map(NameApi.name.to)
       )
     }
     val from: CategoryApiModel => Category = { category =>
       Category(
         categoryType = CategoryType.withName(category.categoryType),
-        names = category.names.map(name.from)
+        names = category.names.map(NameApi.name.from)
       )
     }
   }

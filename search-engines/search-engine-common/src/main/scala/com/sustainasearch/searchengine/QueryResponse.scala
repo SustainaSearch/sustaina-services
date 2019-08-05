@@ -1,5 +1,6 @@
 package com.sustainasearch.searchengine
 
-case class QueryResponse[D](start: Long,
+case class QueryResponse[D, F](start: Long,
                             numFound: Long,
-                            documents: List[D])
+                            documents: List[D],
+                            facets: F)

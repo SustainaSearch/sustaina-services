@@ -29,8 +29,10 @@ trait SolrTestFixture {
         }
         .toList
       QueryResponse(
-        results.getNumFound,
-        documents
+        start = 0,
+        numFound = results.getNumFound,
+        documents,
+        Seq.empty[Facet]
       )
     }
   }

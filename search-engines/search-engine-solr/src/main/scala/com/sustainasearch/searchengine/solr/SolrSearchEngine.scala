@@ -4,11 +4,11 @@ import com.sustainasearch.searchengine._
 
 import scala.collection.JavaConverters._
 
-class SolrSearchEngine[D](solrClientFactory: SolrClientFactory,
-                          solrMorphism: SolrMorphism[D]) extends SearchEngine[D] {
+class SolrSearchEngine[D, F](solrClientFactory: SolrClientFactory,
+                          solrMorphism: SolrMorphism[D, F]) extends SearchEngine[D, F] {
   private val solrClient = solrClientFactory.createSolrClient
 
-  override def query(query: Query): QueryResponse[D] = {
+  override def query(query: Query): QueryResponse[D, F] = {
     val solrParams = SolrParamsFactory.createSolrParams(query)
     val solrQueryResponse = solrClient.query(solrParams)
     solrMorphism.fromSolrQueryResponse(solrQueryResponse)

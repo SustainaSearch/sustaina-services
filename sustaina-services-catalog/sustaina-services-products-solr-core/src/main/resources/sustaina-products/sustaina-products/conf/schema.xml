@@ -139,8 +139,9 @@
     <field name="functionalName_sv" type="text_sv" indexed="true" stored="true"/>
 
     <field name="brandName" type="text_general" indexed="true" stored="true"/>
+    <field name="brandNameExact" type="string" indexed="true" stored="false" docValues="false" />
 
-    <field name="categoryType" type="text_general" indexed="true" stored="true"/>
+    <field name="categoryType" type="string" indexed="true" stored="true"/>
     <field name="categoryName_en" type="text_en" indexed="true" stored="true"/>
     <field name="categoryName_sv" type="text_sv" indexed="true" stored="true"/>
 

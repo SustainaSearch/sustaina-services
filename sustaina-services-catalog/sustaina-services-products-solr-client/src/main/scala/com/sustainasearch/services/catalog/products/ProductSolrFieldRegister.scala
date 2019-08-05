@@ -14,6 +14,8 @@ object ProductSolrFieldRegister extends ProductSearchEngineFieldRegister {
 
   override val BrandNameField: String = "brandName"
 
+  override val BrandNameExactField: String = "brandNameExact"
+
   override val CategoryTypeField: String = "categoryType"
 
   override val CategoryNameField: String = "categoryName"

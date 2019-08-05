@@ -1,0 +1,34 @@
+{
+  "id": "00000000-0000-0000-0000-000000000005",
+  "representativePoint": {
+    "latitude": 59.3293,
+    "longitude": 18.0686
+  },
+  "functionalNames": [
+    {
+      "unparsedName": "Go'gröt persika/päron",
+      "languageCode": "sv"
+    }
+  ],
+  "brandName": {
+    "unparsedName": "Ella's Kitchen"
+  },
+  "category": {
+    "categoryType": "BabyFood",
+    "names": [
+      {
+        "unparsedName": "Barnmat",
+        "languageCode": "sv"
+      }
+    ]
+  },
+  "sustainaIndex": 78.567,
+  "babyFood": {
+    "ingredientStatements": [
+      {
+        "languageCode": "sv",
+        "unparsedStatement": "Ingredienser: 47% gröt/grøt/grød: (25% naturell yoghurt/naturel (MJÖLK/MELK/MÆLK), 18% MJÖLK/MELK/MÆLK, 3% HAVRE, 1% HAVREMJÖL/HAVREMEL/HAVREGRYN, 1% rismjöl/rismel, 1% solrosolja/solsikkeolje/solsikkeolie), 31% päron/pære, 20% persika/fersken, &lt;1% citronjuicekoncentrat/sitronjuicekonsentrat/koncentreret citronjuice, &lt;1% Vitaminer (A, D, C, Tiamin/Thiamin, Riboflavin, Niacin, B6, Folsyra/Folinsyre/Folsyre, B12, E), &lt;1% Mineraler (Kalcium/Kalsium, Järn/Jern, Zink/Sink, Jod)."
+      }
+    ]
+  }
+}
