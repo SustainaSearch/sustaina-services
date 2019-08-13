@@ -1,6 +1,6 @@
 package com.sustainasearch.services.catalog.products
 
-import com.sustainasearch.searchengine.{Query, QueryResponse}
+import com.sustainasearch.searchengine.{Query, QueryResponse, SpecificFieldFilterQuery}
 import com.sustainasearch.services.catalog.products.CategoryType.CategoryType
 import com.sustainasearch.services.catalog.products.facets.ProductFacets
 import javax.inject.{Inject, Singleton}
@@ -54,8 +54,7 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
       val query = Query(
         mainQuery = "*:*",
         rows = 1
-        // TODO: use case class instead, e.g. case classSpecificFieldFilterQuery(fieldName: String, fieldValue: String) extends FilterQuery
-      ).withFilterQuery(s"$CategoryTypeField:$categoryType")
+      ).withFilterQuery(SpecificFieldFilterQuery(fieldName = CategoryTypeField, fieldValue = categoryType.toString))
       val response = searchEngine.query(query)
       response
         .documents

@@ -5,7 +5,7 @@ import com.sustainasearch.searchengine.Order.Order
 case class Query(mainQuery: String,
                  start: Long = 0,
                  rows: Long = 10,
-                 filterQueries: Seq[String] = Seq.empty,
+                 filterQueries: Seq[FilterQuery] = Seq.empty,
                  fuzzy: Boolean = false,
                  sort: Seq[Sort] = Seq.empty,
                  maybeSpatialPoint: Option[SpatialPoint] = None,
@@ -13,7 +13,7 @@ case class Query(mainQuery: String,
                  sortByBoostFunctionResultFirst: Boolean = false,
                  facetFields: Seq[String] = Seq.empty) {
 
-  def withFilterQuery(filterQuery: String): Query = copy(filterQueries = filterQueries :+ filterQuery)
+  def withFilterQuery(filterQuery: FilterQuery): Query = copy(filterQueries = filterQueries :+ filterQuery)
 
   def withAscendingSort(field: String): Query = copy(sort = sort :+ Sort(field = field, order = Order.Ascending))
 
@@ -45,3 +45,6 @@ trait BoostFunction
 
 case class NearestSpatialResult(spatialPoint: SpatialPoint, spatialField: String) extends BoostFunction
 
+trait FilterQuery
+
+case class SpecificFieldFilterQuery(fieldName: String, fieldValue: String) extends FilterQuery

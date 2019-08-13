@@ -23,7 +23,6 @@ class CatalogService @Inject()(productService: ProductService)(implicit ec: Exec
       }
       categories <- Future.sequence(eventualCategories)
     } yield {
-      // TODO: flatMap?
       val categoryNames = categories
         .flatten
         .map { category =>

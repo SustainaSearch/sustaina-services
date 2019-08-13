@@ -1,6 +1,6 @@
 package com.sustainasearch.searchengine.solr
 
-import com.sustainasearch.searchengine.{NearestSpatialResult, Query}
+import com.sustainasearch.searchengine.{NearestSpatialResult, Query, SpecificFieldFilterQuery}
 import org.apache.solr.common.params.{ModifiableSolrParams, SolrParams}
 
 import scala.collection.JavaConverters._
@@ -33,13 +33,23 @@ object SolrParamsFactory {
         }
     }
 
+    def addFilterQueries(): Unit = {
+      val filterQueries = query
+        .filterQueries
+        .map {
+          case SpecificFieldFilterQuery(fieldName, fieldValue) => s"$fieldName:$fieldValue"
+        }
+        .toArray
+      queryParams += ("fq" -> filterQueries)
+    }
+
     val mainQuery = {
       if (query.fuzzy) s"${query.mainQuery}~" else query.mainQuery
     }
     queryParams += ("q" -> Array(mainQuery))
-    queryParams += ("fq" -> query.filterQueries.toArray)
     queryParams += ("start" -> Array(query.start.toString))
     queryParams += ("rows" -> Array(query.rows.toString))
+    addFilterQueries()
 
     if (query.sortByBoostFunctionResultFirst) {
       addBoostFunctionParams()
