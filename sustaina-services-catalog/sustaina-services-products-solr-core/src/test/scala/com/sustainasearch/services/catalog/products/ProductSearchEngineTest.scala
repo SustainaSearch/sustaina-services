@@ -2,7 +2,7 @@ package com.sustainasearch.services.catalog.products
 
 import java.util.UUID
 
-import com.sustainasearch.searchengine.Query
+import com.sustainasearch.searchengine.{AllDocumentsQuery, FreeTextQuery, Query, SpecificFieldFilterQuery}
 import com.sustainasearch.services.catalog.products.clothes.{Clothes, Composition}
 import com.sustainasearch.services.catalog.products.food.{BabyFood, IngredientStatement}
 import org.scalatest.{Matchers, WordSpec}
@@ -15,9 +15,18 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
 
     val babyFoodProduct = Product(
       id = UUID.fromString("00000000-0000-0000-0000-000000000001"),
-      representativePoint = RepresentativePoint(
-        latitude = 52,
-        longitude = 13
+      productActivity = ProductActivity(
+        country = Country(
+          countryCode = CountryCode.Sweden,
+          names = Seq(
+            Name("Sverige", Some(LanguageCode.Swedish))
+          )
+        ),
+        city = None,
+        representativePoint = RepresentativePoint(
+          latitude = 52,
+          longitude = 13
+        )
       ),
       functionalNames = Seq(
         Name(
@@ -53,9 +62,18 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
 
     val clothesProduct = Product(
       id = UUID.fromString("00000000-0000-0000-0000-000000000002"),
-      representativePoint = RepresentativePoint(
-        latitude = 52,
-        longitude = 13
+      productActivity = ProductActivity(
+        country = Country(
+          countryCode = CountryCode.Sweden,
+          names = Seq(
+            Name("Sverige", Some(LanguageCode.Swedish))
+          )
+        ),
+        city = None,
+        representativePoint = RepresentativePoint(
+          latitude = 52,
+          longitude = 13
+        )
       ),
       functionalNames = Seq(
         Name(
@@ -90,51 +108,51 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
     underTest.add(clothesProduct)
 
     "find document by functional name with wildcard query" in {
-      val response = underTest.query(Query(mainQuery = "natt", fuzzy = true))
+      val response = underTest.query(Query(mainQuery = FreeTextQuery("natt"), fuzzy = true))
       response.numFound shouldBe 1
       response.documents.head shouldBe babyFoodProduct
     }
 
     "find document by brand name with wildcard query" in {
-      val response = underTest.query(Query(mainQuery = "hipp", fuzzy = true))
+      val response = underTest.query(Query(mainQuery = FreeTextQuery("hipp"), fuzzy = true))
       response.numFound shouldBe 1
       response.documents.head shouldBe babyFoodProduct
     }
 
     "find document by category type with wildcard query" in {
-      val response = underTest.query(Query(mainQuery = CategoryType.BabyFood.toString, fuzzy = true))
+      val response = underTest.query(Query(mainQuery = FreeTextQuery(CategoryType.BabyFood.toString), fuzzy = true))
       response.numFound shouldBe 1
       response.documents.head shouldBe babyFoodProduct
     }
 
     "find document by category name with wildcard query" in {
-      val response = underTest.query(Query(mainQuery = "Barnma", fuzzy = true))
+      val response = underTest.query(Query(mainQuery = FreeTextQuery("Barnma"), fuzzy = true))
       response.numFound shouldBe 1
       response.documents.head shouldBe babyFoodProduct
     }
 
     "find document by baby food ingredient statement with wildcard query" in {
-      val response = underTest.query(Query(mainQuery = "mildgrö", fuzzy = true))
+      val response = underTest.query(Query(mainQuery = FreeTextQuery("mildgrö"), fuzzy = true))
       response.numFound shouldBe 1
       response.documents.head shouldBe babyFoodProduct
     }
 
     "find document by clothes composition with wildcard query" in {
-      val response = underTest.query(Query(mainQuery = "bomull", fuzzy = true))
+      val response = underTest.query(Query(mainQuery = FreeTextQuery("bomull"), fuzzy = true))
       response.numFound shouldBe 1
       response.documents.head shouldBe clothesProduct
     }
 
     "find document within specified SustainaIndex range" in {
-      val response1 = underTest.query(Query(mainQuery = "*:*").withFilterQuery("sustainaIndex:[70 TO *]"))
+      val response1 = underTest.query(Query(mainQuery = AllDocumentsQuery).withFilterQuery(SpecificFieldFilterQuery("sustainaIndex", "[70 TO *]")))
       response1.numFound shouldBe 1
       response1.documents.head shouldBe babyFoodProduct
 
-      val response2 = underTest.query(Query(mainQuery = "*:*").withFilterQuery("sustainaIndex:[40 TO 70]"))
+      val response2 = underTest.query(Query(mainQuery = AllDocumentsQuery).withFilterQuery(SpecificFieldFilterQuery("sustainaIndex", "[40 TO 70]")))
       response2.numFound shouldBe 1
       response2.documents.head shouldBe clothesProduct
 
-      val response3 = underTest.query(Query(mainQuery = "*:*").withFilterQuery("sustainaIndex:[40 TO *]"))
+      val response3 = underTest.query(Query(mainQuery = AllDocumentsQuery).withFilterQuery(SpecificFieldFilterQuery("sustainaIndex", "[40 TO *]")))
       response3.numFound shouldBe 2
       response3.documents should contain only(babyFoodProduct, clothesProduct)
     }

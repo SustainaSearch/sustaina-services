@@ -53,7 +53,12 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
       val query = Query(
         mainQuery = AllDocumentsQuery,
         rows = 1
-      ).withFilterQuery(SpecificFieldFilterQuery(fieldName = CategoryTypeField, fieldValue = categoryType.toString))
+      ).withFilterQuery(
+        SpecificFieldFilterQuery(
+          fieldName = CategoryTypeField,
+          fieldValue = categoryType.toString
+        )
+      )
       val response = searchEngine.query(query)
       response
         .documents
