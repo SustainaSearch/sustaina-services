@@ -2,7 +2,7 @@ package com.sustainasearch.searchengine
 
 import com.sustainasearch.searchengine.Order.Order
 
-case class Query(mainQuery: String,
+case class Query(mainQuery: MainQuery,
                  start: Long = 0,
                  rows: Long = 10,
                  filterQueries: Seq[FilterQuery] = Seq.empty,
@@ -33,6 +33,12 @@ case class Query(mainQuery: String,
 
   def withFacetField(facetField: String): Query = copy(facetFields = facetFields :+ facetField)
 }
+
+trait MainQuery
+
+object AllDocumentsQuery extends MainQuery
+
+case class FreeTextQuery(value: String) extends MainQuery
 
 case class Sort(field: String, order: Order)
 

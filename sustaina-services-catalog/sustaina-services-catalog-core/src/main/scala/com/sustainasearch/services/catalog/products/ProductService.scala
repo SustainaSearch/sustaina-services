@@ -1,6 +1,6 @@
 package com.sustainasearch.services.catalog.products
 
-import com.sustainasearch.searchengine.{Query, QueryResponse, SpecificFieldFilterQuery}
+import com.sustainasearch.searchengine._
 import com.sustainasearch.services.catalog.products.CategoryType.CategoryType
 import com.sustainasearch.services.catalog.products.facets.ProductFacets
 import javax.inject.{Inject, Singleton}
@@ -20,7 +20,7 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
         .sort
         .foldLeft(
           Query(
-            mainQuery = productQuery.mainQuery,
+            mainQuery = FreeTextQuery(productQuery.mainQuery),
             start = productQuery.start,
             rows = productQuery.rows,
             fuzzy = productQuery.fuzzy,
@@ -50,9 +50,8 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
   def findCategory(categoryType: CategoryType): Future[Option[Category]] = {
     // TODO: get Category names in another way, when there is no guarantee all names are available in the found product
     Future {
-      // TODO: use class instead, e.g. object AllDocuments extends MainQuery
       val query = Query(
-        mainQuery = "*:*",
+        mainQuery = AllDocumentsQuery,
         rows = 1
       ).withFilterQuery(SpecificFieldFilterQuery(fieldName = CategoryTypeField, fieldValue = categoryType.toString))
       val response = searchEngine.query(query)
