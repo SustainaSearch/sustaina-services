@@ -15,34 +15,51 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
   private val searchEngine = searchEngineFactory.createSearchEngine(searchEngineFieldRegister)
 
   def query(productQuery: ProductQuery): Future[QueryResponse[Product, ProductFacets]] = {
-    Future {
-      val searchEngineQuery = productQuery
-        .sort
-        .foldLeft(
-          Query(
-            mainQuery = FreeTextQuery(productQuery.mainQuery),
-            start = productQuery.start,
-            rows = productQuery.rows,
-            fuzzy = productQuery.fuzzy,
-            maybeSpatialPoint = productQuery.maybeSpatialPoint,
-            facetFields = productQuery.facets.map {
-              case ProductFacet.Brand => BrandNameExactField
-              case ProductFacet.Category => CategoryTypeField
-            }
-          )
-        ) { (prev, sort) =>
-          sort match {
-            case ProductSort.DescendingSustainaIndex => prev.withDescendingSort(SustainaIndexField)
-            case ProductSort.NearestSpatialResult =>
-              if (prev.maybeSpatialPoint.isDefined)
-                prev.withNearestSpatialResultBoostFunction(RepresentativePointField)
-              else
-                prev
+    val searchEngineQuery = productQuery
+      .sort
+      .foldLeft(
+        Query(
+          mainQuery = FreeTextQuery(productQuery.mainQuery),
+          start = productQuery.start,
+          rows = productQuery.rows,
+          fuzzy = productQuery.fuzzy,
+          maybeSpatialPoint = productQuery.maybeSpatialPoint,
+          facetFields = productQuery.facets.map {
+            case ProductFacet.Brand => BrandNameExactField
+            case ProductFacet.Category => CategoryTypeField
           }
+        )
+      ) { (prev, sort) =>
+        sort match {
+          case ProductSort.DescendingSustainaIndex => prev.withDescendingSort(SustainaIndexField)
+          case ProductSort.NearestSpatialResult =>
+            if (prev.maybeSpatialPoint.isDefined)
+              prev.withNearestSpatialResultBoostFunction(RepresentativePointField)
+            else
+              prev
         }
+      }
+    val productResponse = searchEngine.query(searchEngineQuery)
+    val eventualCategories = productResponse.facets.categories.map { categoryFacet =>
+      findCategory(categoryFacet.categoryType)
+    }
 
-      // TODO: populate Category names already here or in CatalogService?
-      searchEngine.query(searchEngineQuery)
+    for {
+      // TODO: use the ProductCategoryService to get the categories
+      categories <- Future.sequence(eventualCategories)
+    } yield {
+      val categoryNames = categories
+        .flatten
+        .map { category =>
+          category.categoryType -> category.names
+        }
+        .toMap
+
+      val categoryFacets = productResponse.facets.categories.map { categoryFacet =>
+        categoryFacet.copy(names = categoryNames.getOrElse(categoryFacet.categoryType, Seq.empty))
+      }
+      val facets = productResponse.facets.copy(categories = categoryFacets)
+      productResponse.copy(facets = facets)
     }
   }
 

@@ -3,6 +3,7 @@
 GET         /api/v1/catalog         com.sustainasearch.services.catalog.CatalogController.query(q: String, rows: Long, fuzzy: Boolean, sp: Option[String])
 
 # Produtcs
+GET         /api/v1/catalog/products        com.sustainasearch.services.catalog.products.ProductsController.query(q: String, start: Long, rows: Long, fuzzy: Boolean, sp: Option[String])
 POST        /api/v1/catalog/products        com.sustainasearch.services.catalog.products.ProductsController.add()
 
 # Swagger

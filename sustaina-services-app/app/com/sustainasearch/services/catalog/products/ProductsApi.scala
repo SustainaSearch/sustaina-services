@@ -10,7 +10,31 @@ import scalaz.Isomorphism.<=>
 
 object ProductsApi {
 
-  val queryResponse = new (QueryResponse[Product, ProductFacets] <=> ProductQueryResponseApiModel) {
+  val simpleProductQueryResponse = new (QueryResponse[SimpleProduct, ProductFacets] <=> SimpleProductQueryResponseApiModel) {
+    val to: QueryResponse[SimpleProduct, ProductFacets] => SimpleProductQueryResponseApiModel = { response =>
+      SimpleProductQueryResponseApiModel(
+        start = response.start,
+        numFound = response.numFound,
+        documents = response
+          .documents
+          .map(simpleProduct.to),
+        facets = ProductFacetsApi.productFacets.to(response.facets)
+      )
+    }
+    val from: SimpleProductQueryResponseApiModel => QueryResponse[SimpleProduct, ProductFacets] = { response =>
+      QueryResponse[SimpleProduct, ProductFacets](
+        start = response.start,
+        numFound = response.numFound,
+        documents = response
+          .documents
+          .map(simpleProduct.from)
+          .toList,
+        facets = ProductFacetsApi.productFacets.from(response.facets)
+      )
+    }
+  }
+
+  val productQueryResponse = new (QueryResponse[Product, ProductFacets] <=> ProductQueryResponseApiModel) {
     val to: QueryResponse[Product, ProductFacets] => ProductQueryResponseApiModel = { response =>
       ProductQueryResponseApiModel(
         start = response.start,
@@ -30,6 +54,27 @@ object ProductsApi {
           .map(product.from)
           .toList,
         facets = ProductFacetsApi.productFacets.from(response.facets)
+      )
+    }
+  }
+
+  val simpleProduct = new (SimpleProduct <=> SimpleProductApiModel) {
+    val to: SimpleProduct => SimpleProductApiModel = { product =>
+      SimpleProductApiModel(
+        id = product.id.toString,
+        functionalNames = product.functionalNames.map(NameApi.name.to),
+        brandName = NameApi.name.to(product.brandName),
+        category = category.to(product.category),
+        sustainaIndex = product.sustainaIndex
+      )
+    }
+    val from: SimpleProductApiModel => SimpleProduct = { product =>
+      SimpleProduct(
+        id = UUID.fromString(product.id),
+        functionalNames = product.functionalNames.map(NameApi.name.from),
+        brandName = NameApi.name.from(product.brandName),
+        category = category.from(product.category),
+        sustainaIndex = product.sustainaIndex
       )
     }
   }

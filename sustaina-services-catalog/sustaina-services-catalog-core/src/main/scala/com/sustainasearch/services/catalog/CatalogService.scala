@@ -1,6 +1,8 @@
 package com.sustainasearch.services.catalog
 
-import com.sustainasearch.services.catalog.products.{ProductFacet, ProductQuery, ProductService}
+import com.sustainasearch.searchengine.QueryResponse
+import com.sustainasearch.services.catalog.products.facets.ProductFacets
+import com.sustainasearch.services.catalog.products.{ProductFacet, ProductQuery, ProductService, SimpleProduct}
 import javax.inject.{Inject, Singleton}
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -17,26 +19,14 @@ class CatalogService @Inject()(productService: ProductService)(implicit ec: Exec
 
     for {
       productResponse <- productService.query(productQuery)
-      // TODO: use the ProductCategoryService to get the categories
-      eventualCategories = productResponse.facets.categories.map { categoryFacet =>
-        productService.findCategory(categoryFacet.categoryType)
-      }
-      categories <- Future.sequence(eventualCategories)
     } yield {
-      val categoryNames = categories
-        .flatten
-        .map { category =>
-          category.categoryType -> category.names
-        }
-        .toMap
-
-      val categoryFacets = productResponse.facets.categories.map { categoryFacet =>
-        categoryFacet.copy(names = categoryNames.getOrElse(categoryFacet.categoryType, Seq.empty))
-      }
-      val facets = productResponse.facets.copy(categories = categoryFacets)
-
       CatalogQueryResponse(
-        productResponse.copy(facets = facets)
+        products = QueryResponse[SimpleProduct, ProductFacets] (
+          start = productResponse.start,
+          numFound = productResponse.numFound,
+          documents = productResponse.documents.map(SimpleProduct(_)),
+          facets = productResponse.facets
+        )
       )
     }
   }
