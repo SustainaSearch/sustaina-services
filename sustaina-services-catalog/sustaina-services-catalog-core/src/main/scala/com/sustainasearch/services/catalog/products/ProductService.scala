@@ -16,7 +16,7 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
 
   def query(categoryType: CategoryType, rawProductQuery: ProductQuery): Future[QueryResponse[Product, ProductFacets]] = {
     val productQuery = rawProductQuery
-      .withFilterQuery(SpecificFieldFilterQuery(searchEngineFieldRegister.CategoryTypeField, categoryType))
+      .withFilterQuery(SpecificFieldFilterQuery(CategoryTypeField, categoryType))
       .withSortByDescendingSustainaIndex
       .withSortByNearestSpatialResult
     query(productQuery)
