@@ -1,6 +1,6 @@
 package com.sustainasearch.services.catalog.products
 
-import com.sustainasearch.searchengine.SpatialPoint
+import com.sustainasearch.searchengine.{FilterQuery, Query, SpatialPoint}
 import com.sustainasearch.services.catalog.products.ProductSort.ProductSort
 import com.sustainasearch.services.catalog.CatalogQuery
 import com.sustainasearch.services.catalog.products.ProductFacet.ProductFacet
@@ -8,10 +8,13 @@ import com.sustainasearch.services.catalog.products.ProductFacet.ProductFacet
 case class ProductQuery(mainQuery: String,
                         start: Long = 0,
                         rows: Long = 10,
+                        filterQueries: Seq[FilterQuery] = Seq.empty,
                         fuzzy: Boolean = false,
                         maybeSpatialPoint: Option[SpatialPoint] = None,
                         sort: Seq[ProductSort] = Seq.empty,
                         facets: Seq[ProductFacet] = Seq.empty) {
+
+  def withFilterQuery(filterQuery: FilterQuery): ProductQuery = copy(filterQueries = filterQueries :+ filterQuery)
 
   def withSortByDescendingSustainaIndex: ProductQuery = copy(sort = sort :+ ProductSort.DescendingSustainaIndex)
 

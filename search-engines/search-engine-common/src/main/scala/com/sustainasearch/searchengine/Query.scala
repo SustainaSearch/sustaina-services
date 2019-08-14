@@ -53,4 +53,4 @@ case class NearestSpatialResult(spatialPoint: SpatialPoint, spatialField: String
 
 trait FilterQuery
 
-case class SpecificFieldFilterQuery(fieldName: String, fieldValue: String) extends FilterQuery
+case class SpecificFieldFilterQuery(fieldName: String, fieldValue: Any) extends FilterQuery

@@ -14,11 +14,12 @@ class ProductsController @Inject()(productService: ProductService)(implicit ec: 
 
   @ApiOperation(
     httpMethod = "GET",
-    value = "Queries the product section of the SustainaCatalog",
+    value = "Queries a specific product category",
     produces = "application/json",
     response = classOf[ProductQueryResponseApiModel]
   )
-  def query(@ApiParam(value = "Main query", required = true) q: String,
+  def query(@ApiParam(value = "Category type", required = true) categoryType: String,
+            @ApiParam(value = "Main query", required = true) q: String,
             @ApiParam(value = "Offset (i.e. number of documents) into the query’s result set to be displayed in the response", required = false, defaultValue = "0") start: Long = 0,
             @ApiParam(value = "Maximum number of documents returned at a time in response to a query", required = false, defaultValue = "10") rows: Long = 10,
             @ApiParam(value = "Fuzzy query", required = false, defaultValue = "false") fuzzy: Boolean = false,
@@ -30,10 +31,9 @@ class ProductsController @Inject()(productService: ProductService)(implicit ec: 
       fuzzy = fuzzy,
       maybeSpatialPoint = sp.map(SpatialPoint(_))
     )
-      .withSortByDescendingSustainaIndex
-      .withSortByNearestSpatialResult
+
     for {
-      response <- productService.query(query)
+      response <- productService.query(CategoryType.withName(categoryType), query)
     } yield {
       Ok(Json.toJson(ProductsApi.productQueryResponse.to(response)))
     }

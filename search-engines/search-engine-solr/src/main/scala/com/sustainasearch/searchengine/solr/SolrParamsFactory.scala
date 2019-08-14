@@ -44,7 +44,7 @@ object SolrParamsFactory {
       query
         .filterQueries
         .map {
-          case SpecificFieldFilterQuery(fieldName, fieldValue) => s"$fieldName:$fieldValue"
+          case SpecificFieldFilterQuery(fieldName, fieldValue) => s"$fieldName:${fieldValue.toString}"
         }
         .toArray
     }

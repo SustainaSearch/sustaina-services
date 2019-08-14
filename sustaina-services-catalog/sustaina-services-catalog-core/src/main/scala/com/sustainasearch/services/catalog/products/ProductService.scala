@@ -14,6 +14,14 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
 
   private val searchEngine = searchEngineFactory.createSearchEngine(searchEngineFieldRegister)
 
+  def query(categoryType: CategoryType, rawProductQuery: ProductQuery): Future[QueryResponse[Product, ProductFacets]] = {
+    val productQuery = rawProductQuery
+      .withFilterQuery(SpecificFieldFilterQuery(searchEngineFieldRegister.CategoryTypeField, categoryType))
+      .withSortByDescendingSustainaIndex
+      .withSortByNearestSpatialResult
+    query(productQuery)
+  }
+
   def query(productQuery: ProductQuery): Future[QueryResponse[Product, ProductFacets]] = {
     val searchEngineQuery = productQuery
       .sort
@@ -22,6 +30,7 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
           mainQuery = FreeTextQuery(productQuery.mainQuery),
           start = productQuery.start,
           rows = productQuery.rows,
+          filterQueries = productQuery.filterQueries,
           fuzzy = productQuery.fuzzy,
           maybeSpatialPoint = productQuery.maybeSpatialPoint,
           facetFields = productQuery.facets.map {
@@ -82,6 +91,10 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
         .headOption
         .map(_.category)
     }
+  }
+
+  def filterQueriesForCategoryType(categoryType: CategoryType): Future[Seq[FilterQuery]] = {
+    ???
   }
 
   def add(product: Product): Future[Product] = {
