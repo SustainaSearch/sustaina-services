@@ -1,11 +1,11 @@
 package com.sustainasearch.services.catalog.products
 
-import com.sustainasearch.searchengine.{FilterQuery, Query, SpatialPoint}
+import com.sustainasearch.searchengine._
 import com.sustainasearch.services.catalog.products.ProductSort.ProductSort
 import com.sustainasearch.services.catalog.CatalogQuery
 import com.sustainasearch.services.catalog.products.ProductFacet.ProductFacet
 
-case class ProductQuery(mainQuery: String,
+case class ProductQuery(mainQuery: MainQuery,
                         start: Long = 0,
                         rows: Long = 10,
                         filterQueries: Seq[FilterQuery] = Seq.empty,
@@ -27,7 +27,7 @@ object ProductQuery {
 
   def apply(query: CatalogQuery): ProductQuery = {
     ProductQuery(
-      mainQuery = query.mainQuery,
+      mainQuery = FreeTextQuery(query.mainQuery),
       start = query.start,
       rows = query.rows,
       fuzzy = query.fuzzy,

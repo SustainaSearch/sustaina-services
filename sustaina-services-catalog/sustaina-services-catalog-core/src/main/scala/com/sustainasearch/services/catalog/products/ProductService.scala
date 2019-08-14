@@ -27,7 +27,7 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
       .sort
       .foldLeft(
         Query(
-          mainQuery = FreeTextQuery(productQuery.mainQuery),
+          mainQuery = productQuery.mainQuery,
           start = productQuery.start,
           rows = productQuery.rows,
           filterQueries = productQuery.filterQueries,
