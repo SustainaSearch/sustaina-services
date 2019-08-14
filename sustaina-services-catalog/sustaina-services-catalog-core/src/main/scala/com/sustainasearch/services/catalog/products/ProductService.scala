@@ -14,12 +14,12 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
 
   private val searchEngine = searchEngineFactory.createSearchEngine(searchEngineFieldRegister)
 
-  def query(categoryType: CategoryType, rawProductQuery: ProductQuery): Future[QueryResponse[Product, ProductFacets]] = {
-    val productQuery = rawProductQuery
+  def categoryQuery(categoryType: CategoryType, rawProductQuery: ProductQuery): Future[QueryResponse[Product, ProductFacets]] = {
+    val productCategoryQuery = rawProductQuery
       .withFilterQuery(SpecificFieldFilterQuery(CategoryTypeField, categoryType))
       .withSortByDescendingSustainaIndex
       .withSortByNearestSpatialResult
-    query(productQuery)
+    query(productCategoryQuery)
   }
 
   def query(productQuery: ProductQuery): Future[QueryResponse[Product, ProductFacets]] = {

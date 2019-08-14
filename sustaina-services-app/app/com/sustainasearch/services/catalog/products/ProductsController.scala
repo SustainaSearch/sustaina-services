@@ -33,7 +33,7 @@ class ProductsController @Inject()(productService: ProductService)(implicit ec: 
     )
 
     for {
-      response <- productService.query(CategoryType.withName(categoryType), query)
+      response <- productService.categoryQuery(CategoryType.withName(categoryType), query)
     } yield {
       Ok(Json.toJson(ProductsApi.productQueryResponse.to(response)))
     }
