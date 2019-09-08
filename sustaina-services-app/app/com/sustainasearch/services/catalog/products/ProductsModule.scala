@@ -6,10 +6,13 @@ import play.api.{Configuration, Environment}
 
 class ProductsModule extends Module {
   override def bindings(environment: Environment, configuration: Configuration): Seq[Binding[_]] = {
+    val productsSolrBaseUrl = configuration.getString("products.solr.url").getOrElse(throw new IllegalArgumentException("No 'products.solr.url' has been provided"))
+    println(s"Products Solr base URL = '$productsSolrBaseUrl'")
+    val productsSolrUrl = s"$productsSolrBaseUrl/solr/sustaina-products"
+    println(s"Products Solr URL = '$productsSolrUrl'")
     Seq(
       bind[ProductSearchEngineFieldRegister].toInstance(ProductSolrFieldRegister),
-      // TODO: get Solr URL from configuration
-      bind[ProductSearchEngineFactory].toInstance(new HttpSolrProductSearchEngineFactory(HttpSolrConfig("http://localhost:8983/solr/sustaina-products")))
+      bind[ProductSearchEngineFactory].toInstance(new HttpSolrProductSearchEngineFactory(HttpSolrConfig(productsSolrUrl)))
     )
   }
 }
