@@ -3,6 +3,15 @@
 
 ## Development
 
+### Prerequisites
+
+* Install JDK 8
+* [Install Docker]()
+* [Install the AWS Command line interface](https://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+* Run `aws configure` in a terminal and provide your `AWS Access Key ID`and `AWS Secret Access Key`
+
+### 
+
 ### Run locally
 
 #### Using provided bash script
