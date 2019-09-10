@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-cp sustaina-services-catalog/sustaina-services-products-solr-core/src/main/resources/sustaina-products/sustaina-products/conf/schema.xml ~/solr-8.1.1/server/solr/cores/sustaina-products/sustaina-products/conf/

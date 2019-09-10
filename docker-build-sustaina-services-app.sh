@@ -7,4 +7,4 @@ mv sustaina-services-app/build/svc/*/* sustaina-services-app/build/svc/
 rm sustaina-services-app/build/svc/bin/*.bat
 mv sustaina-services-app/build/svc/bin/* sustaina-services-app/build/svc/bin/start
 
-docker build -t sustaina-services sustaina-services-app
+docker build -t sustaina-services-app sustaina-services-app
