@@ -7,7 +7,7 @@ include 'search-engines:search-engine-solr'
 include 'sustaina-services-catalog:sustaina-services-catalog-core'
 include 'sustaina-services-catalog:sustaina-services-products-model'
 include 'sustaina-services-catalog:sustaina-services-products-solr-client'
-include 'sustaina-services-catalog:sustaina-services-products-solr-core'
+include 'sustaina-services-catalog:sustaina-services-solr-cores'
 
 //include 'sustaina-services-core'
 include 'sustaina-services-app'
