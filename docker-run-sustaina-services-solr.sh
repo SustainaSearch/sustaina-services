@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-docker run --name solr-sustaina-products -p 8983:8983 solr-sustaina-products
+docker run --name sustaina-services-solr -p 8983:8983 sustaina-services-solr
