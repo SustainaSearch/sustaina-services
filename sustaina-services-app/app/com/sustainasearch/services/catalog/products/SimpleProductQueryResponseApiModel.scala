@@ -6,7 +6,7 @@ import play.api.libs.json.Json
 case class SimpleProductQueryResponseApiModel(start: Long,
                                         numFound: Long,
                                         documents: Seq[SimpleProductApiModel],
-                                        facets: ProductFacetsApiModel)
+                                        facets: Option[ProductFacetsApiModel])
 
 object SimpleProductQueryResponseApiModel {
   implicit val format = Json.format[SimpleProductQueryResponseApiModel]

@@ -1,6 +1,7 @@
 package com.sustainasearch.services.catalog.products
 
 import com.sustainasearch.searchengine.{AllDocumentsQuery, FreeTextQuery, MainQuery, SpatialPoint}
+import com.sustainasearch.services.catalog.CategoryType
 import io.swagger.annotations._
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.{JsValue, Json}

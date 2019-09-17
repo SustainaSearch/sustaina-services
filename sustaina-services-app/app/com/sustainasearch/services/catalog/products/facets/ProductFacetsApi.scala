@@ -1,6 +1,8 @@
 package com.sustainasearch.services.catalog.products.facets
 
-import com.sustainasearch.services.catalog.products.{CategoryType, Name, NameApi}
+import com.sustainasearch.services.Name
+import com.sustainasearch.services.catalog.CategoryType
+import com.sustainasearch.services.catalog.products.NameApi
 import scalaz.Isomorphism.<=>
 
 object ProductFacetsApi {

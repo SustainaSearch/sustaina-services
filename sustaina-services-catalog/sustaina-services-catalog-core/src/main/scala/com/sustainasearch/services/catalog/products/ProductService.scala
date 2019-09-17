@@ -1,14 +1,17 @@
 package com.sustainasearch.services.catalog.products
 
 import com.sustainasearch.searchengine._
-import com.sustainasearch.services.catalog.products.CategoryType.CategoryType
+import com.sustainasearch.services.catalog.CategoryType.CategoryType
+import com.sustainasearch.services.catalog.categories.ProductCategoryService
 import com.sustainasearch.services.catalog.products.facets.ProductFacets
 import javax.inject.{Inject, Singleton}
 
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, searchEngineFieldRegister: ProductSearchEngineFieldRegister)(implicit ec: ExecutionContext) {
+class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory,
+                               searchEngineFieldRegister: ProductSearchEngineFieldRegister,
+                               productCategoryService: ProductCategoryService)(implicit ec: ExecutionContext) {
 
   import searchEngineFieldRegister._
 
@@ -49,21 +52,11 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
         }
       }
     val productResponse = searchEngine.query(searchEngineQuery)
-    val eventualCategories = productResponse.facets.categories.map { categoryFacet =>
-      findCategory(categoryFacet.categoryType)
-    }
+    val categoryTypes = productResponse.facets.categories.map(_.categoryType)
 
     for {
-      // TODO: use the ProductCategoryService to get the categories
-      categories <- Future.sequence(eventualCategories)
+      categoryNames <- productCategoryService.categoryNames(categoryTypes)
     } yield {
-      val categoryNames = categories
-        .flatten
-        .map { category =>
-          category.categoryType -> category.names
-        }
-        .toMap
-
       val categoryFacets = productResponse.facets.categories.map { categoryFacet =>
         categoryFacet.copy(names = categoryNames.getOrElse(categoryFacet.categoryType, Seq.empty))
       }
@@ -72,30 +65,9 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory, 
     }
   }
 
-  // TODO: move to ProductCategoryService to get the categories
-  def findCategory(categoryType: CategoryType): Future[Option[Category]] = {
-    // TODO: get Category names in another way, when there is no guarantee all names are available in the found product
-    Future {
-      val query = Query(
-        mainQuery = AllDocumentsQuery,
-        rows = 1
-      ).withFilterQuery(
-        SpecificFieldFilterQuery(
-          fieldName = CategoryTypeField,
-          fieldValue = categoryType.toString
-        )
-      )
-      val response = searchEngine.query(query)
-      response
-        .documents
-        .headOption
-        .map(_.category)
-    }
-  }
-
-  def filterQueriesForCategoryType(categoryType: CategoryType): Future[Seq[FilterQuery]] = {
-    ???
-  }
+  //  def filterQueriesForCategoryType(categoryType: CategoryType): Future[Seq[FilterQuery]] = {
+  //    ???
+  //  }
 
   def add(product: Product): Future[Product] = {
     Future {

@@ -1,6 +1,7 @@
 package com.sustainasearch.services.catalog.products
 
 import java.nio.file.Paths
+import java.util.UUID
 
 import com.sustainasearch.searchengine.SearchEngine
 import com.sustainasearch.searchengine.solr.SolrSearchEngine
@@ -9,9 +10,9 @@ import com.sustainasearch.services.catalog.products.facets.ProductFacets
 
 class EmbeddedSolrProductSearchEngineFactory extends ProductSearchEngineFactory {
 
-  override def createSearchEngine(fieldRegister: ProductSearchEngineFieldRegister): SearchEngine[Product, ProductFacets] = {
+  override def createSearchEngine(fieldRegister: ProductSearchEngineFieldRegister): SearchEngine[UUID, Product, ProductFacets] = {
     val solrXmlUri = getClass
-      .getResource("/sustaina-products/solr.xml")
+      .getResource("/sustaina-solr-cores/solr.xml")
       .toURI
     val solrHome = Paths
       .get(solrXmlUri)
@@ -24,9 +25,9 @@ class EmbeddedSolrProductSearchEngineFactory extends ProductSearchEngineFactory 
       coreName = "sustaina-products"
     )
 
-    new SolrSearchEngine[Product, ProductFacets](
+    new SolrSearchEngine[UUID, Product, ProductFacets](
       new EmbeddedSolrClientFactory(config),
-      new ProductSolrMorphism(fieldRegister)
+      new ProductSolrIsomorphism(fieldRegister)
     )
   }
 }

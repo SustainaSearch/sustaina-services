@@ -2,6 +2,9 @@ package com.sustainasearch.services.catalog.products
 
 import java.util.UUID
 
+import com.sustainasearch.services.Name
+import com.sustainasearch.services.catalog.Category
+
 case class SimpleProduct(id: UUID,
                          functionalNames: Seq[Name],
                          brandName: Name,

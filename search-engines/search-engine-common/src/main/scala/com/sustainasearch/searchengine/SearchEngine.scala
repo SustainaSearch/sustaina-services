@@ -1,8 +1,10 @@
 package com.sustainasearch.searchengine
 
-trait SearchEngine[D, F] {
+trait SearchEngine[Id, Document, Facets] {
 
-  def add(documents: D*): Unit
+  def add(documents: Document*): Unit
 
-  def query(query: Query): QueryResponse[D, F]
+  def getById(id: Id): Document
+
+  def query(query: Query): QueryResponse[Document, Facets]
 }

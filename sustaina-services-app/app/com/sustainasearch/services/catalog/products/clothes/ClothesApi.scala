@@ -1,6 +1,6 @@
 package com.sustainasearch.services.catalog.products.clothes
 
-import com.sustainasearch.services.catalog.products.LanguageCode
+import com.sustainasearch.services.LanguageCode
 import scalaz.Isomorphism.<=>
 
 object ClothesApi {

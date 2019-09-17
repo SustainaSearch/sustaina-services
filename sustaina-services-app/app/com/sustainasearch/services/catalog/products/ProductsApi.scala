@@ -3,6 +3,7 @@ package com.sustainasearch.services.catalog.products
 import java.util.UUID
 
 import com.sustainasearch.searchengine.QueryResponse
+import com.sustainasearch.services.catalog._
 import com.sustainasearch.services.catalog.products.clothes.ClothesApi
 import com.sustainasearch.services.catalog.products.facets.{ProductFacets, ProductFacetsApi}
 import com.sustainasearch.services.catalog.products.food._
@@ -18,7 +19,7 @@ object ProductsApi {
         documents = response
           .documents
           .map(simpleProduct.to),
-        facets = ProductFacetsApi.productFacets.to(response.facets)
+        facets = response.facets.map(ProductFacetsApi.productFacets.to)
       )
     }
     val from: SimpleProductQueryResponseApiModel => QueryResponse[SimpleProduct, ProductFacets] = { response =>
@@ -29,7 +30,7 @@ object ProductsApi {
           .documents
           .map(simpleProduct.from)
           .toList,
-        facets = ProductFacetsApi.productFacets.from(response.facets)
+        facets = response.facets.map(ProductFacetsApi.productFacets.from)
       )
     }
   }
@@ -53,7 +54,7 @@ object ProductsApi {
           .documents
           .map(product.from)
           .toList,
-        facets = ProductFacetsApi.productFacets.from(response.facets)
+        facets = Some(ProductFacetsApi.productFacets.from(response.facets))
       )
     }
   }

@@ -2,7 +2,7 @@ package com.sustainasearch.searchengine.solr
 
 import com.sustainasearch.searchengine.QueryResponse
 import org.apache.solr.client.solrj.response.{QueryResponse => SolrQueryResponse}
-import org.apache.solr.common.SolrInputDocument
+import org.apache.solr.common.{SolrDocument, SolrInputDocument}
 
 import scala.collection.JavaConverters._
 
@@ -12,7 +12,7 @@ trait SolrTestFixture {
 
   case class SolrTestFacet()
 
-  object TestSolrMorphism extends SolrMorphism[SolrTestDocument, Seq[SolrTestFacet]] {
+  object TestSolrIsomorphism extends SolrIsomorphism[SolrTestDocument, Seq[SolrTestFacet]] {
     override def toSolrInputDocument(document: SolrTestDocument): SolrInputDocument = {
       val solrInputDocument = new SolrInputDocument()
       solrInputDocument.addField("id", document.id)
@@ -24,11 +24,7 @@ trait SolrTestFixture {
       val results = response.getResults
       val documents = results
         .asScala
-        .map { document =>
-          val id = document.getFirstValue("id").asInstanceOf[String]
-          val name = document.getFirstValue("name").asInstanceOf[String]
-          SolrTestDocument(id, name)
-        }
+        .map(fromSolrDocument)
         .toList
       QueryResponse(
         start = 0,
@@ -36,6 +32,12 @@ trait SolrTestFixture {
         documents = documents,
         facets = Seq.empty[SolrTestFacet]
       )
+    }
+
+    override def fromSolrDocument(document: SolrDocument): SolrTestDocument = {
+      val id = document.getFirstValue("id").asInstanceOf[String]
+      val name = document.getFirstValue("name").asInstanceOf[String]
+      SolrTestDocument(id, name)
     }
   }
 
