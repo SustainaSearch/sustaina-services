@@ -1,9 +1,9 @@
-package com.sustainasearch.services.v1
+package com.sustainasearch.services.v1.models
 
 import com.sustainasearch.services.{LanguageCode, Name}
 import scalaz.Isomorphism.<=>
 
-object NameApi {
+object NameIsomorphism {
   val name = new (Name <=> NameApiModel) {
     val to: Name => NameApiModel = { name =>
       NameApiModel(

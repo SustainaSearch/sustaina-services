@@ -1,9 +1,9 @@
-package com.sustainasearch.services.v1.catalog.products
+package com.sustainasearch.services.v1.catalog.products.models
 
-import com.sustainasearch.services.v1.NameApiModel
-import com.sustainasearch.services.v1.catalog.CategoryApiModel
-import com.sustainasearch.services.v1.catalog.products.clothes.ClothesApiModel
-import com.sustainasearch.services.v1.catalog.products.food.BabyFoodApiModel
+import com.sustainasearch.services.v1.catalog.models.CategoryApiModel
+import com.sustainasearch.services.v1.catalog.products.models.clothes.ClothesApiModel
+import com.sustainasearch.services.v1.catalog.products.models.food.BabyFoodApiModel
+import com.sustainasearch.services.v1.models.NameApiModel
 import play.api.libs.json.Json
 
 case class ProductApiModel(id: String,

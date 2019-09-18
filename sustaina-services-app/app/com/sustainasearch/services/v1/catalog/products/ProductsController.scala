@@ -3,6 +3,7 @@ package com.sustainasearch.services.v1.catalog.products
 import com.sustainasearch.searchengine.{AllDocumentsQuery, FreeTextQuery, MainQuery, SpatialPoint}
 import com.sustainasearch.services.catalog.CategoryType
 import com.sustainasearch.services.catalog.products._
+import com.sustainasearch.services.v1.catalog.products.models.{ProductApiModel, ProductQueryResponseApiModel, ProductsIsomorphism}
 import io.swagger.annotations._
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.{JsValue, Json}
@@ -37,7 +38,7 @@ class ProductsController @Inject()(productService: ProductService)(implicit ec: 
     for {
       response <- productService.queryProductCategory(CategoryType.withName(categoryType), query)
     } yield {
-      Ok(Json.toJson(ProductsApi.productQueryResponse.to(response)))
+      Ok(Json.toJson(ProductsIsomorphism.productQueryResponse.to(response)))
     }
   }
 
@@ -50,7 +51,7 @@ class ProductsController @Inject()(productService: ProductService)(implicit ec: 
   @ApiImplicitParams(
     Array(
       new ApiImplicitParam(
-        dataType = "com.sustainasearch.services.v1.catalog.products.ProductApiModel",
+        dataType = "com.sustainasearch.services.v1.catalog.products.models.ProductApiModel",
         paramType = "body",
         required = true,
         allowMultiple = false
@@ -60,9 +61,9 @@ class ProductsController @Inject()(productService: ProductService)(implicit ec: 
   def add(): Action[JsValue] = Action.async(parse.json) { implicit request =>
     val productRequest = request.body.as[ProductApiModel]
     for {
-      productResponse <- productService.add(ProductsApi.product.from(productRequest))
+      productResponse <- productService.add(ProductsIsomorphism.product.from(productRequest))
     } yield {
-      Ok(Json.toJson(ProductsApi.product.to(productResponse)))
+      Ok(Json.toJson(ProductsIsomorphism.product.to(productResponse)))
     }
   }
 

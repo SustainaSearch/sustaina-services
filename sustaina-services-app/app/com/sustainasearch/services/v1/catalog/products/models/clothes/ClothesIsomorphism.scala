@@ -1,10 +1,10 @@
-package com.sustainasearch.services.v1.catalog.products.clothes
+package com.sustainasearch.services.v1.catalog.products.models.clothes
 
 import com.sustainasearch.services.LanguageCode
 import com.sustainasearch.services.catalog.products.clothes.{Clothes, Composition}
 import scalaz.Isomorphism.<=>
 
-object ClothesApi {
+object ClothesIsomorphism {
 
   val clothes = new (Clothes <=> ClothesApiModel) {
     val to: Clothes => ClothesApiModel = { clothes =>

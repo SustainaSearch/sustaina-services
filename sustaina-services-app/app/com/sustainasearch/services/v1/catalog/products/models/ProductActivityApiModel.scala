@@ -1,4 +1,4 @@
-package com.sustainasearch.services.v1.catalog.products
+package com.sustainasearch.services.v1.catalog.products.models
 
 import play.api.libs.json.Json
 

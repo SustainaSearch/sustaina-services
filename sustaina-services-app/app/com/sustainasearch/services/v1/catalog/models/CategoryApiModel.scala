@@ -1,6 +1,6 @@
-package com.sustainasearch.services.v1.catalog
+package com.sustainasearch.services.v1.catalog.models
 
-import com.sustainasearch.services.v1.NameApiModel
+import com.sustainasearch.services.v1.models.NameApiModel
 import play.api.libs.json.Json
 
 case class CategoryApiModel(categoryType: String, names: Seq[NameApiModel])

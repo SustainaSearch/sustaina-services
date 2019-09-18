@@ -1,6 +1,6 @@
-package com.sustainasearch.services.v1.catalog.products
+package com.sustainasearch.services.v1.catalog.products.models
 
-import com.sustainasearch.services.v1.catalog.products.facets.ProductFacetsApiModel
+import com.sustainasearch.services.v1.catalog.products.models.facets.ProductFacetsApiModel
 import play.api.libs.json.Json
 
 case class ProductQueryResponseApiModel(start: Long,

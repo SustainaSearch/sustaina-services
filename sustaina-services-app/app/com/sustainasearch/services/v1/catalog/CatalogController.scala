@@ -2,6 +2,7 @@ package com.sustainasearch.services.v1.catalog
 
 import com.sustainasearch.searchengine.SpatialPoint
 import com.sustainasearch.services.catalog.{CatalogQuery, CatalogService}
+import com.sustainasearch.services.v1.catalog.models.{CatalogIsomorphism, CatalogQueryResponseApiModel}
 import io.swagger.annotations.{Api, ApiOperation, ApiParam}
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.Json
@@ -32,7 +33,7 @@ class CatalogController @Inject()(catalogService: CatalogService)(implicit ec: E
     for {
       response <- catalogService.query(query)
     } yield {
-      Ok(Json.toJson(CatalogApi.queryResponse.to(response)))
+      Ok(Json.toJson(CatalogIsomorphism.queryResponse.to(response)))
     }
   }
 
