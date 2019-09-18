@@ -2,7 +2,6 @@ package com.sustainasearch.services.catalog.products
 
 import com.sustainasearch.searchengine._
 import CategoryType.CategoryType
-import com.sustainasearch.services.catalog.products.categories.ProductCategoryService
 import com.sustainasearch.services.catalog.products.facets.ProductFacets
 import javax.inject.{Inject, Singleton}
 

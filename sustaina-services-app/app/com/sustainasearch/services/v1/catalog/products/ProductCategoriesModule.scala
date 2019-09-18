@@ -1,7 +1,7 @@
-package com.sustainasearch.services.v1.catalog.products.categories
+package com.sustainasearch.services.v1.catalog.products
 
 import com.sustainasearch.searchengine.solr.http.HttpSolrConfig
-import com.sustainasearch.services.catalog.products.categories.{HttpSolrProductCategorySearchEngineFactory, ProductCategorySearchEngineFactory, ProductCategorySearchEngineFieldRegister, ProductCategorySolrFieldRegister}
+import com.sustainasearch.services.catalog.products.{HttpSolrProductCategorySearchEngineFactory, ProductCategorySearchEngineFactory, ProductCategorySearchEngineFieldRegister, ProductCategorySolrFieldRegister}
 import play.api.inject.{Binding, Module}
 import play.api.{Configuration, Environment}
 

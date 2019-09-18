@@ -1,4 +1,4 @@
-package com.sustainasearch.services.catalog.products.categories
+package com.sustainasearch.services.catalog.products
 
 import com.sustainasearch.services.LanguageCode.LanguageCode
 import com.sustainasearch.services.Name

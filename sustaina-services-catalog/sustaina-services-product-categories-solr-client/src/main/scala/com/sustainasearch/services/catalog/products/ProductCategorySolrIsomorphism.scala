@@ -1,8 +1,7 @@
-package com.sustainasearch.services.catalog.products.categories
+package com.sustainasearch.services.catalog.products
 
 import com.sustainasearch.searchengine.QueryResponse
 import com.sustainasearch.searchengine.solr.SolrIsomorphism
-import com.sustainasearch.services.catalog.products.{Category, CategoryType}
 import com.sustainasearch.services.{LanguageCode, Name}
 import org.apache.solr.client.solrj.response.{QueryResponse => SolrQueryResponse}
 import org.apache.solr.common.{SolrDocument, SolrInputDocument}

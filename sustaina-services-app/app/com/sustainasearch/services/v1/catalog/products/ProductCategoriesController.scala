@@ -1,7 +1,6 @@
-package com.sustainasearch.services.v1.catalog.products.categories
+package com.sustainasearch.services.v1.catalog.products
 
-import com.sustainasearch.services.catalog.products.categories.ProductCategoryService
-import com.sustainasearch.services.v1.catalog.products.{CategoryApiModel, CategoryIsomorphism}
+import com.sustainasearch.services.catalog.products.ProductCategoryService
 import io.swagger.annotations._
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.{JsValue, Json}
@@ -15,7 +14,7 @@ class ProductCategoriesController @Inject()(productCategoryService: ProductCateg
 
   @ApiOperation(
     httpMethod = "POST",
-    value = "Adds a new Product Category. Only for test purposes. Will be removed eventually.",
+    value = "Adds a new Product Category. Only for test purposes - will be removed eventually.",
     produces = "application/CategoryApiModel",
     response = classOf[CategoryApiModel]
   )

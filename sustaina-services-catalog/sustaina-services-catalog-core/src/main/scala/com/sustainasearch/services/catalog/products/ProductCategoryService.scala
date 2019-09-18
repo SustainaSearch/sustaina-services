@@ -1,8 +1,7 @@
-package com.sustainasearch.services.catalog.products.categories
+package com.sustainasearch.services.catalog.products
 
 import com.sustainasearch.searchengine.{AllDocumentsQuery, Query}
 import com.sustainasearch.services.LanguageCode.LanguageCode
-import com.sustainasearch.services.catalog.products.Category
 import com.sustainasearch.services.catalog.products.CategoryType.CategoryType
 import com.sustainasearch.services.{LanguageCode, Name}
 import javax.inject.{Inject, Singleton}

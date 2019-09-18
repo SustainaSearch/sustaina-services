@@ -42,7 +42,7 @@ class ProductsController @Inject()(productService: ProductService)(implicit ec: 
 
   @ApiOperation(
     httpMethod = "POST",
-    value = "Adds a new Product. Only for test purposes. Will be removed eventually.",
+    value = "Adds a new Product. Only for test purposes- will be removed eventually.",
     produces = "application/json",
     response = classOf[ProductApiModel]
   )
