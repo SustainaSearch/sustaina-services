@@ -1,10 +1,10 @@
 
 # Catalog
-GET         /api/v1/catalog                                         com.sustainasearch.services.catalog.CatalogController.query(q: String, rows: Long, fuzzy: Boolean, sp: Option[String])
+GET         /api/v1/catalog                                         com.sustainasearch.services.v1.catalog.CatalogController.query(q: String, rows: Long, fuzzy: Boolean, sp: Option[String])
 
-# Produtcs
-GET         /api/v1/catalog/products/categories/:categoryType       com.sustainasearch.services.catalog.products.ProductsController.query(categoryType:String, q: Option[String], start: Long, rows: Long, fuzzy: Boolean, sp: Option[String])
-POST        /api/v1/catalog/products                                com.sustainasearch.services.catalog.products.ProductsController.add()
+# Products
+GET         /api/v1/catalog/products/categories/:categoryType       com.sustainasearch.services.v1.catalog.products.ProductsController.query(categoryType:String, q: Option[String], start: Long, rows: Long, fuzzy: Boolean, sp: Option[String])
+POST        /api/v1/catalog/products                                com.sustainasearch.services.v1.catalog.products.ProductsController.add()
 
 # Swagger
 GET         /api-doc                                                controllers.Assets.at(path="/public/api-doc", file="/index.html")
