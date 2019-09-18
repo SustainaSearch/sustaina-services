@@ -56,8 +56,9 @@ class ProductsController @Inject()(productService: ProductService)(implicit ec: 
       )
     )
   )
-  def add(): Action[JsValue] = Action.async(parse.json) { implicit request =>
+  def add(@ApiParam(value = "Category type", required = true) categoryType: String): Action[JsValue] = Action.async(parse.json) { implicit request =>
     val productRequest = request.body.as[ProductApiModel]
+    require(productRequest.category.categoryType == categoryType)
     for {
       productResponse <- productService.add(ProductsIsomorphism.product.from(productRequest))
     } yield {
