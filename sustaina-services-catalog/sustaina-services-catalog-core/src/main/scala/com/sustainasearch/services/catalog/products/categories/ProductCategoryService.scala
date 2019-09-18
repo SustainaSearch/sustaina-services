@@ -2,8 +2,8 @@ package com.sustainasearch.services.catalog.products.categories
 
 import com.sustainasearch.searchengine.{AllDocumentsQuery, Query}
 import com.sustainasearch.services.LanguageCode.LanguageCode
-import com.sustainasearch.services.catalog.Category
-import com.sustainasearch.services.catalog.CategoryType.CategoryType
+import com.sustainasearch.services.catalog.products.Category
+import com.sustainasearch.services.catalog.products.CategoryType.CategoryType
 import com.sustainasearch.services.{LanguageCode, Name}
 import javax.inject.{Inject, Singleton}
 
@@ -21,14 +21,16 @@ class ProductCategoryService @Inject()(searchEngineFactory: ProductCategorySearc
       categories <- Future.sequence(categoryTypes.map(findCategory))
     } yield {
       categories
-        .map { category =>
-          category.categoryType -> category.names
+        .flatMap { maybeCategory =>
+          maybeCategory.map { category =>
+            category.categoryType -> category.names
+          }
         }
         .toMap
     }
   }
 
-  def findCategory(categoryType: CategoryType): Future[Category] = {
+  def findCategory(categoryType: CategoryType): Future[Option[Category]] = {
     Future {
       searchEngine.getById(categoryType)
     }

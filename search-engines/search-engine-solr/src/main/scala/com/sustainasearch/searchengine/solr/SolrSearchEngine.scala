@@ -5,7 +5,7 @@ import com.sustainasearch.searchengine._
 import scala.collection.JavaConverters._
 
 class SolrSearchEngine[Id, Document, Facets](solrClientFactory: SolrClientFactory,
-                                 solrIsomorphism: SolrIsomorphism[Document, Facets]) extends SearchEngine[Id, Document, Facets] {
+                                             solrIsomorphism: SolrIsomorphism[Document, Facets]) extends SearchEngine[Id, Document, Facets] {
   private val solrClient = solrClientFactory.createSolrClient
 
   override def query(query: Query): QueryResponse[Document, Facets] = {
@@ -22,8 +22,9 @@ class SolrSearchEngine[Id, Document, Facets](solrClientFactory: SolrClientFactor
     solrClient.commit()
   }
 
-  override def getById(id: Id): Document = {
+  override def getById(id: Id): Option[Document] = {
     val solrDocument = solrClient.getById(id.toString)
-    solrIsomorphism.fromSolrDocument(solrDocument)
+    if (solrDocument == null) None
+    else Some(solrIsomorphism.fromSolrDocument(solrDocument))
   }
 }

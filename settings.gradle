@@ -10,5 +10,5 @@ include 'sustaina-services-catalog:sustaina-services-products-solr-client'
 include 'sustaina-services-catalog:sustaina-services-product-categories-solr-client'
 include 'sustaina-services-solr-cores'
 
-//include 'sustaina-services-core'
+include 'sustaina-services-api-model'
 include 'sustaina-services-app'

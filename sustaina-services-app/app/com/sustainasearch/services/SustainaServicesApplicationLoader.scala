@@ -1,6 +1,7 @@
 package com.sustainasearch.services
 
-import com.sustainasearch.services.v1.catalog.products.{ProductCategoriesModule, ProductsModule}
+import com.sustainasearch.services.v1.catalog.products.ProductsModule
+import com.sustainasearch.services.v1.catalog.products.categories.ProductCategoriesModule
 import play.api.ApplicationLoader
 import play.api.inject.guice.{GuiceApplicationBuilder, GuiceApplicationLoader}
 import play.modules.swagger.SwaggerModule

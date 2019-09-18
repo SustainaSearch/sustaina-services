@@ -1,9 +1,7 @@
 package com.sustainasearch.services.v1.catalog.products
 
 import com.sustainasearch.searchengine.{AllDocumentsQuery, FreeTextQuery, MainQuery, SpatialPoint}
-import com.sustainasearch.services.catalog.CategoryType
-import com.sustainasearch.services.catalog.products._
-import com.sustainasearch.services.v1.catalog.products.models.{ProductApiModel, ProductQueryResponseApiModel, ProductsIsomorphism}
+import com.sustainasearch.services.catalog.products.{CategoryType, _}
 import io.swagger.annotations._
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.{JsValue, Json}
@@ -44,14 +42,14 @@ class ProductsController @Inject()(productService: ProductService)(implicit ec: 
 
   @ApiOperation(
     httpMethod = "POST",
-    value = "Adds a new Product",
+    value = "Adds a new Product. Only for test purposes. Will be removed eventually.",
     produces = "application/json",
     response = classOf[ProductApiModel]
   )
   @ApiImplicitParams(
     Array(
       new ApiImplicitParam(
-        dataType = "com.sustainasearch.services.v1.catalog.products.models.ProductApiModel",
+        dataType = "com.sustainasearch.services.v1.catalog.products.ProductApiModel",
         paramType = "body",
         required = true,
         allowMultiple = false

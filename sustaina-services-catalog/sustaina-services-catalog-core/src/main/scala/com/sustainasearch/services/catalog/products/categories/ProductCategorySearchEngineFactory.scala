@@ -1,8 +1,8 @@
 package com.sustainasearch.services.catalog.products.categories
 
 import com.sustainasearch.searchengine.SearchEngine
-import com.sustainasearch.services.catalog.Category
-import com.sustainasearch.services.catalog.CategoryType.CategoryType
+import com.sustainasearch.services.catalog.products.Category
+import com.sustainasearch.services.catalog.products.CategoryType.CategoryType
 
 trait ProductCategorySearchEngineFactory {
 
