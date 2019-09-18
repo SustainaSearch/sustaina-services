@@ -4,7 +4,7 @@ import com.sustainasearch.searchengine._
 
 import scala.collection.mutable.ListBuffer
 
-class FakeSearchEngine[D] extends SearchEngine[D, Unit] {
+class FakeSearchEngine[I, D] extends SearchEngine[I, D, Unit] {
   private val index: ListBuffer[FakeInputDocument[D]] = ListBuffer.empty[FakeInputDocument[D]]
 
   override def query(query: Query): QueryResponse[D, Unit] = {
@@ -27,4 +27,7 @@ class FakeSearchEngine[D] extends SearchEngine[D, Unit] {
     index += FakeInputDocument(document)
   }
 
+  override def getById(id: I): D = {
+    throw new NotImplementedError("getById not implemented yet")
+  }
 }

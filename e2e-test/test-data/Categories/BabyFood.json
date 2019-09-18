@@ -1,0 +1,13 @@
+{
+  "categoryType": "BabyFood",
+  "names": [
+    {
+      "unparsedName": "Baby food",
+      "languageCode": "en"
+    },
+    {
+      "unparsedName": "Barnmat",
+      "languageCode": "sv"
+    }
+  ]
+}

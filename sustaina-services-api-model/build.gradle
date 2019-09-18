@@ -1,0 +1,24 @@
+apply plugin: 'scala'
+
+dependencies {
+    compile project(':sustaina-services-catalog:sustaina-services-catalog-core')
+    compile "com.typesafe.play:play-json_$scalaPlatform:$playVersion"
+    compile "org.scalaz:scalaz-core_$scalaPlatform:$scalazVersion"
+
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.scalatest:scalatest_$scalaPlatform:$scalaTestVersion"
+}
+
+// TODO: make it possible to define repositories only once in root project build.gradle
+repositories {
+    jcenter()
+    maven {
+        name "lightbend-maven-releases"
+        url "https://repo.lightbend.com/lightbend/maven-release"
+    }
+    ivy {
+        name "lightbend-ivy-release"
+        url "https://repo.lightbend.com/lightbend/ivy-releases"
+        layout "ivy"
+    }
+}

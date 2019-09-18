@@ -1,6 +1,7 @@
 package com.sustainasearch.services.catalog.products
 
-import com.sustainasearch.services.catalog.products.LanguageCode.LanguageCode
+import com.sustainasearch.services.Name
+import com.sustainasearch.services.LanguageCode.LanguageCode
 
 /**
   * The field names must correspond with what is defined in the sustaina-products schema.xml file.

@@ -1,6 +1,7 @@
 package com.sustainasearch.services.catalog.products
 
-import com.sustainasearch.services.catalog.products.LanguageCode.LanguageCode
+import com.sustainasearch.services.Name
+import com.sustainasearch.services.LanguageCode.LanguageCode
 
 trait ProductSearchEngineFieldRegister {
   val IdField: String

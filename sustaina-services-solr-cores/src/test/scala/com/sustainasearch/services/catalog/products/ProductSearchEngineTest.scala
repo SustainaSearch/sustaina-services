@@ -3,6 +3,8 @@ package com.sustainasearch.services.catalog.products
 import java.util.UUID
 
 import com.sustainasearch.searchengine.{AllDocumentsQuery, FreeTextQuery, Query, SpecificFieldFilterQuery}
+import com.sustainasearch.services.{LanguageCode, Name}
+import com.sustainasearch.services.catalog._
 import com.sustainasearch.services.catalog.products.clothes.{Clothes, Composition}
 import com.sustainasearch.services.catalog.products.food.{BabyFood, IngredientStatement}
 import org.scalatest.{Matchers, WordSpec}

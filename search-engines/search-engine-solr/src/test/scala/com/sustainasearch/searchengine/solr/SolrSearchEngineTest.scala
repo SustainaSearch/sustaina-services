@@ -7,7 +7,7 @@ import com.sustainasearch.searchengine.{AllDocumentsQuery, FreeTextQuery, Query}
 import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpec}
 
 class SolrSearchEngineTest extends WordSpec with Matchers with SolrTestFixture with BeforeAndAfterAll {
-  private var underTest: SolrSearchEngine[SolrTestDocument, Seq[SolrTestFacet]] = _
+  private var underTest: SolrSearchEngine[String, SolrTestDocument, Seq[SolrTestFacet]] = _
 
   override def beforeAll(): Unit = {
     val solrHome = Paths
@@ -25,9 +25,9 @@ class SolrSearchEngineTest extends WordSpec with Matchers with SolrTestFixture w
       coreName = "test_embedded"
     )
 
-    underTest = new SolrSearchEngine[SolrTestDocument, Seq[SolrTestFacet]](
+    underTest = new SolrSearchEngine[String, SolrTestDocument, Seq[SolrTestFacet]](
       new EmbeddedSolrClientFactory(config),
-      TestSolrMorphism
+      TestSolrIsomorphism
     )
 
     underTest.add(firstDoc, secondDoc)
@@ -86,6 +86,11 @@ class SolrSearchEngineTest extends WordSpec with Matchers with SolrTestFixture w
       // id field is not copied to the default search field
       val response2 = underTest.query(Query(mainQuery = FreeTextQuery(firstDoc.id)))
       response2.numFound shouldBe 0
+    }
+
+    "get document by ID" in {
+      underTest.getById(firstDoc.id) shouldBe firstDoc
+      underTest.getById(secondDoc.id) shouldBe secondDoc
     }
   }
 }

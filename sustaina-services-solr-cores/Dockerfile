@@ -6,4 +6,4 @@ MAINTAINER SustainaSearch
 # Override the HEAP setting
 ENV SOLR_HEAP_MEMORY 512m
 
-ADD --chown=solr:solr src/main/resources/sustaina-products /var/solr/data/sustaina-products
+ADD --chown=solr:solr src/main/resources/sustaina-solr-cores /var/solr/data/sustaina-solr-cores

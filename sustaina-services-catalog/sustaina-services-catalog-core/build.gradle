@@ -3,7 +3,7 @@ apply plugin: 'scala'
 dependencies {
     compile "org.scala-lang:scala-library:$scalaVersion"
     compileOnly "javax.inject:javax.inject:1"
-    compile project(':sustaina-services-catalog:sustaina-services-products-model')
+    compile project(':sustaina-services-catalog:sustaina-services-catalog-model')
     compile project(':search-engines:search-engine-common')
 
     testCompile "junit:junit:$junitVersion"
