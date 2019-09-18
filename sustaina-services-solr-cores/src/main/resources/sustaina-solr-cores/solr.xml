@@ -15,9 +15,6 @@
         </str>
         <str name="zkACLProvider">${zkACLProvider:org.apache.solr.common.cloud.DefaultZkACLProvider}</str>
     </solrcloud>
-    <core>
-        <str name="name">products</str>
-    </core>
     <shardHandlerFactory name="shardHandlerFactory" class="HttpShardHandlerFactory">
         <int name="socketTimeout">${socketTimeout:0}</int>
         <int name="connTimeout">${connTimeout:0}</int>
