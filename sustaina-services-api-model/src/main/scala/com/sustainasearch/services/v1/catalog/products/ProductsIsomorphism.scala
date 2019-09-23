@@ -4,12 +4,12 @@ import java.util.UUID
 
 import com.sustainasearch.searchengine.QueryResponse
 import com.sustainasearch.services.catalog._
-import com.sustainasearch.services.catalog.products.facets.ProductFacets
 import com.sustainasearch.services.catalog.products._
-import com.sustainasearch.services.v1.{ImageIsomorphism, NameIsomorphism}
+import com.sustainasearch.services.catalog.products.facets.ProductFacets
 import com.sustainasearch.services.v1.catalog.products.clothes.ClothesIsomorphism
 import com.sustainasearch.services.v1.catalog.products.facets.ProductFacetsIsomorphism
 import com.sustainasearch.services.v1.catalog.products.food.BabyFoodIsomorphism
+import com.sustainasearch.services.v1.{ImageIsomorphism, NameIsomorphism}
 import scalaz.Isomorphism.<=>
 
 object ProductsIsomorphism {
@@ -65,7 +65,7 @@ object ProductsIsomorphism {
   val simpleProduct = new (SimpleProduct <=> SimpleProductApiModel) {
     val to: SimpleProduct => SimpleProductApiModel = { product =>
       SimpleProductApiModel(
-        id = product.id.toString,
+        id = productId.to(product.id),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.to),
         brandName = NameIsomorphism.name.to(product.brandName),
         category = category.to(product.category),
@@ -74,7 +74,7 @@ object ProductsIsomorphism {
     }
     val from: SimpleProductApiModel => SimpleProduct = { product =>
       SimpleProduct(
-        id = UUID.fromString(product.id),
+        id = productId.from(product.id),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.from),
         brandName = NameIsomorphism.name.from(product.brandName),
         category = category.from(product.category),
@@ -83,10 +83,20 @@ object ProductsIsomorphism {
     }
   }
 
+  val productId = new (UUID <=> String) {
+    override def to: UUID => String = { id =>
+      id.toString
+    }
+
+    override def from: String => UUID = { id =>
+      UUID.fromString(id)
+    }
+  }
+
   val product = new (Product <=> ProductApiModel) {
     val to: Product => ProductApiModel = { product =>
       ProductApiModel(
-        id = product.id.toString,
+        id = productId.to(product.id),
         productActivity = productActivity.to(product.productActivity),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.to),
         brandName = NameIsomorphism.name.to(product.brandName),
@@ -99,7 +109,7 @@ object ProductsIsomorphism {
     }
     val from: ProductApiModel => Product = { product =>
       Product(
-        id = UUID.fromString(product.id),
+        id = productId.from(product.id),
         productActivity = productActivity.from(product.productActivity),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.from),
         brandName = NameIsomorphism.name.from(product.brandName),
@@ -108,6 +118,20 @@ object ProductsIsomorphism {
         sustainaIndex = product.sustainaIndex,
         maybeBabyFood = product.babyFood.map(BabyFoodIsomorphism.babyFood.from),
         maybeClothes = product.clothes.map(ClothesIsomorphism.clothes.from)
+      )
+    }
+  }
+
+  val productContainer = new (ProductContainer <=> ProductContainerApiModel) {
+    override def to: ProductContainer => ProductContainerApiModel = { container =>
+      ProductContainerApiModel(
+        product = product.to(container.product)
+      )
+    }
+
+    override def from: ProductContainerApiModel => ProductContainer = { container =>
+      ProductContainer(
+        product = product.from(container.product)
       )
     }
   }
