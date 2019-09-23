@@ -15,6 +15,25 @@ class ProductsController @Inject()(productService: ProductService)(implicit ec: 
 
   @ApiOperation(
     httpMethod = "GET",
+    value = "Get a specific product",
+    produces = "application/json",
+    response = classOf[ProductContainerApiModel]
+  )
+  def getById(@ApiParam(value = "Category type", required = true) categoryType: String,
+              @ApiParam(value = "Product ID", required = true) productId: String) = Action.async { implicit request =>
+    val uuid = ProductsIsomorphism.productId.from(productId)
+
+    for {
+      maybeProduct <- productService.getById(uuid)
+    } yield {
+      maybeProduct.fold(NotFound(Json.toJson(s"No product with ID '$productId' was found"))) { productContainer =>
+        Ok(Json.toJson(ProductsIsomorphism.productContainer.to(productContainer)))
+      }
+    }
+  }
+
+  @ApiOperation(
+    httpMethod = "GET",
     value = "Queries a specific product category",
     produces = "application/json",
     response = classOf[ProductQueryResponseApiModel]

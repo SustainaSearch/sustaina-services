@@ -1,7 +1,9 @@
 package com.sustainasearch.services.catalog.products
 
+import java.util.UUID
+
 import com.sustainasearch.searchengine._
-import CategoryType.CategoryType
+import com.sustainasearch.services.catalog.products.CategoryType.CategoryType
 import com.sustainasearch.services.catalog.products.facets.ProductFacets
 import javax.inject.{Inject, Singleton}
 
@@ -15,6 +17,14 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory,
   import searchEngineFieldRegister._
 
   private val searchEngine = searchEngineFactory.createSearchEngine(searchEngineFieldRegister)
+
+  def getById(id: UUID): Future[Option[ProductContainer]] = Future {
+    searchEngine.getById(id).map { product =>
+      ProductContainer(
+        product
+      )
+    }
+  }
 
   def queryProductCategory(categoryType: CategoryType, rawProductQuery: ProductQuery): Future[QueryResponse[Product, ProductFacets]] = {
     val productCategoryQuery = rawProductQuery
