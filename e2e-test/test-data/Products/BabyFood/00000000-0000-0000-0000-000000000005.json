@@ -41,6 +41,12 @@
       }
     ]
   },
+  "images": [
+    {
+      "imageType": "Small",
+      "url": "foo.bar.5"
+    }
+  ],
   "sustainaIndex": 78.567,
   "babyFood": {
     "ingredientStatements": [

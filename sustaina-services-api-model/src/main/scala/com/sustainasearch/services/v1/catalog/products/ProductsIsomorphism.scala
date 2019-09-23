@@ -6,7 +6,7 @@ import com.sustainasearch.searchengine.QueryResponse
 import com.sustainasearch.services.catalog._
 import com.sustainasearch.services.catalog.products.facets.ProductFacets
 import com.sustainasearch.services.catalog.products._
-import com.sustainasearch.services.v1.NameIsomorphism
+import com.sustainasearch.services.v1.{ImageIsomorphism, NameIsomorphism}
 import com.sustainasearch.services.v1.catalog.products.clothes.ClothesIsomorphism
 import com.sustainasearch.services.v1.catalog.products.facets.ProductFacetsIsomorphism
 import com.sustainasearch.services.v1.catalog.products.food.BabyFoodIsomorphism
@@ -91,6 +91,7 @@ object ProductsIsomorphism {
         functionalNames = product.functionalNames.map(NameIsomorphism.name.to),
         brandName = NameIsomorphism.name.to(product.brandName),
         category = category.to(product.category),
+        images = product.images.map(ImageIsomorphism.image.to),
         sustainaIndex = product.sustainaIndex,
         babyFood = product.maybeBabyFood.map(BabyFoodIsomorphism.babyFood.to),
         clothes = product.maybeClothes.map(ClothesIsomorphism.clothes.to)
@@ -103,6 +104,7 @@ object ProductsIsomorphism {
         functionalNames = product.functionalNames.map(NameIsomorphism.name.from),
         brandName = NameIsomorphism.name.from(product.brandName),
         category = category.from(product.category),
+        images = product.images.map(ImageIsomorphism.image.from),
         sustainaIndex = product.sustainaIndex,
         maybeBabyFood = product.babyFood.map(BabyFoodIsomorphism.babyFood.from),
         maybeClothes = product.clothes.map(ClothesIsomorphism.clothes.from)

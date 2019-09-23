@@ -6,6 +6,8 @@ import com.sustainasearch.services.LanguageCode.LanguageCode
 trait ProductSearchEngineFieldRegister {
   val IdField: String
 
+  val ImageField: String
+
   val CountryCodeField: String
 
   val CountryNameField: String

@@ -3,7 +3,7 @@ package com.sustainasearch.services.catalog.products
 import java.util.UUID
 
 import com.sustainasearch.searchengine.{AllDocumentsQuery, FreeTextQuery, Query, SpecificFieldFilterQuery}
-import com.sustainasearch.services.{LanguageCode, Name}
+import com.sustainasearch.services.{Image, ImageType, LanguageCode, Name}
 import com.sustainasearch.services.catalog._
 import com.sustainasearch.services.catalog.products.clothes.{Clothes, Composition}
 import com.sustainasearch.services.catalog.products.food.{BabyFood, IngredientStatement}
@@ -46,6 +46,16 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
           unparsedName = "Barnmat",
           languageCode = Some(LanguageCode.Swedish)
         ))
+      ),
+      images = Seq(
+        Image(
+          ImageType.Small,
+          url = "small.image.1"
+        ),
+        Image(
+          ImageType.Large,
+          url = "large.image.1"
+        )
       ),
       sustainaIndex = 78.567d,
       maybeBabyFood = Some(
@@ -93,6 +103,16 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
           unparsedName = "Kläder",
           languageCode = Some(LanguageCode.Swedish)
         ))
+      ),
+      images = Seq(
+        Image(
+          ImageType.Small,
+          url = "small.image.2"
+        ),
+        Image(
+          ImageType.Large,
+          url = "large.image.2"
+        )
       ),
       sustainaIndex = 48.517d,
       maybeBabyFood = None,

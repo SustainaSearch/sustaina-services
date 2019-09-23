@@ -6,6 +6,8 @@ dependencies {
     compile project(':sustaina-services-catalog:sustaina-services-catalog-core')
     compile project(':search-engines:search-engine-solr')
 
+    compile "org.scalaz:scalaz-core_$scalaPlatform:$scalazVersion"
+
     // Use Scalatest for testing our library
     testCompile 'junit:junit:4.12'
     testCompile 'org.scalatest:scalatest_2.11:3.0.5'

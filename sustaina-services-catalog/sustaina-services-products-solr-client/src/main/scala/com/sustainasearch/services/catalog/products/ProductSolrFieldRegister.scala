@@ -9,6 +9,8 @@ import com.sustainasearch.services.LanguageCode.LanguageCode
 object ProductSolrFieldRegister extends ProductSearchEngineFieldRegister {
   override val IdField: String = "id"
 
+  override val ImageField: String = "image"
+
   override val CountryNameField: String = "countryName"
 
   override val CountryCodeField: String = "countryCode"
