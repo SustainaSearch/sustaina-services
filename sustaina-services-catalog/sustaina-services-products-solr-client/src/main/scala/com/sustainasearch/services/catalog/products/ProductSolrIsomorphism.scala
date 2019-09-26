@@ -5,7 +5,7 @@ import java.util.UUID
 
 import com.sustainasearch.searchengine.QueryResponse
 import com.sustainasearch.searchengine.solr.SolrIsomorphism
-import com.sustainasearch.services.{LanguageCode, Name}
+import com.sustainasearch.services.{LanguageCode, ImageUrl, Name}
 import com.sustainasearch.services.catalog._
 import com.sustainasearch.services.catalog.products.clothes.{Clothes, Composition}
 import com.sustainasearch.services.catalog.products.facets.{BrandFacet, CategoryFacet, ProductFacets}
@@ -35,6 +35,11 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
       }
     }
     document.addField(RepresentativePointField, s"${product.productActivity.representativePoint.latitude},${product.productActivity.representativePoint.longitude}")
+
+    product.imageUrls.foreach { imageUrl =>
+      document.addField(ImageTypeField, imageUrl.imageType)
+      document.addField(ImageUrlField, imageUrl.url) // TODO language?
+    }
 
     product.functionalNames.foreach { name =>
       document.addField(functionalNameWithNameLanguageCodeField(name), name.unparsedName)
@@ -72,6 +77,21 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
       val (lat, lon) = (latLon.head, latLon.last)
       RepresentativePoint(lat, lon)
     }
+
+    val imageUrls = ListBuffer.empty[ImageUrl]
+
+    if (document.containsKey(ImageTypeField) && document.containsKey(ImageUrlField)) {
+      val types = document.getFieldValues(ImageTypeField).asScala
+      val urls = document.getFieldValues(ImageUrlField).asScala
+
+      if (types.size == urls.size)
+        for ( (t, u) <- (types zip urls))
+          imageUrls += ImageUrl(
+            imageType = t.asInstanceOf[String],
+            url = u.asInstanceOf[String]
+        )
+    }
+
 
     val functionalNames = ListBuffer.empty[Name]
 
@@ -150,6 +170,7 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
         representativePoint
       ),
       functionalNames,
+      imageUrls,
       brandName = Name(
         unparsedName = document.getFirstValue(BrandNameField).asInstanceOf[String],
         languageCode = None

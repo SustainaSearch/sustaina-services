@@ -6,7 +6,7 @@ import com.sustainasearch.searchengine.QueryResponse
 import com.sustainasearch.services.catalog._
 import com.sustainasearch.services.catalog.products.facets.ProductFacets
 import com.sustainasearch.services.catalog.products._
-import com.sustainasearch.services.v1.NameIsomorphism
+import com.sustainasearch.services.v1.{NameIsomorphism, ImageUrlIsomorphism}
 import com.sustainasearch.services.v1.catalog.products.clothes.ClothesIsomorphism
 import com.sustainasearch.services.v1.catalog.products.facets.ProductFacetsIsomorphism
 import com.sustainasearch.services.v1.catalog.products.food.BabyFoodIsomorphism
@@ -67,6 +67,7 @@ object ProductsIsomorphism {
       SimpleProductApiModel(
         id = product.id.toString,
         functionalNames = product.functionalNames.map(NameIsomorphism.name.to),
+        imageUrls = product.imageUrls.map(ImageUrlIsomorphism.imageUrl.to),
         brandName = NameIsomorphism.name.to(product.brandName),
         category = category.to(product.category),
         sustainaIndex = product.sustainaIndex
@@ -76,6 +77,7 @@ object ProductsIsomorphism {
       SimpleProduct(
         id = UUID.fromString(product.id),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.from),
+        imageUrls = product.imageUrls.map(ImageUrlIsomorphism.imageUrl.from),
         brandName = NameIsomorphism.name.from(product.brandName),
         category = category.from(product.category),
         sustainaIndex = product.sustainaIndex
@@ -89,6 +91,7 @@ object ProductsIsomorphism {
         id = product.id.toString,
         productActivity = productActivity.to(product.productActivity),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.to),
+        imageUrls = product.imageUrls.map(ImageUrlIsomorphism.imageUrl.to),
         brandName = NameIsomorphism.name.to(product.brandName),
         category = category.to(product.category),
         sustainaIndex = product.sustainaIndex,
@@ -101,6 +104,7 @@ object ProductsIsomorphism {
         id = UUID.fromString(product.id),
         productActivity = productActivity.from(product.productActivity),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.from),
+        imageUrls = product.imageUrls.map(ImageUrlIsomorphism.imageUrl.from),
         brandName = NameIsomorphism.name.from(product.brandName),
         category = category.from(product.category),
         sustainaIndex = product.sustainaIndex,
