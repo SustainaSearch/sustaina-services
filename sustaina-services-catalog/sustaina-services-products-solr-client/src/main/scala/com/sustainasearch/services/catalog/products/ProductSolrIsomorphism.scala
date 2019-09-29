@@ -24,6 +24,10 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
     val document = new SolrInputDocument()
     document.addField(IdField, product.id.toString)
 
+   product.images.foreach { image =>
+     document.addField(ImageField, ImageIsomorphism.image.to(image))
+   }
+
     val countryCode = product.productActivity.country.countryCode.toString
     document.addField(CountryCodeField, countryCode)
     product.productActivity.country.names.foreach { name =>
@@ -181,6 +185,7 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
         ),
         categoryNames
       ),
+      images = images,
       sustainaIndex = document.getFirstValue(SustainaIndexField).asInstanceOf[Double],
       maybeBabyFood,
       maybeClothes

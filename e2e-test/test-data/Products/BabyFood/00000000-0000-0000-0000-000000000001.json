@@ -47,6 +47,16 @@
       }
     ]
   },
+  "images": [
+    {
+      "imageType": "Small",
+      "url": "foo.bar.1"
+    },
+    {
+      "imageType": "Large",
+      "url": "något.annat.com"
+    }
+  ],
   "sustainaIndex": 78.567,
   "babyFood": {
     "ingredientStatements": [

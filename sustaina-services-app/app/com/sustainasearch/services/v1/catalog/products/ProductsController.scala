@@ -5,13 +5,33 @@ import com.sustainasearch.services.catalog.products.{CategoryType, _}
 import io.swagger.annotations._
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.{JsValue, Json}
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.{AbstractController, Action, Controller, ControllerComponents}
 
 import scala.concurrent.ExecutionContext
 
 @Singleton
-@Api(value = "/products")
-class ProductsController @Inject()(productService: ProductService)(implicit ec: ExecutionContext) extends Controller {
+@Api(value = "/Products")
+class ProductsController @Inject()(components: ControllerComponents,
+                                   productService: ProductService)(implicit ec: ExecutionContext) extends AbstractController(components) {
+
+  @ApiOperation(
+    httpMethod = "GET",
+    value = "Get a specific product",
+    produces = "application/json",
+    response = classOf[ProductContainerApiModel]
+  )
+  def getById(@ApiParam(value = "Category type", required = true) categoryType: String,
+              @ApiParam(value = "Product ID", required = true) productId: String) = Action.async { implicit request =>
+    val uuid = ProductsIsomorphism.productId.from(productId)
+
+    for {
+      maybeProduct <- productService.getById(uuid)
+    } yield {
+      maybeProduct.fold(NotFound(Json.toJson(s"No product with ID '$productId' was found"))) { productContainer =>
+        Ok(Json.toJson(ProductsIsomorphism.productContainer.to(productContainer)))
+      }
+    }
+  }
 
   @ApiOperation(
     httpMethod = "GET",

@@ -27,7 +27,7 @@ class FakeSearchEngine[I, D] extends SearchEngine[I, D, Unit] {
     index += FakeInputDocument(document)
   }
 
-  override def getById(id: I): D = {
+  override def getById(id: I): Option[D] = {
     throw new NotImplementedError("getById not implemented yet")
   }
 }
