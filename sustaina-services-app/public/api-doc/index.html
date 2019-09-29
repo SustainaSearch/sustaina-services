@@ -49,6 +49,8 @@
       const ui = SwaggerUIBundle({
         url: url,
         dom_id: '#swagger-ui',
+        // Remove line below if you want to display models section
+        defaultModelsExpandDepth: -1,
         deepLinking: true,
         presets: [
           SwaggerUIBundle.presets.apis,
@@ -57,7 +59,8 @@
         plugins: [
           SwaggerUIBundle.plugins.DownloadUrl
         ],
-        layout: "StandaloneLayout"
+        layout: "StandaloneLayout",
+        tagsSorter: 'alpha'
       })
       // End Swagger UI call region
 

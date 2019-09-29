@@ -2,7 +2,7 @@ apply plugin: 'scala'
 
 dependencies {
     compile project(':sustaina-services-catalog:sustaina-services-catalog-core')
-    compile "com.typesafe.play:play-json_$scalaPlatform:$playVersion"
+    compile "com.typesafe.play:play-json_$scalaPlatform:$playJsonVersion"
     compile "org.scalaz:scalaz-core_$scalaPlatform:$scalazVersion"
 
     testCompile "junit:junit:$junitVersion"
