@@ -14,10 +14,15 @@ dependencies {
         exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
         exclude group: 'com.fasterxml.jackson.core', module: 'jackson-annotations'
     }
-
     compile(project(':sustaina-services-api-model'))
+
     compile "com.typesafe.play:play-cache_$scalaPlatform:$playVersion"
+    compile "com.typesafe.play:play-guice_$scalaPlatform:$playVersion"
+
     compile "io.swagger:swagger-play2_$scalaPlatform:$swaggerVersion"
+
+    // For generating Flow types
+    compile "com.davegurnell:bridges_2.12:0.20.2"
 }
 
 model {

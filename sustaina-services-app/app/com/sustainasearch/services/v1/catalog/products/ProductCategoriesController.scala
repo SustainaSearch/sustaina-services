@@ -4,13 +4,14 @@ import com.sustainasearch.services.catalog.products.ProductCategoryService
 import io.swagger.annotations._
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.{JsValue, Json}
-import play.api.mvc.{Action, Controller}
+import play.api.mvc.{AbstractController, Action, ControllerComponents}
 
 import scala.concurrent.ExecutionContext
 
 @Singleton
-@Api(value = "/product-categories")
-class ProductCategoriesController @Inject()(productCategoryService: ProductCategoryService)(implicit ec: ExecutionContext) extends Controller {
+@Api(value = "/Product Categories")
+class ProductCategoriesController @Inject()(components: ControllerComponents,
+                                            productCategoryService: ProductCategoryService)(implicit ec: ExecutionContext) extends AbstractController(components) {
 
   @ApiOperation(
     httpMethod = "POST",
