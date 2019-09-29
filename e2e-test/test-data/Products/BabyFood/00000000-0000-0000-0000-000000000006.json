@@ -23,20 +23,6 @@
       "longitude": 13.4050
     }
   },
-  "imageUrls": [
-    {
-      "imageType": "small",
-      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100291165_small.jpg"
-    },
-    {
-      "imageType": "medium",
-      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100291165_medium.jpg"
-    },
-    {
-      "imageType": "large",
-      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100291165_large.jpg"
-    }
-  ],
   "functionalNames": [
     {
       "unparsedName": "Havregröt 6mån",
@@ -57,8 +43,16 @@
   },
   "images": [
     {
-      "imageType": "Small",
-      "url": "foo.bar.6"
+      "imageType": "small",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100291165_small.jpg"
+    },
+    {
+      "imageType": "medium",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100291165_medium.jpg"
+    },
+    {
+      "imageType": "large",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100291165_large.jpg"
     }
   ],
   "sustainaIndex": 78.567,

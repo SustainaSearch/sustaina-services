@@ -23,20 +23,6 @@
       "longitude": 18.0686
     }
   },
-  "imageUrls": [
-    {
-      "imageType": "small",
-      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/05060503500075_small.jpg"
-    },
-    {
-      "imageType": "medium",
-      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/05060503500075_medium.jpg"
-    },
-    {
-      "imageType": "large",
-      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/05060503500075_large.jpg"
-    }
-  ],
   "functionalNames": [
     {
       "unparsedName": "Go'gröt persika/päron",
@@ -57,8 +43,16 @@
   },
   "images": [
     {
-      "imageType": "Small",
-      "url": "foo.bar.5"
+      "imageType": "small",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/05060503500075_small.jpg"
+    },
+    {
+      "imageType": "medium",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/05060503500075_medium.jpg"
+    },
+    {
+      "imageType": "large",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/05060503500075_large.jpg"
     }
   ],
   "sustainaIndex": 78.567,

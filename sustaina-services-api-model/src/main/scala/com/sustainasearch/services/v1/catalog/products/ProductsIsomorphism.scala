@@ -67,7 +67,6 @@ object ProductsIsomorphism {
       SimpleProductApiModel(
         id = productId.to(product.id),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.to),
-        imageUrls = product.imageUrls.map(ImageUrlIsomorphism.imageUrl.to),
         brandName = NameIsomorphism.name.to(product.brandName),
         category = category.to(product.category),
         sustainaIndex = product.sustainaIndex
@@ -77,7 +76,6 @@ object ProductsIsomorphism {
       SimpleProduct(
         id = productId.from(product.id),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.from),
-        imageUrls = product.imageUrls.map(ImageUrlIsomorphism.imageUrl.from),
         brandName = NameIsomorphism.name.from(product.brandName),
         category = category.from(product.category),
         sustainaIndex = product.sustainaIndex
@@ -101,7 +99,6 @@ object ProductsIsomorphism {
         id = productId.to(product.id),
         productActivity = productActivity.to(product.productActivity),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.to),
-        imageUrls = product.imageUrls.map(ImageUrlIsomorphism.imageUrl.to),
         brandName = NameIsomorphism.name.to(product.brandName),
         category = category.to(product.category),
         images = product.images.map(ImageIsomorphism.image.to),
@@ -115,7 +112,6 @@ object ProductsIsomorphism {
         id = productId.from(product.id),
         productActivity = productActivity.from(product.productActivity),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.from),
-        imageUrls = product.imageUrls.map(ImageUrlIsomorphism.imageUrl.from),
         brandName = NameIsomorphism.name.from(product.brandName),
         category = category.from(product.category),
         images = product.images.map(ImageIsomorphism.image.from),

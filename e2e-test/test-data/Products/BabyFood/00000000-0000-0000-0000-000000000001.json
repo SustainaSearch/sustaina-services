@@ -15,20 +15,6 @@
       "longitude": 13.4050
     }
   },
-  "imageUrls": [
-      {
-        "imageType": "small",
-        "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300078789_small.jpg"
-      },
-      {
-        "imageType": "medium",
-        "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300078789_medium.jpg"
-      },
-      {
-        "imageType": "large",
-        "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300078789_large.jpg"
-      }
-  ],
   "functionalNames": [
     {
       "unparsedName": "God Natt! Mildgröt med Grönsaker 6m",
@@ -49,12 +35,16 @@
   },
   "images": [
     {
-      "imageType": "Small",
-      "url": "foo.bar.1"
+      "imageType": "small",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300078789_small.jpg"
     },
     {
-      "imageType": "Large",
-      "url": "något.annat.com"
+      "imageType": "medium",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300078789_medium.jpg"
+    },
+    {
+      "imageType": "large",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300078789_large.jpg"
     }
   ],
   "sustainaIndex": 78.567,

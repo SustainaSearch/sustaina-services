@@ -9,7 +9,6 @@ import com.sustainasearch.services.catalog.products.food.BabyFood
 case class Product(id: UUID,
                    productActivity: ProductActivity,
                    functionalNames: Seq[Name],
-                   imageUrls: Seq[ImageUrl],
                    brandName: Name,
                    category: Category,
                    images: Seq[Image],
