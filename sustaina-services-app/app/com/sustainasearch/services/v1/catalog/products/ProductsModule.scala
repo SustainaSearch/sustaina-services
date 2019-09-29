@@ -8,11 +8,13 @@ import play.api.{Configuration, Environment}
 class ProductsModule extends Module {
   override def bindings(environment: Environment, configuration: Configuration): Seq[Binding[_]] = {
     val productsSolrBaseUrl = configuration
-      .getString("products.solr.url")
+      .getOptional[String]("products.solr.url")
       .getOrElse("http://localhost:8983")
     println(s"Products Solr base URL = '$productsSolrBaseUrl'")
+
     val productsSolrUrl = s"$productsSolrBaseUrl/solr/sustaina-products"
     println(s"Products Solr URL = '$productsSolrUrl'")
+
     Seq(
       bind[ProductSearchEngineFieldRegister].toInstance(ProductSolrFieldRegister),
       bind[ProductSearchEngineFactory].toInstance(new HttpSolrProductSearchEngineFactory(HttpSolrConfig(productsSolrUrl)))
