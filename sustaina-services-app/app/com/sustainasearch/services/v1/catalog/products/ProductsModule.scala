@@ -7,7 +7,9 @@ import play.api.{Configuration, Environment}
 
 class ProductsModule extends Module {
   override def bindings(environment: Environment, configuration: Configuration): Seq[Binding[_]] = {
-    val productsSolrBaseUrl = configuration.getString("products.solr.url").getOrElse(throw new IllegalArgumentException("No 'products.solr.url' has been provided"))
+    val productsSolrBaseUrl = configuration
+      .getString("products.solr.url")
+      .getOrElse("http://localhost:8983")
     println(s"Products Solr base URL = '$productsSolrBaseUrl'")
     val productsSolrUrl = s"$productsSolrBaseUrl/solr/sustaina-products"
     println(s"Products Solr URL = '$productsSolrUrl'")
