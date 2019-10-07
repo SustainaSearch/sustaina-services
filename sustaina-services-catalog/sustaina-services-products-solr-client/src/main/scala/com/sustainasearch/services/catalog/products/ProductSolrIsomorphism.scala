@@ -5,7 +5,7 @@ import java.util.UUID
 
 import com.sustainasearch.searchengine.QueryResponse
 import com.sustainasearch.searchengine.solr.SolrIsomorphism
-import com.sustainasearch.services.{LanguageCode, Image, ImageType, Name}
+import com.sustainasearch.services.{LanguageCode, Image, Name}
 import com.sustainasearch.services.catalog._
 import com.sustainasearch.services.catalog.products.clothes.{Clothes, Composition}
 import com.sustainasearch.services.catalog.products.facets.{BrandFacet, CategoryFacet, ProductFacets}
@@ -37,8 +37,7 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
     document.addField(RepresentativePointField, s"${product.productActivity.representativePoint.latitude},${product.productActivity.representativePoint.longitude}")
 
     product.images.foreach { image =>
-      document.addField(ImageTypeField, image.imageType)
-      document.addField(ImageUrlField, image.url) 
+       document.addField(ImageField, ImageIsomorphism.image.to(image))
     }
 
     product.functionalNames.foreach { name =>
@@ -78,19 +77,9 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
       RepresentativePoint(lat, lon)
     }
 
-    val images = ListBuffer.empty[Image]
-
-    if (document.containsKey(ImageTypeField) && document.containsKey(ImageUrlField)) {
-      val types = document.getFieldValues(ImageTypeField).asScala
-      val urls = document.getFieldValues(ImageUrlField).asScala
-
-      if (types.size == urls.size)
-        for ( (t, u) <- (types zip urls))
-          images += Image(
-            imageType = ImageType.withName(t.asInstanceOf[String]),
-            url = u.asInstanceOf[String]
-        )
-    }
+    val images = document.getFieldValues(ImageField).asScala.map { t =>
+      ImageIsomorphism.image.from(t.asInstanceOf[String])
+    }.toSeq
 
     val functionalNames = ListBuffer.empty[Name]
 
