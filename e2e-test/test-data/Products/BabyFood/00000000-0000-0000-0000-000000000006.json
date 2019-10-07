@@ -43,15 +43,15 @@
   },
   "images": [
     {
-      "imageType": "small",
+      "imageType": "Small",
       "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100291165_small.jpg"
     },
     {
-      "imageType": "medium",
+      "imageType": "Medium",
       "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100291165_medium.jpg"
     },
     {
-      "imageType": "large",
+      "imageType": "Large",
       "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100291165_large.jpg"
     }
   ],

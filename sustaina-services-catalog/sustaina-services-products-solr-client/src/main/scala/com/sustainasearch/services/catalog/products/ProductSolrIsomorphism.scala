@@ -5,7 +5,7 @@ import java.util.UUID
 
 import com.sustainasearch.searchengine.QueryResponse
 import com.sustainasearch.searchengine.solr.SolrIsomorphism
-import com.sustainasearch.services.{LanguageCode, Image, Name}
+import com.sustainasearch.services.{LanguageCode, Image, ImageType, Name}
 import com.sustainasearch.services.catalog._
 import com.sustainasearch.services.catalog.products.clothes.{Clothes, Composition}
 import com.sustainasearch.services.catalog.products.facets.{BrandFacet, CategoryFacet, ProductFacets}
@@ -87,7 +87,7 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
       if (types.size == urls.size)
         for ( (t, u) <- (types zip urls))
           images += Image(
-            imageType = t.asInstanceOf[String],
+            imageType = ImageType.withName(t.asInstanceOf[String]),
             url = u.asInstanceOf[String]
         )
     }
