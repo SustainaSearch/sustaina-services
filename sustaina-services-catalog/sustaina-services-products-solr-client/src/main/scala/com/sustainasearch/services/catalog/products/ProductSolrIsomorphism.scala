@@ -5,7 +5,7 @@ import java.util.UUID
 
 import com.sustainasearch.searchengine.QueryResponse
 import com.sustainasearch.searchengine.solr.SolrIsomorphism
-import com.sustainasearch.services.{LanguageCode, Name}
+import com.sustainasearch.services.{LanguageCode, Image, Name}
 import com.sustainasearch.services.catalog._
 import com.sustainasearch.services.catalog.products.clothes.{Clothes, Composition}
 import com.sustainasearch.services.catalog.products.facets.{BrandFacet, CategoryFacet, ProductFacets}
@@ -24,10 +24,6 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
     val document = new SolrInputDocument()
     document.addField(IdField, product.id.toString)
 
-   product.images.foreach { image =>
-     document.addField(ImageField, ImageIsomorphism.image.to(image))
-   }
-
     val countryCode = product.productActivity.country.countryCode.toString
     document.addField(CountryCodeField, countryCode)
     product.productActivity.country.names.foreach { name =>
@@ -39,6 +35,10 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
       }
     }
     document.addField(RepresentativePointField, s"${product.productActivity.representativePoint.latitude},${product.productActivity.representativePoint.longitude}")
+
+    product.images.foreach { image =>
+       document.addField(ImageField, ImageIsomorphism.image.to(image))
+    }
 
     product.functionalNames.foreach { name =>
       document.addField(functionalNameWithNameLanguageCodeField(name), name.unparsedName)
@@ -77,8 +77,8 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
       RepresentativePoint(lat, lon)
     }
 
-    val images = document.getFieldValues(ImageField).asScala.map { value =>
-      ImageIsomorphism.image.from(value.asInstanceOf[String])
+    val images = document.getFieldValues(ImageField).asScala.map { t =>
+      ImageIsomorphism.image.from(t.asInstanceOf[String])
     }.toSeq
 
     val functionalNames = ListBuffer.empty[Name]

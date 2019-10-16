@@ -44,7 +44,15 @@
   "images": [
     {
       "imageType": "Small",
-      "url": "foo.bar.5"
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/05060503500075_small.jpg"
+    },
+    {
+      "imageType": "Medium",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/05060503500075_medium.jpg"
+    },
+    {
+      "imageType": "Large",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/05060503500075_large.jpg"
     }
   ],
   "sustainaIndex": 78.567,
