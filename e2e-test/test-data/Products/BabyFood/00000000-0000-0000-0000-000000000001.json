@@ -37,11 +37,15 @@
   "images": [
     {
       "imageType": "Small",
-      "url": "foo.bar.1"
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300078789_small.jpg"
+    },
+    {
+      "imageType": "Medium",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300078789_medium.jpg"
     },
     {
       "imageType": "Large",
-      "url": "något.annat.com"
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300078789_large.jpg"
     }
   ],
   "sustainaIndex": 78.567,

@@ -18,6 +18,10 @@ trait ProductSearchEngineFieldRegister {
 
   val FunctionalNameField: String
 
+  val ImageUrlField: String
+
+  val ImageTypeField: String
+
   val BrandNameField: String
 
   val BrandNameExactField: String
