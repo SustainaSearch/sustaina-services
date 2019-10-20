@@ -9,7 +9,7 @@ import com.sustainasearch.services.catalog.products.facets.ProductFacets
 import com.sustainasearch.services.v1.catalog.products.clothes.ClothesIsomorphism
 import com.sustainasearch.services.v1.catalog.products.facets.ProductFacetsIsomorphism
 import com.sustainasearch.services.v1.catalog.products.food.BabyFoodIsomorphism
-import com.sustainasearch.services.v1.{ImageIsomorphism, NameIsomorphism}
+import com.sustainasearch.services.v1._
 import scalaz.Isomorphism.<=>
 
 object ProductsIsomorphism {
@@ -62,13 +62,31 @@ object ProductsIsomorphism {
     }
   }
 
+  val productCatalogQueryResponse = new (ProductCategoryQueryResponse <=> ProductCategoryQueryResponseApiModel) {
+    override def to: ProductCategoryQueryResponse => ProductCategoryQueryResponseApiModel = { response =>
+      ProductCategoryQueryResponseApiModel(
+        productQueryResponse = productQueryResponse.to(response.productQueryResponse),
+        filterQueries = response.filterQueries.map(FilterQueryContainerIsomorphism.filterQueryContainer.to)
+      )
+    }
+
+    override def from: ProductCategoryQueryResponseApiModel => ProductCategoryQueryResponse = { response =>
+      ProductCategoryQueryResponse(
+        productQueryResponse = productQueryResponse.from(response.productQueryResponse),
+        filterQueries = response.filterQueries.map(FilterQueryContainerIsomorphism.filterQueryContainer.from)
+      )
+    }
+  }
+
+
+
   val simpleProduct = new (SimpleProduct <=> SimpleProductApiModel) {
     val to: SimpleProduct => SimpleProductApiModel = { product =>
       SimpleProductApiModel(
         id = productId.to(product.id),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.to),
         brandName = NameIsomorphism.name.to(product.brandName),
-        category = category.to(product.category),
+        category = CategoryIsomorphism.category.to(product.category),
         sustainaIndex = product.sustainaIndex
       )
     }
@@ -77,7 +95,7 @@ object ProductsIsomorphism {
         id = productId.from(product.id),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.from),
         brandName = NameIsomorphism.name.from(product.brandName),
-        category = category.from(product.category),
+        category = CategoryIsomorphism.category.from(product.category),
         sustainaIndex = product.sustainaIndex
       )
     }
@@ -100,7 +118,7 @@ object ProductsIsomorphism {
         productActivity = productActivity.to(product.productActivity),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.to),
         brandName = NameIsomorphism.name.to(product.brandName),
-        category = category.to(product.category),
+        category = CategoryIsomorphism.category.to(product.category),
         images = product.images.map(ImageIsomorphism.image.to),
         sustainaIndex = product.sustainaIndex,
         babyFood = product.maybeBabyFood.map(BabyFoodIsomorphism.babyFood.to),
@@ -113,7 +131,7 @@ object ProductsIsomorphism {
         productActivity = productActivity.from(product.productActivity),
         functionalNames = product.functionalNames.map(NameIsomorphism.name.from),
         brandName = NameIsomorphism.name.from(product.brandName),
-        category = category.from(product.category),
+        category = CategoryIsomorphism.category.from(product.category),
         images = product.images.map(ImageIsomorphism.image.from),
         sustainaIndex = product.sustainaIndex,
         maybeBabyFood = product.babyFood.map(BabyFoodIsomorphism.babyFood.from),
@@ -192,21 +210,6 @@ object ProductsIsomorphism {
       RepresentativePoint(
         latitude = representativePoint.latitude,
         longitude = representativePoint.longitude
-      )
-    }
-  }
-
-  val category = new (Category <=> CategoryApiModel) {
-    val to: Category => CategoryApiModel = { category =>
-      CategoryApiModel(
-        categoryType = category.categoryType.toString,
-        names = category.names.map(NameIsomorphism.name.to)
-      )
-    }
-    val from: CategoryApiModel => Category = { category =>
-      Category(
-        categoryType = CategoryType.withName(category.categoryType),
-        names = category.names.map(NameIsomorphism.name.from)
       )
     }
   }

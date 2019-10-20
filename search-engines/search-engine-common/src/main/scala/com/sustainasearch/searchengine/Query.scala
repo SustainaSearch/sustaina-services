@@ -53,4 +53,12 @@ case class NearestSpatialResult(spatialPoint: SpatialPoint, spatialField: String
 
 trait FilterQuery
 
-case class SpecificFieldFilterQuery(fieldName: String, fieldValue: Any) extends FilterQuery
+case class TextFilterQuery(fieldName: String, fieldValue: String) extends FilterQuery
+
+object TextFilterQuery {
+  def apply(fieldName: String, fieldValue: Any): TextFilterQuery = new TextFilterQuery(fieldName, fieldValue.toString)
+}
+
+case class RangeFilterQuery(fieldName: String, from: Long, to: Long) extends FilterQuery
+
+case class BooleanFilterQuery(fieldName: String, fieldValue: Boolean) extends FilterQuery

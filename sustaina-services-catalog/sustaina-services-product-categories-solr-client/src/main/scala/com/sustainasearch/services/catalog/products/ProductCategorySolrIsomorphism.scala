@@ -40,7 +40,9 @@ class ProductCategorySolrIsomorphism(fieldRegister: ProductCategorySearchEngineF
       categoryType = CategoryType.withName(
         document.getFirstValue(IdField).asInstanceOf[String]
       ),
-      categoryNames
+      names = categoryNames,
+      // TODO: fix
+      filters = Seq.empty
     )
   }
 

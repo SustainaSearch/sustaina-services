@@ -2,6 +2,7 @@ apply plugin: 'scala'
 
 dependencies {
     compile "org.scala-lang:scala-library:$scalaVersion"
+    compile project(':search-engines:search-engine-common')
 
     testCompile "junit:junit:$junitVersion"
     testCompile "org.scalatest:scalatest_$scalaPlatform:$scalaTestVersion"
