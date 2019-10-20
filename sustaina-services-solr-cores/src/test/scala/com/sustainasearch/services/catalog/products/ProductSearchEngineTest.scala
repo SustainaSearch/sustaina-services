@@ -2,7 +2,7 @@ package com.sustainasearch.services.catalog.products
 
 import java.util.UUID
 
-import com.sustainasearch.searchengine.{AllDocumentsQuery, FreeTextQuery, Query, SpecificFieldFilterQuery}
+import com.sustainasearch.searchengine.{AllDocumentsQuery, FreeTextQuery, Query, TextFilterQuery}
 import com.sustainasearch.services.{Image, ImageType, LanguageCode, Name}
 import com.sustainasearch.services.catalog._
 import com.sustainasearch.services.catalog.products.clothes.{Clothes, Composition}
@@ -166,15 +166,15 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
     }
 
     "find document within specified SustainaIndex range" in {
-      val response1 = underTest.query(Query(mainQuery = AllDocumentsQuery).withFilterQuery(SpecificFieldFilterQuery("sustainaIndex", "[70 TO *]")))
+      val response1 = underTest.query(Query(mainQuery = AllDocumentsQuery).withFilterQuery(TextFilterQuery("sustainaIndex", "[70 TO *]")))
       response1.numFound shouldBe 1
       response1.documents.head shouldBe babyFoodProduct
 
-      val response2 = underTest.query(Query(mainQuery = AllDocumentsQuery).withFilterQuery(SpecificFieldFilterQuery("sustainaIndex", "[40 TO 70]")))
+      val response2 = underTest.query(Query(mainQuery = AllDocumentsQuery).withFilterQuery(TextFilterQuery("sustainaIndex", "[40 TO 70]")))
       response2.numFound shouldBe 1
       response2.documents.head shouldBe clothesProduct
 
-      val response3 = underTest.query(Query(mainQuery = AllDocumentsQuery).withFilterQuery(SpecificFieldFilterQuery("sustainaIndex", "[40 TO *]")))
+      val response3 = underTest.query(Query(mainQuery = AllDocumentsQuery).withFilterQuery(TextFilterQuery("sustainaIndex", "[40 TO *]")))
       response3.numFound shouldBe 2
       response3.documents should contain only(babyFoodProduct, clothesProduct)
     }

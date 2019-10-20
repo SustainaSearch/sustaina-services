@@ -9,5 +9,16 @@
       "unparsedName": "Barnmat",
       "languageCode": "sv"
     }
+  ],
+  "filters": [
+    {
+      "filterType": "HasCertification",
+      "names": [
+        {
+          "unparsedName": "Har certifieringar",
+          "languageCode": "sv"
+        }
+      ]
+    }
   ]
 }

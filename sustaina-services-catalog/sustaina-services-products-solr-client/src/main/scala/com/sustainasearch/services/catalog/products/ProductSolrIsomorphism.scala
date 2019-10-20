@@ -166,7 +166,9 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
         categoryType = CategoryType.withName(
           document.getFirstValue(CategoryTypeField).asInstanceOf[String]
         ),
-        categoryNames
+        names = categoryNames,
+        // TODO: fix
+        filters = Seq.empty
       ),
       images = images,
       sustainaIndex = document.getFirstValue(SustainaIndexField).asInstanceOf[Double],

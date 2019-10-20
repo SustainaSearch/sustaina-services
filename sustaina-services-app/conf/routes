@@ -4,7 +4,7 @@ GET         /api/v1/catalog                                         com.sustaina
 
 # Products
 POST        /api/v1/catalog/categories                                      com.sustainasearch.services.v1.catalog.products.ProductCategoriesController.add()
-GET         /api/v1/catalog/categories/:categoryType/products               com.sustainasearch.services.v1.catalog.products.ProductsController.query(categoryType:String, q: Option[String], start: Long, rows: Long, fuzzy: Boolean, sp: Option[String])
+GET         /api/v1/catalog/categories/:categoryType/products               com.sustainasearch.services.v1.catalog.products.ProductsController.query(categoryType:String, q: Option[String], start: Long, rows: Long, fuzzy: Boolean, sp: Option[String], fq: Seq[String])
 GET         /api/v1/catalog/categories/:categoryType/products/:productId    com.sustainasearch.services.v1.catalog.products.ProductsController.getById(categoryType: String, productId: String)
 POST        /api/v1/catalog/categories/:categoryType/products               com.sustainasearch.services.v1.catalog.products.ProductsController.add(categoryType: String)
 

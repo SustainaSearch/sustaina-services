@@ -2,6 +2,7 @@ package com.sustainasearch.services.catalog.products
 
 import java.util.UUID
 
+import com.sustainasearch.searchengine
 import com.sustainasearch.searchengine._
 import com.sustainasearch.services.catalog.products.CategoryType.CategoryType
 import com.sustainasearch.services.catalog.products.facets.ProductFacets
@@ -26,12 +27,34 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory,
     }
   }
 
-  def queryProductCategory(categoryType: CategoryType, rawProductQuery: ProductQuery): Future[QueryResponse[Product, ProductFacets]] = {
-    val productCategoryQuery = rawProductQuery
-      .withFilterQuery(SpecificFieldFilterQuery(CategoryTypeField, categoryType))
+  def queryProductCategory(categoryType: CategoryType, productQuery: ProductQuery): Future[ProductCategoryQueryResponse] = {
+    val productCategoryQuery = productQuery
+      .withFilterQuery(TextFilterQuery(CategoryTypeField, categoryType))
       .withSortByDescendingSustainaIndex
       .withSortByNearestSpatialResult
-    query(productCategoryQuery)
+
+    for {
+      productQueryResponse <- query(productCategoryQuery)
+      maybeCategory <- productCategoryService.findCategory(categoryType)
+    } yield {
+      ProductCategoryQueryResponse(
+        productQueryResponse = productQueryResponse,
+        filterQueries = maybeCategory.fold(Seq.empty[FilterQueryContainer]) { category =>
+          category
+            .filters
+            .flatMap { categoryFilter =>
+              categoryFilter.filterType match {
+                case CategoryFilterType.HasCertification => Seq(
+                  FilterQueryContainer(categoryFilter.names, BooleanFilterQuery("TODO", true)),
+                )
+                case CategoryFilterType.ZeroToThreeMonths => Seq(
+                  FilterQueryContainer(categoryFilter.names, searchengine.RangeFilterQuery("TODO", from = 0, to = 3)),
+                )
+              }
+            }
+        }
+      )
+    }
   }
 
   def query(productQuery: ProductQuery): Future[QueryResponse[Product, ProductFacets]] = {
@@ -73,10 +96,6 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory,
       productResponse.copy(facets = facets)
     }
   }
-
-  //  def filterQueriesForCategoryType(categoryType: CategoryType): Future[Seq[FilterQuery]] = {
-  //    ???
-  //  }
 
   def add(product: Product): Future[Product] = {
     Future {

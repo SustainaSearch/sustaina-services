@@ -1,9 +1,9 @@
 package com.sustainasearch.services.catalog.products
 
 import com.sustainasearch.searchengine._
-import com.sustainasearch.services.catalog.products.ProductSort.ProductSort
 import com.sustainasearch.services.catalog.CatalogQuery
 import com.sustainasearch.services.catalog.products.ProductFacet.ProductFacet
+import com.sustainasearch.services.catalog.products.ProductSort.ProductSort
 
 case class ProductQuery(mainQuery: MainQuery,
                         start: Long = 0,
