@@ -10,11 +10,11 @@ import scala.concurrent.{ExecutionContext, Future}
 class ProductCategoryService @Inject()(repository: ProductCategoryRepository)(implicit ec: ExecutionContext) {
   // TODO: add cache
 
-  def findCategory(categoryType: CategoryType): Future[Option[Category]] = repository.findCategory(categoryType)
+  def findCategory(categoryType: CategoryType): Future[Option[Category]] = repository.getCategory(categoryType)
 
   def categoryNames(categoryTypes: Seq[CategoryType]): Future[Map[CategoryType, Seq[Name]]] = {
     for {
-      categories <- Future.sequence(categoryTypes.map(repository.findCategory))
+      categories <- Future.sequence(categoryTypes.map(repository.getCategory))
     } yield {
       categories
         .flatMap { maybeCategory =>

@@ -1,8 +1,11 @@
 package com.sustainasearch.services.v1
 
 import com.sustainasearch.searchengine.{BooleanFilterQuery, RangeFilterQuery, TextFilterQuery}
+import org.junit.runner.RunWith
+import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FunSuite, Matchers}
 
+@RunWith(classOf[JUnitRunner])
 class FilterQueryJsonParserTest extends FunSuite with Matchers {
 
   test("Isomorphism for TextFilterQuery") {

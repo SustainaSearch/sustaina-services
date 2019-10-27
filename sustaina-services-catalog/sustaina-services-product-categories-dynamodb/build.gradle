@@ -2,18 +2,18 @@ apply plugin: 'scala'
 
 dependencies {
     compile "org.scala-lang:scala-library:$scalaVersion"
-
-    compile "org.apache.solr:solr-solrj:$solrVersion"
-    compile "org.apache.solr:solr-core:$solrVersion"
-
-    compile project(":search-engines:search-engine-common")
+    compileOnly "javax.inject:javax.inject:1"
+    compile project(':sustaina-services-catalog:sustaina-services-catalog-core')
+    compile "com.amazonaws:aws-java-sdk-dynamodb:$dynamoDBVersion"
+    compile "com.typesafe.play:play-json_$scalaPlatform:$playJsonVersion"
+    compile "org.scalaz:scalaz-core_$scalaPlatform:$scalazVersion"
 
     // Use Scalatest for testing our library
     testCompile 'junit:junit:4.12'
     testCompile "org.scalatest:scalatest_$scalaPlatform:$scalaTestVersion"
 
     // Need scala-xml at test runtime
-    testRuntime 'org.scala-lang.modules:scala-xml_2.11:1.1.0'
+    testRuntime 'org.scala-lang.modules:scala-xml_2.12:1.1.0'
 }
 
 // In this section you declare where to find the dependencies of your project
