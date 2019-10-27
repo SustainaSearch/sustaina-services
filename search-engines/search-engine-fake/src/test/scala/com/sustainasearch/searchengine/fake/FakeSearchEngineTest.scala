@@ -1,8 +1,11 @@
 package com.sustainasearch.searchengine.fake
 
 import com.sustainasearch.searchengine.{FreeTextQuery, Query}
+import org.junit.runner.RunWith
+import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FunSuite, Matchers}
 
+@RunWith(classOf[JUnitRunner])
 class FakeSearchEngineTest extends FunSuite with Matchers {
 
   test("FakeSearchEngine supports case insensitive queries") {

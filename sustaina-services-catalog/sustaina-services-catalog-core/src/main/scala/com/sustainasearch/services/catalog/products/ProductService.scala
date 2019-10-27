@@ -35,7 +35,7 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory,
 
     for {
       productQueryResponse <- query(productCategoryQuery)
-      maybeCategory <- productCategoryService.findCategory(categoryType)
+      maybeCategory <- productCategoryService.getCategory(categoryType)
     } yield {
       ProductCategoryQueryResponse(
         productQueryResponse = productQueryResponse,

@@ -5,8 +5,10 @@ import com.sustainasearch.services.catalog.products.CategoryType.CategoryType
 import scala.concurrent.Future
 
 trait ProductCategoryRepository {
+  
+  def getAllCategories: Future[Seq[Category]]
 
-  def findCategory(categoryType: CategoryType): Future[Option[Category]]
+  def getCategory(categoryType: CategoryType): Future[Option[Category]]
 
   def add(category: Category): Future[Category]
 

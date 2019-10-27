@@ -45,7 +45,8 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
         names = Seq(Name(
           unparsedName = "Barnmat",
           languageCode = Some(LanguageCode.Swedish)
-        ))
+        )),
+        filters = Seq.empty
       ),
       images = Seq(
         Image(
@@ -102,7 +103,8 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
         names = Seq(Name(
           unparsedName = "Kläder",
           languageCode = Some(LanguageCode.Swedish)
-        ))
+        )),
+        filters = Seq.empty
       ),
       images = Seq(
         Image(

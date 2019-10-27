@@ -4,11 +4,7 @@ apply plugin: 'scala'
 dependencies {
     compile project(':sustaina-services-catalog:sustaina-services-catalog-core')
     compile project(':sustaina-services-api-model')
-    compile(project(':sustaina-services-catalog:sustaina-services-product-categories-solr-client')) {
-        // Required for Swagger UI to work - does it affect Solr?
-        exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
-        exclude group: 'com.fasterxml.jackson.core', module: 'jackson-annotations'
-    }
+    compile(project(':sustaina-services-catalog:sustaina-services-product-categories-dynamodb'))
     compile(project(':sustaina-services-catalog:sustaina-services-products-solr-client')) {
         // Required for Swagger UI to work - does it affect Solr?
         exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'

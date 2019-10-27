@@ -1,25 +1,30 @@
 package com.sustainasearch.services.v1.catalog.products
 
-import com.sustainasearch.services.catalog.products._
+import com.sustainasearch.dynamodb.{DynamoDBFactory, TablePrefix}
+import com.sustainasearch.services.catalog.products.{DynamoDBProductCategoryRepository, ProductCategoryRepository}
 import play.api.inject.{Binding, Module}
 import play.api.{Configuration, Environment}
 
 class ProductCategoriesModule extends Module {
   override def bindings(environment: Environment, configuration: Configuration): Seq[Binding[_]] = {
-    //    val productsSolrBaseUrl = configuration
-    //      .getOptional[String]("product-categories.solr.url")
-    //      .getOrElse("http://localhost:8983")
-    //    println(s"Product categories Solr base URL = '$productsSolrBaseUrl'")
-    //
-    //    val productCategoriesSolrUrl = s"$productsSolrBaseUrl/solr/sustaina-categories"
-    //    println(s"Product categories Solr URL = '$productCategoriesSolrUrl'")
-    //
-    //    Seq(
-    //      bind[ProductCategorySearchEngineFieldRegister].toInstance(ProductCategorySolrFieldRegister),
-    //      bind[ProductCategorySearchEngineFactory].toInstance(new HttpSolrProductCategorySearchEngineFactory(HttpSolrConfig(productCategoriesSolrUrl)))
-    //    )
+
+    val accessKey = configuration.get[String]("aws.access.key")
+    val secretKey = configuration.get[String]("aws.secret.key")
+    val region = configuration.get[String]("aws.region")
+    val dynamoDBFactory = new DynamoDBFactory(
+      accessKey = accessKey,
+      secretKey = secretKey,
+      region = region
+    )
+
+    // TODO: make use of
+    //    val tablePrefix = TablePrefixFactory.createTablePrefix(environment)
+    val tablePrefix = TablePrefix("Dev_")
+
     Seq(
-      bind(classOf[ProductCategoryRepository]).to(classOf[InMemoryProductCategoryRepository])
+      bind[TablePrefix].toInstance(tablePrefix),
+      bind[DynamoDBFactory].toInstance(dynamoDBFactory),
+      bind[ProductCategoryRepository].to[DynamoDBProductCategoryRepository]
     )
   }
 }
