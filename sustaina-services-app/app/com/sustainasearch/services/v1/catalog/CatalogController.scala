@@ -20,10 +20,10 @@ class CatalogController @Inject()(components: ControllerComponents,
     produces = "application/json",
     response = classOf[CatalogQueryResponseApiModel]
   )
-  def query(@ApiParam(value = "Main query", required = true) q: String,
-            @ApiParam(value = "Rows per catalog category", required = false, defaultValue = "10") rows: Long = 10,
-            @ApiParam(value = "Fuzzy query", required = false, defaultValue = "false") fuzzy: Boolean = false,
-            @ApiParam(value = "Spatial point using the format \"lat,lon\"") sp: Option[String] = None) = Action.async { implicit request =>
+  def queryCatalog(@ApiParam(value = "Main query", required = true) q: String,
+                   @ApiParam(value = "Rows per catalog category", required = false, defaultValue = "10") rows: Long = 10,
+                   @ApiParam(value = "Fuzzy query", required = false, defaultValue = "false") fuzzy: Boolean = false,
+                   @ApiParam(value = "Spatial point using the format \"lat,lon\"") sp: Option[String] = None) = Action.async { implicit request =>
     val query = CatalogQuery(
       mainQuery = q,
       rows = rows,

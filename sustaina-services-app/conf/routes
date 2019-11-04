@@ -1,12 +1,12 @@
 
 # Catalog
-GET         /api/v1/catalog                                         com.sustainasearch.services.v1.catalog.CatalogController.query(q: String, rows: Long, fuzzy: Boolean, sp: Option[String])
+GET         /api/v1/catalog                                         com.sustainasearch.services.v1.catalog.CatalogController.queryCatalog(q: String, rows: Long, fuzzy: Boolean, sp: Option[String])
 
 # Products
-POST        /api/v1/catalog/categories                                      com.sustainasearch.services.v1.catalog.products.ProductCategoriesController.add()
-GET         /api/v1/catalog/categories/:categoryType/products               com.sustainasearch.services.v1.catalog.products.ProductsController.query(categoryType:String, q: Option[String], start: Long, rows: Long, fuzzy: Boolean, sp: Option[String], fq: Seq[String])
+POST        /api/v1/catalog/categories                                      com.sustainasearch.services.v1.catalog.products.ProductCategoriesController.addProductCategory()
+GET         /api/v1/catalog/categories/:categoryType/products               com.sustainasearch.services.v1.catalog.products.ProductsController.queryProductCategory(categoryType:String, q: Option[String], start: Long, rows: Long, fuzzy: Boolean, sp: Option[String], fq: Seq[String])
 GET         /api/v1/catalog/categories/:categoryType/products/:productId    com.sustainasearch.services.v1.catalog.products.ProductsController.getById(categoryType: String, productId: String)
-POST        /api/v1/catalog/categories/:categoryType/products               com.sustainasearch.services.v1.catalog.products.ProductsController.add(categoryType: String)
+POST        /api/v1/catalog/categories/:categoryType/products               com.sustainasearch.services.v1.catalog.products.ProductsController.addProduct(categoryType: String)
 
 # API Models
 GET         /api/v1/models/:language                                        com.sustainasearch.services.v1.models.ModelsController.getModels(language: String)

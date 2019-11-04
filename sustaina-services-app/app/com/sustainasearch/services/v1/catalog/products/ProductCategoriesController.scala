@@ -29,7 +29,7 @@ class ProductCategoriesController @Inject()(components: ControllerComponents,
       )
     )
   )
-  def add(): Action[JsValue] = Action.async(parse.json) { implicit request =>
+  def addProductCategory(): Action[JsValue] = Action.async(parse.json) { implicit request =>
     val categoryRequest = request.body.as[CategoryApiModel]
     for {
       productCategoryResponse <- productCategoryService.add(CategoryIsomorphism.category.from(categoryRequest))

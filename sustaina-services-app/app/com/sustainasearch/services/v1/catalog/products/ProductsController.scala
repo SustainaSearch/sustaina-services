@@ -40,13 +40,13 @@ class ProductsController @Inject()(components: ControllerComponents,
     produces = "application/json",
     response = classOf[ProductCategoryQueryResponseApiModel]
   )
-  def query(@ApiParam(value = "Category type", required = true) categoryType: String,
-            @ApiParam(value = "Main query", required = false) q: Option[String],
-            @ApiParam(value = "Offset (i.e. number of documents) into the query’s result set to be displayed in the response", required = false, defaultValue = "0") start: Long = 0,
-            @ApiParam(value = "Maximum number of documents returned at a time in response to a query", required = false, defaultValue = "10") rows: Long = 10,
-            @ApiParam(value = "Fuzzy query", required = false, defaultValue = "false") fuzzy: Boolean = false,
-            @ApiParam(value = "Spatial point using the format \"lat,lon\"") sp: Option[String] = None,
-            @ApiParam(value = "Filter queries in JSON format, e.g. {\"text\":{\"fieldName\":\"field1\",\"fieldValue\":\"value1\"}}") fq: Seq[String]) = Action.async { implicit request =>
+  def queryProductCategory(@ApiParam(value = "Category type", required = true) categoryType: String,
+                           @ApiParam(value = "Main query", required = false) q: Option[String],
+                           @ApiParam(value = "Offset (i.e. number of documents) into the query’s result set to be displayed in the response", required = false, defaultValue = "0") start: Long = 0,
+                           @ApiParam(value = "Maximum number of documents returned at a time in response to a query", required = false, defaultValue = "10") rows: Long = 10,
+                           @ApiParam(value = "Fuzzy query", required = false, defaultValue = "false") fuzzy: Boolean = false,
+                           @ApiParam(value = "Spatial point using the format \"lat,lon\"") sp: Option[String] = None,
+                           @ApiParam(value = "Filter queries in JSON format, e.g. {\"text\":{\"fieldName\":\"field1\",\"fieldValue\":\"value1\"}}") fq: Seq[String]) = Action.async { implicit request =>
     val filterQueries = fq.map(FilterQueryJsonParser.fromJson)
     val query = ProductQuery(
       mainQuery = q.fold[MainQuery](AllDocumentsQuery)(mainQuery => FreeTextQuery(mainQuery)),
@@ -80,7 +80,7 @@ class ProductsController @Inject()(components: ControllerComponents,
       )
     )
   )
-  def add(@ApiParam(value = "Category type", required = true) categoryType: String): Action[JsValue] = Action.async(parse.json) { implicit request =>
+  def addProduct(@ApiParam(value = "Category type", required = true) categoryType: String): Action[JsValue] = Action.async(parse.json) { implicit request =>
     val productRequest = request.body.as[ProductApiModel]
     require(productRequest.category.categoryType == categoryType)
     for {
