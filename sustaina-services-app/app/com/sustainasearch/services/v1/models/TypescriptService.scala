@@ -38,7 +38,8 @@ class TypescriptService @Inject()()(implicit ec: ExecutionContext) {
           decl[CategoryFacetApiModel],
           decl[ProductFacetsApiModel],
           decl[BabyFoodApiModel],
-          decl[IngredientStatementApiModel]
+          decl[IngredientStatementApiModel],
+          decl[CategoryFilterApiModel]
         )
       )
     )
