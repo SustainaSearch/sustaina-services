@@ -1,6 +1,5 @@
 package com.sustainasearch.services.v1.models
 
-import akka.japi
 import javax.inject.{Inject, Singleton}
 
 import scala.concurrent.{ExecutionContext, Future}
