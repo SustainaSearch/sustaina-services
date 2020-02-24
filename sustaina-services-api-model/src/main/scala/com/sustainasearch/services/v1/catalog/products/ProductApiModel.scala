@@ -12,6 +12,7 @@ case class ProductApiModel(id: String,
                            category: CategoryApiModel,
                            images: Seq[ImageApiModel],
                            sustainaIndex: Double,
+                           certifications: Seq[CertificationApiModel],
                            babyFood: Option[BabyFoodApiModel],
                            clothes: Option[ClothesApiModel]
                           )

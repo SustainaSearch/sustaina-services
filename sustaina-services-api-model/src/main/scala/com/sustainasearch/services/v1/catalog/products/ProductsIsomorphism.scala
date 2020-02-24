@@ -121,6 +121,7 @@ object ProductsIsomorphism {
         category = CategoryIsomorphism.category.to(product.category),
         images = product.images.map(ImageIsomorphism.image.to),
         sustainaIndex = product.sustainaIndex,
+        certifications = product.certifications.map(CertificationIsomorphism.certification.to),
         babyFood = product.maybeBabyFood.map(BabyFoodIsomorphism.babyFood.to),
         clothes = product.maybeClothes.map(ClothesIsomorphism.clothes.to)
       )
@@ -134,6 +135,7 @@ object ProductsIsomorphism {
         category = CategoryIsomorphism.category.from(product.category),
         images = product.images.map(ImageIsomorphism.image.from),
         sustainaIndex = product.sustainaIndex,
+        certifications = product.certifications.map(CertificationIsomorphism.certification.from),
         maybeBabyFood = product.babyFood.map(BabyFoodIsomorphism.babyFood.from),
         maybeClothes = product.clothes.map(ClothesIsomorphism.clothes.from)
       )

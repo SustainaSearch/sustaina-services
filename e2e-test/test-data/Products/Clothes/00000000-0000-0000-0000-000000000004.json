@@ -1,8 +1,19 @@
 {
   "id": "00000000-0000-0000-0000-000000000004",
-  "representativePoint": {
-    "latitude": 10.5200,
-    "longitude": 10.4050
+  "productActivity": {
+    "country": {
+      "countryCode": "DEU",
+      "names": [
+        {
+          "unparsedName": "Tyskland",
+          "languageCode": "sv"
+        }
+      ]
+    },
+    "representativePoint": {
+      "latitude": 10.5200,
+      "longitude": 10.4050
+    }
   },
   "functionalNames": [
     {
@@ -20,8 +31,25 @@
         "unparsedName": "Kläder",
         "languageCode": "sv"
       }
-    ]
+    ],
+    "filters": []
+
   },
+  "images": [
+    {
+      "imageType": "Small",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100291165_small.jpg"
+    },
+    {
+      "imageType": "Medium",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100291165_medium.jpg"
+    },
+    {
+      "imageType": "Large",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100291165_large.jpg"
+    }
+  ],
+  "certifications": [],
   "sustainaIndex": 21.517,
   "clothes": {
     "compositions": [

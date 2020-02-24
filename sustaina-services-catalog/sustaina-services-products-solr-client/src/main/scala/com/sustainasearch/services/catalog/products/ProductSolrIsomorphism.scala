@@ -40,6 +40,22 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
        document.addField(ImageField, ImageIsomorphism.image.to(image))
     }
 
+    document.addField(HasCertificationField, product.certifications.length > 0)
+	product.certifications.foreach { certification =>
+	  document.addField(CertificationCodeField, certification.certificationCode.toString)
+	  LanguageCode.values.foreach { languageCode =>
+		 var hasNameForLanguageCode = false
+		 certification.names.foreach { name =>
+		   if (languageCode.toString.equals(name.languageCode.get.toString)) {
+			 document.addField(certificationNameWithNameLanguageCodeField(name), name.unparsedName)
+			 hasNameForLC = true
+			 }
+		 }
+         if (!hasNameForLC) document.addField(certificationNameWithLanguageCodeField(languageCode), "")
+	   }
+	   document.addField(CertificationLogoUrlField, certification.logoUrl)
+	}
+
     product.functionalNames.foreach { name =>
       document.addField(functionalNameWithNameLanguageCodeField(name), name.unparsedName)
     }
@@ -139,6 +155,29 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
         )
     }
 
+    val certifications = ListBuffer.empty[Certification]
+    if (document.containsKey(CertificationCodeField)) {
+      val certificationCodes =  document.getFieldValues(CertificationCodeField).asScala.toList
+        if (document.getFirstValue(HasCertificationField).asInstanceOf[Boolean]) {
+        var x = 0
+        for ( x <- 0 to certificationCodes.size-1 ) {
+          val certificationNames = ListBuffer.empty[Name]
+          LanguageCode.values.foreach { languageCode =>
+            val certificationNameField = certificationNameWithLanguageCodeField(languageCode)
+            if (document.containsKey(certificationNameField)) {
+              val names = document.getFieldValues(certificationNameField).asScala.toList
+              val unparsedName = names(x).asInstanceOf[String]
+              if(!unparsedName.equals("")) certificationNames += Name(unparsedName, Some(languageCode))
+            }
+          }
+          certifications += Certification(
+            CertificationCode.withName(certificationCodes(x).asInstanceOf[String]), 
+            certificationNames,
+            document.getFirstValue(CertificationLogoUrlField).asInstanceOf[String])
+        }
+      }
+    }
+
     val maybeBabyFood = if (babyFoodIngredientStatements.isEmpty) None else Some(BabyFood(babyFoodIngredientStatements))
 
     val maybeClothes = if (clothesCompositions.isEmpty) None else Some(Clothes(clothesCompositions))
@@ -172,6 +211,7 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
       ),
       images = images,
       sustainaIndex = document.getFirstValue(SustainaIndexField).asInstanceOf[Double],
+      certifications = certifications,
       maybeBabyFood,
       maybeClothes
     )
