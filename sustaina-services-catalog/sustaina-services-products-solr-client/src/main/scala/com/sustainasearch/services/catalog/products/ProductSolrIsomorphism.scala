@@ -48,10 +48,10 @@ class ProductSolrIsomorphism(fieldRegister: ProductSearchEngineFieldRegister) ex
 		 certification.names.foreach { name =>
 		   if (languageCode.toString.equals(name.languageCode.get.toString)) {
 			 document.addField(certificationNameWithNameLanguageCodeField(name), name.unparsedName)
-			 hasNameForLC = true
+			 hasNameForLanguageCode = true
 			 }
 		 }
-         if (!hasNameForLC) document.addField(certificationNameWithLanguageCodeField(languageCode), "")
+         if (!hasNameForLanguageCode) document.addField(certificationNameWithLanguageCodeField(languageCode), "")
 	   }
 	   document.addField(CertificationLogoUrlField, certification.logoUrl)
 	}
