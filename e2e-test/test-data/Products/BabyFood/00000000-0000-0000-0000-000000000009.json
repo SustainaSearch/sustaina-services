@@ -56,6 +56,22 @@
       "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300204607_large.jpg"
     }
   ],
+  "certifications": [
+    {
+      "certificationCode": "EUECOLEAF",
+      "names": [
+        {
+          "unparsedName": "EU Organic Farming",
+          "languageCode": "sv"
+        },
+        {
+          "unparsedName": "EU Organic Farming",
+          "languageCode": "en"
+        }
+      ],
+      "logoUrl": "https://d2z239b16fruf2.cloudfront.net/CertificationLogos/eueco.jpg"
+    }
+  ],
   "sustainaIndex": 93.357,
   "babyFood": {
     "ingredientStatements": [

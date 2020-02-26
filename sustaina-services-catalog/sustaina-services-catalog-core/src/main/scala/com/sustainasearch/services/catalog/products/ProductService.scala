@@ -45,7 +45,7 @@ class ProductService @Inject()(searchEngineFactory: ProductSearchEngineFactory,
             .flatMap { categoryFilter =>
               categoryFilter.filterType match {
                 case CategoryFilterType.HasCertification => Seq(
-                  FilterQueryContainer(categoryFilter.names, BooleanFilterQuery("TODO", true)),
+                  FilterQueryContainer(categoryFilter.names, BooleanFilterQuery(HasCertificationField, true)),
                 )
                 case CategoryFilterType.ZeroToThreeMonths => Seq(
                   FilterQueryContainer(categoryFilter.names, searchengine.RangeFilterQuery("TODO", from = 0, to = 3)),

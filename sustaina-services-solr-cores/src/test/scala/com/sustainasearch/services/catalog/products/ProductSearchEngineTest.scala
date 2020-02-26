@@ -58,6 +58,16 @@ class ProductSearchEngineTest extends WordSpec with Matchers {
           url = "large.image.1"
         )
       ),
+      certifications = Seq(
+        Certification(
+          "GOTS",
+          Name(
+            unparsedName = "Gots",
+            languageCode = Some(LanguageCode.Swedish)
+          ),
+          logoUrl = "gots.small.image.1"
+        )
+      ),
       sustainaIndex = 78.567d,
       maybeBabyFood = Some(
         BabyFood(

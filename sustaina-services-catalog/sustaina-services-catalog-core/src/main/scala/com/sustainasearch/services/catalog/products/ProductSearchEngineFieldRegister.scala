@@ -32,9 +32,17 @@ trait ProductSearchEngineFieldRegister {
 
   val SustainaIndexField: String
 
+  val CertificationCodeField: String
+
+  val CertificationNameField: String
+
+  val CertificationLogoUrlField: String
+
   val BabyFoodIngredientStatementField: String
 
   val ClothesCompositionField: String
+
+  val HasCertificationField: String
 
   def countryNameWithNameLanguageCodeField(name: Name): String
 
@@ -57,4 +65,9 @@ trait ProductSearchEngineFieldRegister {
   def babyFoodIngredientStatemenWithLanguageCodeField(languageCode: LanguageCode): String
 
   def clothesCompositionWithLanguageCodeField(languageCode: LanguageCode): String
+
+  def certificationNameWithLanguageCodeField(languageCode: LanguageCode): String
+
+  def certificationNameWithNameLanguageCodeField(name: Name): String
+
 }

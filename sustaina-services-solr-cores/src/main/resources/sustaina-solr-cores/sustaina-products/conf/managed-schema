@@ -158,6 +158,15 @@
 
     <field name="sustainaIndex" type="pdouble" indexed="true" stored="true"/>
 
+    <!-- Filter data -->
+    <field name="hasCertification" type="boolean" indexed="true" stored="true"/>
+
+    <!-- Certifications -->
+    <field name="certificationCode" type="string" indexed="true" stored="true" multiValued="true" />
+    <field name="certificationName_en" type="text_en" indexed="true" stored="true" multiValued="true" />
+    <field name="certificationName_sv" type="text_sv" indexed="true" stored="true" multiValued="true" />
+    <field name="certificationLogoUrl" type="text_general" indexed="false" stored="true" multiValued="true" />
+
     <!-- BabyFood fields -->
     <field name="babyFoodIngredientStatement_en" type="text_en" indexed="true" stored="true"/>
     <field name="babyFoodIngredientStatement_sv" type="text_sv" indexed="true" stored="true"/>
