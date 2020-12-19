@@ -1,0 +1,69 @@
+{
+  "id": "00000000-0000-0000-0000-000000000008",
+  "productActivity": {
+    "country": {
+      "countryCode": "DEU",
+      "names": [
+        {
+          "unparsedName": "Tyskland",
+          "languageCode": "sv"
+        }
+      ]
+    },
+    "city": {
+      "names": [
+        {
+          "unparsedName": "Berlin",
+          "languageCode": "sv"
+        }
+      ]
+    },
+    "representativePoint": {
+      "latitude": -1.5280,
+      "longitude": 120.4050
+    }
+  },
+  "functionalNames": [
+    {
+      "unparsedName": "Spagetti Köttfärssås 15 Mån",
+      "languageCode": "sv"
+    }
+  ],
+  "brandName": {
+    "unparsedName": "NESTLÉ"
+  },
+  "category": {
+    "categoryType": "BabyFood",
+    "names": [
+      {
+        "unparsedName": "Barnmat",
+        "languageCode": "sv"
+      }
+    ],
+    "filters": []
+  },
+  "images": [
+    {
+      "imageType": "Small",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07613033588051_small.jpg"
+    },
+    {
+      "imageType": "Medium",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07613033588051_medium.jpg"
+    },
+    {
+      "imageType": "Large",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07613033588051_large.jpg"
+    }
+  ],
+  "certifications": [],
+  "sustainaIndex": 92.337,
+  "babyFood": {
+    "ingredientStatements": [
+      {
+        "languageCode": "sv",
+        "unparsedStatement": " INGREDIENSER: Vatten, kokt fullkornsspagetti 18% (FULLKORNSDURUMVETE),  morot, nötkött (8%), tomatpuré, paprika, lök, stärkelse, VETEMJÖL, vegetabilisk olja (raps, solros), salt, vitlök, oregano och svartpeppar. Rotfrukter/grönsaker 16%. KAN INNEHÅLLA SPÅR AV ÄGG."
+      }
+    ]
+  }
+}

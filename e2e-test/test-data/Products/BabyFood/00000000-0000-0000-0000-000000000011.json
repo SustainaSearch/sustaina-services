@@ -1,0 +1,98 @@
+{
+  "id": "00000000-0000-0000-0000-000000000011",
+  "productActivity": {
+    "country": {
+      "countryCode": "SWE",
+      "names": [
+        {
+          "unparsedName": "Sweden",
+          "languageCode": "sv"
+        }
+      ]
+    },
+    "city": {
+      "names": [
+        {
+          "unparsedName": "Malmö",
+          "languageCode": "sv"
+        }
+      ]
+    },
+    "representativePoint": {
+      "latitude": 51.1280,
+      "longitude": 16.4050
+    }
+  },
+  "functionalNames": [
+    {
+      "unparsedName": "EKO Pasta &amp; köttfärssås 8 mån KRAV",
+      "languageCode": "sv"
+    }
+  ],
+  "brandName": {
+    "unparsedName": "Semper"
+  },
+  "category": {
+    "categoryType": "BabyFood",
+    "names": [
+      {
+        "unparsedName": "Barnmat",
+        "languageCode": "sv"
+      }
+    ],
+    "filters": []
+  },
+  "images": [
+    {
+      "imageType": "Small",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100955623_small.jpg"
+    },
+    {
+      "imageType": "Medium",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100955623_medium.jpg"
+    },
+    {
+      "imageType": "Large",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07310100955623_large.jpg"
+    }
+  ],
+  "certifications": [
+    {
+      "certificationCode": "EUECOLEAF",
+      "names": [
+        {
+          "unparsedName": "EU Organic Farming",
+          "languageCode": "sv"
+        },
+        {
+          "unparsedName": "EU Organic Farming",
+          "languageCode": "en"
+        }
+      ],
+      "logoUrl": "https://d2z239b16fruf2.cloudfront.net/CertificationLogos/eueco.jpg"
+    },
+    {
+      "certificationCode": "KRAV",
+      "names": [
+        {
+          "unparsedName": "Krav",
+          "languageCode": "sv"
+        },
+        {
+          "unparsedName": "Krav",
+          "languageCode": "en"
+        }
+      ],
+      "logoUrl": "https://d2z239b16fruf2.cloudfront.net/CertificationLogos/krav.png"
+    }
+  ],
+  "sustainaIndex": 87.357,
+  "babyFood": {
+    "ingredientStatements": [
+      {
+        "languageCode": "sv",
+        "unparsedStatement": " INGREDIENSER: Vatten, tomat*, morot*, pasta (durumvete)*, nötkött* 8 %, rotselleri*, lök*, rapsolja*, rismjöl*, timjan*, oregano*, svartpeppar*. *KRAV-ekologisk ingrediens. Certifieringsorgan: Kiwa."
+      }
+    ]
+  }
+}

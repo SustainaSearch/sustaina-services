@@ -25,6 +25,12 @@ object ProductSolrFieldRegister extends ProductSearchEngineFieldRegister {
 
   override val ImageTypeField: String = "imageType"
 
+  override val CertificationCodeField: String = "certificationCode"
+
+  override val CertificationNameField: String = "certificationName"
+
+  override val CertificationLogoUrlField: String  = "certificationLogoUrl"
+
   override val BrandNameField: String = "brandName"
 
   override val BrandNameExactField: String = "brandNameExact"
@@ -38,6 +44,8 @@ object ProductSolrFieldRegister extends ProductSearchEngineFieldRegister {
   override val BabyFoodIngredientStatementField: String = "babyFoodIngredientStatement"
 
   override val ClothesCompositionField: String = "clothesComposition"
+
+  override val HasCertificationField: String = "hasCertification"
 
   override def functionalNameWithNameLanguageCodeField(name: Name): String = s"$FunctionalNameField${nameLanguageCodeSuffix(name)}"
 
@@ -60,6 +68,10 @@ object ProductSolrFieldRegister extends ProductSearchEngineFieldRegister {
   override def babyFoodIngredientStatemenWithLanguageCodeField(languageCode: LanguageCode): String = s"${BabyFoodIngredientStatementField}${languageCodeSuffix(languageCode)}"
 
   override def clothesCompositionWithLanguageCodeField(languageCode: LanguageCode): String = s"${ClothesCompositionField}${languageCodeSuffix(languageCode)}"
+
+  override def certificationNameWithLanguageCodeField(languageCode: LanguageCode): String = s"${CertificationNameField}${languageCodeSuffix(languageCode)}"
+
+  override def certificationNameWithNameLanguageCodeField(name: Name): String = s"$CertificationNameField${nameLanguageCodeSuffix(name)}"
 
   private def languageCodeSuffix(languageCode: LanguageCode): String = s"_${languageCode.toString}"
 

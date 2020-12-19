@@ -1,0 +1,98 @@
+{
+  "id": "00000000-0000-0000-0000-000000000007",
+  "productActivity": {
+    "country": {
+      "countryCode": "BGD",
+      "names": [
+        {
+          "unparsedName": "Bangladesh",
+          "languageCode": "sv"
+        }
+      ]
+    },
+    "city": {
+      "names": [
+        {
+          "unparsedName": "-",
+          "languageCode": "sv"
+        }
+      ]
+    },
+    "representativePoint": {
+      "latitude": -1.5280,
+      "longitude": 120.4050
+    }
+  },
+  "functionalNames": [
+    {
+      "unparsedName": "Äppelgröt med kanel",
+      "languageCode": "sv"
+    }
+  ],
+  "brandName": {
+    "unparsedName": "Alex&amp;Phil"
+  },
+  "category": {
+    "categoryType": "BabyFood",
+    "names": [
+      {
+        "unparsedName": "Barnmat",
+        "languageCode": "sv"
+      }
+    ],
+    "filters": []
+  },
+  "images": [
+    {
+      "imageType": "Small",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07350081220020_small.jpg"
+    },
+    {
+      "imageType": "Medium",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07350081220020_medium.jpg"
+    },
+    {
+      "imageType": "Large",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/07350081220020_large.jpg"
+    }
+  ],
+  "certifications": [
+    {
+      "certificationCode": "EUECOLEAF",
+      "names": [
+        {
+          "unparsedName": "EU Organic Farming",
+          "languageCode": "sv"
+        },
+        {
+          "unparsedName": "EU Organic Farming",
+          "languageCode": "en"
+        }
+      ],
+      "logoUrl": "https://d2z239b16fruf2.cloudfront.net/CertificationLogos/eueco.jpg"
+    },
+    {
+      "certificationCode": "KRAV",
+      "names": [
+        {
+          "unparsedName": "Krav",
+          "languageCode": "sv"
+        },
+        {
+          "unparsedName": "Krav",
+          "languageCode": "en"
+        }
+      ],
+      "logoUrl": "https://d2z239b16fruf2.cloudfront.net/CertificationLogos/krav.png"
+    }
+  ],
+  "sustainaIndex": 92.337,
+  "babyFood": {
+    "ingredientStatements": [
+      {
+        "languageCode": "sv",
+        "unparsedStatement": "Ingredienser: äpple* 44%, äppeljuice* (ej från koncentrat) 36%, nypon* 9%, glutenfritt havremjöl* 6,5%, rapsolja* 4,5%, ceylonkanel* 0,05%. *KRAV-ekologiska ingredienser."
+      }
+    ]
+  }
+}

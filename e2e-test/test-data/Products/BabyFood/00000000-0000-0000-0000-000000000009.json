@@ -1,0 +1,84 @@
+{
+  "id": "00000000-0000-0000-0000-000000000009",
+  "productActivity": {
+    "country": {
+      "countryCode": "SWE",
+      "names": [
+        {
+          "unparsedName": "Sweden",
+          "languageCode": "sv"
+        }
+      ]
+    },
+    "city": {
+      "names": [
+        {
+          "unparsedName": "Uppsala",
+          "languageCode": "sv"
+        }
+      ]
+    },
+    "representativePoint": {
+      "latitude": 57.5280,
+      "longitude": 20.4050
+    }
+  },
+  "functionalNames": [
+    {
+      "unparsedName": "Fullkornsgröt m Banan &amp; Plommon 8m",
+      "languageCode": "sv"
+    }
+  ],
+  "brandName": {
+    "unparsedName": "Hipp"
+  },
+  "category": {
+    "categoryType": "BabyFood",
+    "names": [
+      {
+        "unparsedName": "Barnmat",
+        "languageCode": "sv"
+      }
+    ],
+    "filters": []
+  },
+  "images": [
+    {
+      "imageType": "Small",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300204607_small.jpg"
+    },
+    {
+      "imageType": "Medium",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300204607_medium.jpg"
+    },
+    {
+      "imageType": "Large",
+      "url": "https://d2z239b16fruf2.cloudfront.net/ProductImages/04062300204607_large.jpg"
+    }
+  ],
+  "certifications": [
+    {
+      "certificationCode": "EUECOLEAF",
+      "names": [
+        {
+          "unparsedName": "EU Organic Farming",
+          "languageCode": "sv"
+        },
+        {
+          "unparsedName": "EU Organic Farming",
+          "languageCode": "en"
+        }
+      ],
+      "logoUrl": "https://d2z239b16fruf2.cloudfront.net/CertificationLogos/eueco.jpg"
+    }
+  ],
+  "sustainaIndex": 93.357,
+  "babyFood": {
+    "ingredientStatements": [
+      {
+        "languageCode": "sv",
+        "unparsedStatement": " Ingredienser: Tillskottsnäring uteslutande baserad på mjölk* 45% (vasslepulver* delvis demineraliserat, skummjölkspulver*, vegetabiliska oljor*, rismjöl* vitaminer (vitamin C, niacin, vitamin E, pantotensyra, vitamin B1, vitamin A, vitamin B6, folsyra, vitamin K, vitamin D), mineraler (järnsulfat, zinksulfat, kaliumjodat, natriumselenat)), 40% fullkornsmjöl av havre*, vasslepulver* delvis demineraliserat, skummjölkspulver*, 4% bananflingor*, 1,5% plommonflingor*, kalciumkarbonat, rismjöl*, vitamin D. *Ekologisk ingrediens (HR-BIO-141)."
+      }
+    ]
+  }
+}
