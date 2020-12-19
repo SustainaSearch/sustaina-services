@@ -7,7 +7,7 @@ import com.sustainasearch.services.v1.catalog.products._
 import com.sustainasearch.services.v1.catalog.products.clothes.{ClothesApiModel, CompositionApiModel}
 import com.sustainasearch.services.v1.catalog.products.facets.{BrandFacetApiModel, CategoryFacetApiModel, ProductFacetsApiModel}
 import com.sustainasearch.services.v1.catalog.products.food.{BabyFoodApiModel, IngredientStatementApiModel}
-import com.sustainasearch.services.v1.{ImageApiModel, NameApiModel}
+import com.sustainasearch.services.v1._
 import javax.inject.{Inject, Singleton}
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -39,7 +39,13 @@ class FlowTypeService @Inject()()(implicit ec: ExecutionContext) {
           decl[ProductFacetsApiModel],
           decl[BabyFoodApiModel],
           decl[IngredientStatementApiModel],
-          decl[CategoryFilterApiModel]
+          decl[CategoryFilterApiModel],
+          decl[CategoryFilterApiModel],
+          decl[TextFilterQueryApiModel],
+          decl[BooleanFilterQueryApiModel],
+          decl[RangeFilterQueryApiModel],
+          decl[FilterQueryApiModel],
+          decl[FilterQueryContainerApiModel]
         )
       )
     )
