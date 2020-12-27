@@ -6,7 +6,7 @@ import com.sustainasearch.services.sustainaindex.Country.Country
 
 /**
   *
-  * @param id         Item ID (unique for tenant)
+  * @param id             Item ID (unique for tenant)
   * @param country        Country of production
   * @param certifications Certifications of the garment
   * @param materials      Materials of the garment
@@ -14,7 +14,7 @@ import com.sustainasearch.services.sustainaindex.Country.Country
   * @param brand          Brand
   */
 case class Item(id: String,
-                country: Country,
+                country: Option[Country],
                 certifications: Seq[Certification],
                 materials: Seq[Material],
                 garmentWeight: Option[Float],

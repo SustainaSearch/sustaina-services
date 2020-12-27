@@ -51,6 +51,8 @@ class SustainaIndexController @Inject()(components: ControllerComponents,
       .body
       .as[ClothesSustainaIndexRequestApiModel]
       .toInput
+
+    println(input)
     for {
       sustainaIndex <- sustainaIndexService.calculateClothesSustainaIndex(input)
     } yield {
