@@ -12,4 +12,5 @@ class SustainaIndexService @Inject()(sustainaIndexCalculator: SustainaIndexCalcu
     sustainaIndexCalculator.calculateSustainaIndex(input)
     // TODO: save stats?
   }
+
 }

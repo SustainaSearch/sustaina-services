@@ -1,6 +1,7 @@
 {
   "tenant": {
-    "id": "tenant_1"
+    "id": "tenant_1",
+    "host": "host_1"
   },
   "item": {
     "id": "item_1",

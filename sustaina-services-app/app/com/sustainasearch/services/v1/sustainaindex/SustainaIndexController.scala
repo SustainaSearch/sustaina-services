@@ -4,6 +4,7 @@ import com.sustainasearch.services.sustainaindex.SustainaIndexService
 import com.sustainasearch.services.v1.sustainaindex.clothes.ClothesSustainaIndexRequestApiModel
 import io.swagger.annotations._
 import javax.inject.{Inject, Singleton}
+import play.api.http.HeaderNames
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.{AbstractController, Action, ControllerComponents}
 
@@ -27,10 +28,25 @@ class SustainaIndexController @Inject()(components: ControllerComponents,
         paramType = "body",
         required = true,
         allowMultiple = false
+      ),
+      new ApiImplicitParam(
+        name = "Authorization",
+        value = "Bearer JWT-token",
+        required = true,
+        allowEmptyValue = false,
+        paramType = "header",
+        dataType = "String"
       )
     )
   )
   def calculateClothesSustainaIndex(): Action[JsValue] = Action.async(parse.json) { implicit request =>
+
+    val headerTokenRegex = """Bearer (.+?)""".r
+    val token = request.headers.get(HeaderNames.AUTHORIZATION).collect {
+      case headerTokenRegex(token) => token
+    }
+    println(token)
+
     val input = request
       .body
       .as[ClothesSustainaIndexRequestApiModel]
