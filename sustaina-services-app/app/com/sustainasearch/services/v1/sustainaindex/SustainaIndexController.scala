@@ -27,7 +27,7 @@ class SustainaIndexController @Inject()(components: ControllerComponents,
   @ApiImplicitParams(
     Array(
       new ApiImplicitParam(
-        dataType = "com.sustainasearch.services.v1.sustainaindex.clothes.ClothesSustainaIndexRequestApiModel",
+        dataType = "com.sustainasearch.services.v1.sustainaindex.clothes.ItemApiModel",
         paramType = "body",
         required = true,
         allowMultiple = false
