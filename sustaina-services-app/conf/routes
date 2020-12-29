@@ -1,8 +1,11 @@
+# Auth - temporary
+GET          /api/v1/auth/jwt                                       com.sustainasearch.services.v1.auth.AuthController.getAuthorizationHeader(tid: String, thost: String, exp: Int)
+
 # SustainaIndex
-POST         /api/v1/sustainaindex/clothes                                  com.sustainasearch.services.v1.sustainaindex.SustainaIndexController.calculateClothesSustainaIndex()
+POST         /api/v1/sustainaindex/clothes                          com.sustainasearch.services.v1.sustainaindex.SustainaIndexController.calculateClothesSustainaIndex()
 
 # API Models
-GET         /api/v1/models/:language                                        com.sustainasearch.services.v1.models.ModelsController.getModels(language: String)
+GET         /api/v1/models/:language                                com.sustainasearch.services.v1.models.ModelsController.getModels(language: String)
 
 # Swagger
 GET         /api-doc                                                controllers.Assets.at(path="/public/api-doc", file="/index.html")

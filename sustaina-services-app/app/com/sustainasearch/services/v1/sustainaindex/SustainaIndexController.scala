@@ -1,19 +1,22 @@
 package com.sustainasearch.services.v1.sustainaindex
 
 import com.sustainasearch.services.sustainaindex.SustainaIndexService
-import com.sustainasearch.services.v1.sustainaindex.clothes.ClothesSustainaIndexRequestApiModel
+import com.sustainasearch.services.sustainaindex.clothes.SustainaIndexInput
+import com.sustainasearch.services.v1.auth.AuthAction
+import com.sustainasearch.services.v1.sustainaindex.clothes.ItemApiModel
 import io.swagger.annotations._
 import javax.inject.{Inject, Singleton}
-import play.api.http.HeaderNames
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc.{AbstractController, Action, ControllerComponents}
 
 import scala.concurrent.ExecutionContext
+import scala.util.{Failure, Success}
 
 @Singleton
 @Api(value = "/SustainaIndex")
 class SustainaIndexController @Inject()(components: ControllerComponents,
-                                        sustainaIndexService: SustainaIndexService)(implicit ec: ExecutionContext) extends AbstractController(components) {
+                                        sustainaIndexService: SustainaIndexService,
+                                        authAction: AuthAction)(implicit ec: ExecutionContext) extends AbstractController(components) {
 
   @ApiOperation(
     httpMethod = "POST",
@@ -39,24 +42,21 @@ class SustainaIndexController @Inject()(components: ControllerComponents,
       )
     )
   )
-  def calculateClothesSustainaIndex(): Action[JsValue] = Action.async(parse.json) { implicit request =>
-
-    val headerTokenRegex = """Bearer (.+?)""".r
-    val token = request.headers.get(HeaderNames.AUTHORIZATION).collect {
-      case headerTokenRegex(token) => token
-    }
-    println(token)
-
-    val input = request
-      .body
-      .as[ClothesSustainaIndexRequestApiModel]
-      .toInput
-
-    println(input)
+  def calculateClothesSustainaIndex(): Action[JsValue] = authAction.async(parse.json) { implicit request =>
+    val input = SustainaIndexInput(
+      tenant = request.tenant,
+      item = request
+        .body
+        .as[ItemApiModel]
+        .toItem
+    )
     for {
-      sustainaIndex <- sustainaIndexService.calculateClothesSustainaIndex(input)
+      triedSustainaIndex <- sustainaIndexService.calculateClothesSustainaIndex(input)
     } yield {
-      Ok(Json.toJson(SustainaIndexResponseApiModel.from(sustainaIndex)))
+      triedSustainaIndex match {
+        case Success(sustainaIndex) => Ok(Json.toJson(SustainaIndexResponseApiModel.from(sustainaIndex)))
+        case Failure(t) => NotFound(t.getMessage)
+      }
     }
 
   }

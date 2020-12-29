@@ -2,8 +2,8 @@ package com.sustainasearch.services.v1.models
 
 import bridges.flow._
 import bridges.flow.syntax._
+import com.sustainasearch.services.v1.sustainaindex.clothes.{ItemApiModel, MaterialApiModel}
 import com.sustainasearch.services.v1.sustainaindex.{BrandApiModel, SustainaIndexResponseApiModel, TenantApiModel}
-import com.sustainasearch.services.v1.sustainaindex.clothes.{ClothesSustainaIndexRequestApiModel, ItemApiModel, MaterialApiModel}
 import javax.inject.{Inject, Singleton}
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -15,7 +15,6 @@ class FlowTypeService @Inject()()(implicit ec: ExecutionContext) {
     Future(
       Flow.render(
         List(
-          decl[ClothesSustainaIndexRequestApiModel],
           decl[SustainaIndexResponseApiModel],
           decl[TenantApiModel],
           decl[ItemApiModel],
