@@ -2,8 +2,10 @@ package com.sustainasearch.services.v1.models
 
 import bridges.typescript._
 import bridges.typescript.syntax._
-import com.sustainasearch.services.v1.sustainaindex.clothes.{ItemApiModel, MaterialApiModel}
-import com.sustainasearch.services.v1.sustainaindex.{BrandApiModel, SustainaIndexResponseApiModel, TenantApiModel}
+import com.sustainasearch.services.v1.sustainaindex.brand.BrandApiModel
+import com.sustainasearch.services.v1.sustainaindex.clothes.ItemApiModel
+import com.sustainasearch.services.v1.sustainaindex.clothes.material.MaterialApiModel
+import com.sustainasearch.services.v1.sustainaindex.{SustainaIndexResponseApiModel, TenantApiModel}
 import javax.inject.{Inject, Singleton}
 
 import scala.concurrent.{ExecutionContext, Future}

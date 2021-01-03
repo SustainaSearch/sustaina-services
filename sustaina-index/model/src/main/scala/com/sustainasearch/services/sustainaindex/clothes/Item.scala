@@ -1,8 +1,9 @@
 package com.sustainasearch.services.sustainaindex.clothes
 
-import com.sustainasearch.services.sustainaindex.Brand.Brand
-import com.sustainasearch.services.sustainaindex.Certification.Certification
-import com.sustainasearch.services.sustainaindex.Country.Country
+import com.sustainasearch.services.sustainaindex.brand.Brand
+import com.sustainasearch.services.sustainaindex.certification.Certification
+import com.sustainasearch.services.sustainaindex.clothes.material.Material
+import com.sustainasearch.services.sustainaindex.country.Country
 
 /**
   *
