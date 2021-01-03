@@ -3,9 +3,9 @@ package com.sustainasearch.services.v1.models
 import bridges.typescript._
 import bridges.typescript.syntax._
 import com.sustainasearch.services.v1.sustainaindex.brand.BrandApiModel
-import com.sustainasearch.services.v1.sustainaindex.clothes.ItemApiModel
+import com.sustainasearch.services.v1.sustainaindex.clothes.{ItemApiModel, SustainaIndexResponseApiModel}
 import com.sustainasearch.services.v1.sustainaindex.clothes.material.MaterialApiModel
-import com.sustainasearch.services.v1.sustainaindex.{SustainaIndexResponseApiModel, TenantApiModel}
+import com.sustainasearch.services.v1.sustainaindex.{SustainaIndexApiModel, TenantApiModel}
 import javax.inject.{Inject, Singleton}
 
 import scala.concurrent.{ExecutionContext, Future}
@@ -17,6 +17,7 @@ class TypescriptService @Inject()()(implicit ec: ExecutionContext) {
     Future(
       Typescript.render(
         List(
+          decl[SustainaIndexApiModel],
           decl[SustainaIndexResponseApiModel],
           decl[TenantApiModel],
           decl[ItemApiModel],

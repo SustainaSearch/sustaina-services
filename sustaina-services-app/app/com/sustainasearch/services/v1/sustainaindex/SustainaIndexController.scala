@@ -1,9 +1,9 @@
 package com.sustainasearch.services.v1.sustainaindex
 
-import com.sustainasearch.services.sustainaindex.clothes.{Item, SustainaIndexInput}
-import com.sustainasearch.services.sustainaindex.{SustainaIndexService, Tenant}
+import com.sustainasearch.services.sustainaindex.SustainaIndexService
+import com.sustainasearch.services.sustainaindex.clothes.SustainaIndexInput
 import com.sustainasearch.services.v1.auth.AuthAction
-import com.sustainasearch.services.v1.sustainaindex.clothes.{ItemApiModel, ItemConverter}
+import com.sustainasearch.services.v1.sustainaindex.clothes.{ItemApiModel, ItemConverter, SustainaIndexResponseApiModel}
 import io.swagger.annotations._
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.{JsValue, Json}
@@ -44,23 +44,22 @@ class SustainaIndexController @Inject()(components: ControllerComponents,
     )
   )
   def calculateClothesSustainaIndex(): Action[JsValue] = authAction.async(parse.json) { implicit request =>
-    def calculateClothesSustainaIndex(tenant: Tenant, item: Item) = {
-      val input = SustainaIndexInput(tenant, item)
-      for {
-        triedSustainaIndex <- sustainaIndexService.calculateClothesSustainaIndex(input)
-      } yield {
-        triedSustainaIndex match {
-          case Success(sustainaIndex) => Ok(Json.toJson(SustainaIndexResponseApiModel.from(sustainaIndex)))
-          case Failure(t) => NotFound(t.getMessage)
-        }
-      }
-    }
-
     Try(request.body.as[ItemApiModel]) match {
-      case Success(apiModel) => itemConverter
-        .convertToItem(apiModel)
+      case Success(requestBody) => itemConverter
+        .convertToItem(requestBody)
         .flatMap {
-          case Success(item) => calculateClothesSustainaIndex(request.tenant, item)
+          case Success(item) =>
+            val input = SustainaIndexInput(request.tenant, item)
+            for {
+              triedSustainaIndex <- sustainaIndexService.calculateClothesSustainaIndex(input)
+            } yield {
+              triedSustainaIndex match {
+                case Success(sustainaIndex) =>
+                  val responseApiModel = SustainaIndexResponseApiModel.from(requestBody, sustainaIndex)
+                  Ok(Json.toJson(responseApiModel))
+                case Failure(t) => NotFound(t.getMessage)
+              }
+            }
           case Failure(t) => Future.successful(BadRequest(t.getMessage))
         }
       case Failure(t) => Future.successful(BadRequest(t.getMessage))
