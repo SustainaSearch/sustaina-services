@@ -12,9 +12,8 @@ class InMemoryMaterialGroupStorageTest extends WordSpec with Matchers {
     }
 
     "provide score" in {
-      MaterialGroupStorage.group0.score shouldBe 27
-      MaterialGroupStorage.group1.score shouldBe 0
-      MaterialGroupStorage.group2.score shouldBe 46
+      MaterialGroupStorage.group0.score shouldBe 0
+      MaterialGroupStorage.group10.score shouldBe 100
     }
   }
 }

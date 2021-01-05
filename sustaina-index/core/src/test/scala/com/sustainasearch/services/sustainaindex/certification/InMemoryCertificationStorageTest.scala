@@ -10,9 +10,9 @@ class InMemoryCertificationStorageTest extends WordSpec with Matchers {
       CertificationStorage(1) shouldBe CertificationStorage.EUEcoLabel
     }
 
-    "provide score" in {
-      CertificationStorage.BlueSign.score shouldBe 17
-      CertificationStorage.EUEcoLabel.score shouldBe 61
-    }
+    //"provide score" in {
+    //  CertificationStorage.BlueSign.score shouldBe 17
+    //  CertificationStorage.EUEcoLabel.score shouldBe 61
+    //}
   }
 }
