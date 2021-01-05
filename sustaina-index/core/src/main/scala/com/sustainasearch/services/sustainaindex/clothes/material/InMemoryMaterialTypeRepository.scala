@@ -40,11 +40,11 @@ private object MaterialTypeStorage extends Enumeration {
 
   val Cotton = Val(
     id = nextId,
-    group = MaterialGroupStorage.group0
+    group = MaterialGroupStorage.group0 // group 0 gives 0 material points
   )
   val Wool = Val(
     id = nextId,
-    group = MaterialGroupStorage.group2
+    group = MaterialGroupStorage.group10 // group 10 gives 100 material points (40 with material weight 0.4)
   )
 
 }
