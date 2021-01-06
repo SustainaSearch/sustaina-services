@@ -18,66 +18,31 @@ class InMemoryMaterialGroupRepository @Inject()(implicit ec: ExecutionContext) e
 }
 
 private object MaterialGroupStorage extends Enumeration {
+  private val MaxGroup = 10
+  private val MaxPoints = 100
 
-  case class Val(
-                  override val id: Int,
-                  score: Int
-                ) extends super.Val(id) {
+  case class Val(override val id: Int) extends super.Val(id) {
+    // TODO: why not only pow2?
+    lazy val score: Int = (MaxPoints * pow2(id)) / pow2(MaxGroup)
+
+    private def pow2(x: Int): Int = math.pow(x, 2).toInt
 
     def toMaterialGroup: MaterialGroup = MaterialGroup(id, score)
 
   }
 
   implicit def valueToMaterialGroupVal(x: Value): MaterialGroupStorage.Val = x.asInstanceOf[Val]
-  val MAX_GROUP = 10
-  val MAX_POINTS = 100
 
-  // use materal fx X^2
-  def getScore(x: Int): Int = MAX_POINTS * (x * x) / (MAX_GROUP*MAX_GROUP)
-  
-  val group0 = Val(
-    id = nextId,
-    score = getScore(0)
-  )
-  val group1 = Val(
-    id = nextId,
-    score = getScore(1)
-  )
-  val group2 = Val(
-    id = nextId,
-    score = getScore(2)
-  )
-  val group3 = Val(
-    id = nextId,
-    score = getScore(3)
-  )
-  val group4 = Val(
-    id = nextId,
-    score = getScore(4)
-  )
-  val group5 = Val(
-    id = nextId,
-    score = getScore(5)
-  )
-  val group6 = Val(
-    id = nextId,
-    score = getScore(6)
-  )
-  val group7 = Val(
-    id = nextId,
-    score = getScore(7)
-  )
-  val group8 = Val(
-    id = nextId,
-    score = getScore(8)
-  )
-  val group9 = Val(
-    id = nextId,
-    score = getScore(9)
-  )
-  val group10 = Val(
-    id = nextId,
-    score = getScore(10)
-  )
-  
+  val group0 = Val(id = nextId)
+  val group1 = Val(id = nextId)
+  val group2 = Val(id = nextId)
+  val group3 = Val(id = nextId)
+  val group4 = Val(id = nextId)
+  val group5 = Val(id = nextId)
+  val group6 = Val(id = nextId)
+  val group7 = Val(id = nextId)
+  val group8 = Val(id = nextId)
+  val group9 = Val(id = nextId)
+  val group10 = Val(id = nextId)
+
 }

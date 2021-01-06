@@ -37,7 +37,7 @@ class SustainaIndexCalculator @Inject()(implicit ec: ExecutionContext) {
   def calculateMaterialPoints(input: SustainaIndexInput, weight: Float): Float = {
 	var materialPoints = 0.0F
 	for ( material <- input.item.materials ) {
-		materialPoints += 0.01F* material.percent * material.materialType.materialGroup.score
+		materialPoints += 0.01F* material.percent * material.materialType.group.score
 	} 
 	materialPoints * weight
   }
