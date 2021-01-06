@@ -1,14 +1,17 @@
 rootProject.name = 'sustaina-services'
 
-include 'search-engines:search-engine-common'
-include 'search-engines:search-engine-fake'
-include 'search-engines:search-engine-solr'
+//include 'search-engines:search-engine-common'
+//include 'search-engines:search-engine-fake'
+//include 'search-engines:search-engine-solr'
 
-include 'sustaina-services-catalog:sustaina-services-catalog-model'
-include 'sustaina-services-catalog:sustaina-services-catalog-core'
-include 'sustaina-services-catalog:sustaina-services-products-solr-client'
-include 'sustaina-services-catalog:sustaina-services-product-categories-dynamodb'
-include 'sustaina-services-solr-cores'
+//include 'sustaina-services-catalog:sustaina-services-catalog-model'
+//include 'sustaina-services-catalog:sustaina-services-catalog-core'
+//include 'sustaina-services-catalog:sustaina-services-products-solr-client'
+//include 'sustaina-services-catalog:sustaina-services-product-categories-dynamodb'
+//include 'sustaina-services-solr-cores'
+
+include 'sustaina-index:model'
+include 'sustaina-index:core'
 
 include 'sustaina-services-api-model'
 include 'sustaina-services-app'

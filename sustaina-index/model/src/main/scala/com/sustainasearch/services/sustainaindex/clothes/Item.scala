@@ -1,0 +1,22 @@
+package com.sustainasearch.services.sustainaindex.clothes
+
+import com.sustainasearch.services.sustainaindex.brand.Brand
+import com.sustainasearch.services.sustainaindex.certification.Certification
+import com.sustainasearch.services.sustainaindex.clothes.material.Material
+import com.sustainasearch.services.sustainaindex.country.Country
+
+/**
+  *
+  * @param id             Item ID (unique for tenant)
+  * @param country        Country of production
+  * @param certifications Certifications of the garment
+  * @param materials      Materials of the garment
+  * @param garmentWeight  Total weight of the garment
+  * @param brand          Brand
+  */
+case class Item(id: String,
+                country: Option[Country],
+                certifications: Seq[Certification],
+                materials: Seq[Material],
+                garmentWeight: Option[Float],
+                brand: Option[Brand])

@@ -1,15 +1,11 @@
+# Auth - temporary
+GET          /api/v1/auth/jwt                                       com.sustainasearch.services.v1.auth.AuthController.getAuthorizationHeader(tid: String, thost: String, exp: Int)
 
-# Catalog
-GET         /api/v1/catalog                                         com.sustainasearch.services.v1.catalog.CatalogController.queryCatalog(q: String, rows: Long, fuzzy: Boolean, sp: Option[String])
-
-# Products
-POST        /api/v1/catalog/categories                                      com.sustainasearch.services.v1.catalog.products.ProductCategoriesController.addProductCategory()
-GET         /api/v1/catalog/categories/:categoryType/products               com.sustainasearch.services.v1.catalog.products.ProductsController.queryProductCategory(categoryType:String, q: Option[String], start: Long, rows: Long, fuzzy: Boolean, sp: Option[String], fq: Seq[String])
-GET         /api/v1/catalog/categories/:categoryType/products/:productId    com.sustainasearch.services.v1.catalog.products.ProductsController.getById(categoryType: String, productId: String)
-POST        /api/v1/catalog/categories/:categoryType/products               com.sustainasearch.services.v1.catalog.products.ProductsController.addProduct(categoryType: String)
+# SustainaIndex
+POST         /api/v1/sustainaindex/clothes                          com.sustainasearch.services.v1.sustainaindex.SustainaIndexController.calculateClothesSustainaIndex()
 
 # API Models
-GET         /api/v1/models/:language                                        com.sustainasearch.services.v1.models.ModelsController.getModels(language: String)
+GET         /api/v1/models/:language                                com.sustainasearch.services.v1.models.ModelsController.getModels(language: String)
 
 # Swagger
 GET         /api-doc                                                controllers.Assets.at(path="/public/api-doc", file="/index.html")
