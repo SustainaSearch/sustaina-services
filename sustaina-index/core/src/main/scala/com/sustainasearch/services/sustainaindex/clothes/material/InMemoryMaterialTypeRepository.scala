@@ -204,4 +204,5 @@ private object MaterialTypeStorage extends Enumeration {
     id = nextId,
     group = MaterialGroupStorage.group0
   )
+
 }

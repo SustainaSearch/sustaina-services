@@ -130,5 +130,4 @@ private object CountryStorage extends Enumeration {
     crc             = 46.3F
   )
   
- 
 }
