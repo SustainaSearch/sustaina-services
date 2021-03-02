@@ -35,7 +35,7 @@ private object MaterialGroupStorage extends Enumeration {
   // use materal fx X^2
   def getScore(x: Int): Int = MAX_POINTS * (x * x) / (MAX_GROUP*MAX_GROUP)
   
-  val group0 = Val(
+  val group0 = Val( // group 0 gives 0 material points
     id = nextId,
     score = getScore(0)
   )
@@ -77,7 +77,7 @@ private object MaterialGroupStorage extends Enumeration {
   )
   val group10 = Val(
     id = nextId,
-    score = getScore(10)
+    score = getScore(10) // group 10 gives 100 material points (40 with material weight 0.4)
   )
   
 }
