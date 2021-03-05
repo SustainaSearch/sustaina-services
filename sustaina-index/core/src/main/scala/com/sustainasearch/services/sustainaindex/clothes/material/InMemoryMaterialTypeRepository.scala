@@ -38,13 +38,171 @@ private object MaterialTypeStorage extends Enumeration {
 
   implicit def valueToMaterialTypeVal(x: Value): MaterialTypeStorage.Val = x.asInstanceOf[Val]
 
-  val Cotton = Val(
+  // Cotton
+  val Cotton_NoInfo = Val(
     id = nextId,
-    group = MaterialGroupStorage.group0 // group 0 gives 0 material points
+    group = MaterialGroupStorage.group1
   )
-  val Wool = Val(
+  val Cotton_Recycled = Val(
     id = nextId,
-    group = MaterialGroupStorage.group10 // group 10 gives 100 material points (40 with material weight 0.4)
+    group = MaterialGroupStorage.group9
+  )
+  val Cotton_Ecological = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
+  val Cotton_InChange = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group5
+  )
+  val Cotton_BCI = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group3
+  )
+
+  // Polyester
+  val Polyester_NoInfo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group3
+  )
+  val Polyester_Biobased = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group5
+  )
+  val Polyester_ChemicallyRecycled = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
+  val Polyester_MechanicallyRecycled = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group9
+  )
+
+  // Polyamid
+  val Polyamid_NoInfo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group1
+  )
+  val Polyamid_Biobased = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group3
+  )
+  val Polyamid_ChemicallyRecycled = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group5
+  )
+  val Polyamid_MechanicallyRecycled = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group9
+  )
+
+  //Wool
+  val Wool_NoInfo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group1 
+  )
+  val Wool_NonChlorine = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group3 
+  )
+  val Wool_Ecological = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group5 
+  )
+  val Wool_Ecological_NoChlorine = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
+  val Wool_Recycled = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group9
+  )
+
+  //Viscose
+  val Viscose_NoInfo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group1 
+  )
+  val Viscose_Bamboo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group3 
+  )
+  val Viscose_FSC_or_PEFC = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group5 
+  )
+  val Viscose_Recycled = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
+
+  //Lyocell
+  val Lyocell_NoInfo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group3 
+  )
+  val Lyocell_Recycled = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group9
+  )
+
+  //Flax
+  val Flax_NoInfo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group3 
+  )
+  val Flax_Ecological = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
+
+  //Hemp
+  val Hemp_NoInfo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group3 
+  )
+  val Hemp_Ecological = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
+
+  //Silk
+  val Silk_NoInfo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group3 
+  )
+
+  //Modal
+  val Modal = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group5
+  )
+
+  //Acrylic
+  val Acrylic_NoInfo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group1
+  )
+
+  //Elastane
+  val Elastane_NoInfo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group1
+  )
+  val Elastane_Biobased = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group5
+  )
+
+  //Bamboo
+  val Bamboo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group5
+  )
+
+  val NoMaterialInfo = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group0
   )
 
 }
