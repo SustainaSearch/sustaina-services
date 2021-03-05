@@ -8,11 +8,11 @@
   "materials": [
     {
       "id": 0,
-      "percent": 0.60
+      "percent": 60
     },
     {
       "id": 1,
-      "percent": 0.40
+      "percent": 40
     }
   ],
   "garmentWeight": 12,
