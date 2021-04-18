@@ -5,32 +5,40 @@ import javax.inject.{Inject, Singleton}
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Success, Try}
+//import play.api
 
 @Singleton
 class SustainaIndexCalculator @Inject()(implicit ec: ExecutionContext) {
 
   def calculateSustainaIndex(input: SustainaIndexInput): Future[Try[SustainaIndex]] = {
     // TODO: fix weight parameters
-	val MaterialWeight = 0.4F
-	val CertificationWeight = 0.3F
-	val RenewableEnergyWeight = 0.2F
-	val CrcWeight = 0.1F
+	// ####### Version 2 values #######
+	val MaterialWeight = 0.3F
+	val ProcessWeight = 0.4F
+	val QualityWeight = 0.1F // removed 0.1 here to have room for energy and crc
+	val WorkingConditionWeight = 0.05F
+	val PackagingWeight = 0.05F
+	val RenewableEnergyWeight = 0.05F
+	val CrcWeight = 0.05F
 	
 	var materialPoints = calculateMaterialPoints(input, MaterialWeight)
-	var certificationPoints = calculateCertificationPoints(input, CertificationWeight)
-	
+	var processPoints = calculateProcessPoints(input, ProcessWeight)
+	var qualityPoints = calculateQualityPoints(input, QualityWeight)
+	var workingConditionPoints = calculateWorkingConditionPoints(input, WorkingConditionWeight)
+	var packagingPoints = calculatePackagingPoints(input, PackagingWeight)
 	var renewableEnergyPoints = 0.0
 	var crcPoints = 0.0
+
 	if (input.item.country.isDefined) {
 		crcPoints             = input.item.country.get.crc * CrcWeight
 		renewableEnergyPoints = input.item.country.get.renewableEnergy * RenewableEnergyWeight
 	}
 
 	// calculate and convert SI points to percentage
-	val si = 0.01F * ( materialPoints + certificationPoints + renewableEnergyPoints + crcPoints)
+	val si = 0.01F * (materialPoints + renewableEnergyPoints + crcPoints + processPoints + qualityPoints + workingConditionPoints + packagingPoints)
 
     Future {
-	  Success(SustainaIndex(si.toFloat))
+	  Success(SustainaIndex(si.toFloat, materialPoints.toFloat, processPoints.toFloat, qualityPoints.toFloat, workingConditionPoints.toFloat, packagingPoints.toFloat, renewableEnergyPoints.toFloat, crcPoints.toFloat))
     }
   }
 
@@ -41,60 +49,91 @@ class SustainaIndexCalculator @Inject()(implicit ec: ExecutionContext) {
 	} 
 	materialPoints * weight
   }
-
-  def calculateCertificationPoints(input: SustainaIndexInput, weight: Float): Float = {
-  
+ 
+  def calculateProcessPoints(input: SustainaIndexInput, weight: Float): Float = {
 	// TODO move constants to certification data
-	val CERTIFICATION_MAX_INTERNAL_POINTS = 200.0F
-	val CERTIFICATION_TOP_SCORE = 100.0F
+	val PROCESS_MAX_INTERNAL_POINTS = 10.0F
+	val PROCESS_TOP_SCORE = 100.0F
+	val BRAND_PROCESS_MAX_INTERNAL_POINTS = 30.0F
+	val BRAND_PROCESS_TOP_SCORE = 100.0F
 	
-	var ecological_farming = 0
-	var pesitcides_ban = 0
-    var chemical_fertilizer_ban = 0
-    var rules_for_water_use_and_protection = 0
-    var gmo_crops_ban = 0
-    var desaturation_ban = 0
-    var package_material_requirements = 0
-	var health_and_environmental_toxins_use_ban = 0
-    var control_of_chemical_use = 0
-    var chemical_remnants_banned_in_final_product = 0
-    var requirements_on_wear_tear_and_color_percistance = 0
-	var follows_ilo_conventions = 0
-    var rules_on_workplace_saftey = 0
-    var guarantees_minimum_wage = 0
-
-	for ( certification <- input.item.certifications ) {
-		ecological_farming = math.max(ecological_farming, certification.ecological_farming)
-		pesitcides_ban = math.max(pesitcides_ban, certification.pesitcides_ban)
-		chemical_fertilizer_ban = math.max(chemical_fertilizer_ban, certification.chemical_fertilizer_ban)
-		rules_for_water_use_and_protection = math.max(rules_for_water_use_and_protection, certification.rules_for_water_use_and_protection)
-		gmo_crops_ban = math.max(gmo_crops_ban, certification.gmo_crops_ban)
-		desaturation_ban = math.max(desaturation_ban, certification.desaturation_ban)
-		package_material_requirements = math.max(package_material_requirements, certification.package_material_requirements)
-		health_and_environmental_toxins_use_ban = math.max(health_and_environmental_toxins_use_ban, certification.health_and_environmental_toxins_use_ban)
-		control_of_chemical_use = math.max(control_of_chemical_use, certification.control_of_chemical_use)
-		chemical_remnants_banned_in_final_product = math.max(chemical_remnants_banned_in_final_product, certification.chemical_remnants_banned_in_final_product)
-		requirements_on_wear_tear_and_color_percistance = math.max(requirements_on_wear_tear_and_color_percistance, certification.requirements_on_wear_tear_and_color_percistance)
-		follows_ilo_conventions = math.max(follows_ilo_conventions, certification.follows_ilo_conventions)
-		rules_on_workplace_saftey = math.max(rules_on_workplace_saftey, certification.rules_on_workplace_saftey)
-		guarantees_minimum_wage = math.max(guarantees_minimum_wage, certification.guarantees_minimum_wage)
-	} 
-	
-	var certificationPoints = (ecological_farming +
-	pesitcides_ban +
-    chemical_fertilizer_ban +
-    rules_for_water_use_and_protection +
-    gmo_crops_ban +
-    desaturation_ban +
-    package_material_requirements +
-	health_and_environmental_toxins_use_ban +
-    control_of_chemical_use +
-    chemical_remnants_banned_in_final_product +
-    requirements_on_wear_tear_and_color_percistance +
-	follows_ilo_conventions +
-    rules_on_workplace_saftey +
-    guarantees_minimum_wage).toFloat * CERTIFICATION_TOP_SCORE / CERTIFICATION_MAX_INTERNAL_POINTS
-  
-	certificationPoints.toFloat * weight
+	var points = 0.0F
+	if ( input.item.certifications.length > 0 ) {
+		var chemical_use_restriction = 0
+		for ( certification <- input.item.certifications ) {
+			chemical_use_restriction = math.max(chemical_use_restriction, certification.chemical_use_restriction)
+		}
+		points = (chemical_use_restriction).toFloat * PROCESS_TOP_SCORE / PROCESS_MAX_INTERNAL_POINTS
+	} else if (input.item.brand.isDefined) {
+		var brand = input.item.brand.get
+		points = ((if (brand.no_perfluorinated_compounds_used) 10 else 0) + (if (brand.no_added_biocides_for_anibacterial_purpose) 10 else 0) + (if (brand.no_pvc_with_ftalates_used) 10 else 0)).toFloat * BRAND_PROCESS_TOP_SCORE / BRAND_PROCESS_MAX_INTERNAL_POINTS
+	}
+	points.toFloat * weight
   }
+
+  def calculateQualityPoints(input: SustainaIndexInput, weight: Float): Float = {
+	// TODO move constants to certification data
+	val QUALITY_MAX_INTERNAL_POINTS = 10.0F
+	val QUALITY_TOP_SCORE = 100.0F
+	val BRAND_QUALITY_MAX_INTERNAL_POINTS = 10.0F
+	val BRAND_QUALITY_TOP_SCORE = 100.0F
+	
+	var points = 0.0F
+	if ( input.item.certifications.length > 0 ) {
+		var requirements_on_wear_tear_and_color_percistance = 0
+		for ( certification <- input.item.certifications ) {
+			requirements_on_wear_tear_and_color_percistance = math.max(requirements_on_wear_tear_and_color_percistance, certification.requirements_on_wear_tear_and_color_percistance)
+		}
+		points = (requirements_on_wear_tear_and_color_percistance).toFloat * QUALITY_TOP_SCORE / QUALITY_MAX_INTERNAL_POINTS
+	} else if (input.item.brand.isDefined) {
+		var brand = input.item.brand.get
+		points = ((0)).toFloat * BRAND_QUALITY_TOP_SCORE / BRAND_QUALITY_MAX_INTERNAL_POINTS // TODO brand quality points question
+	}
+	
+	points.toFloat * weight
+  }
+
+  def calculateWorkingConditionPoints(input: SustainaIndexInput, weight: Float): Float = {
+	// TODO move constants to certification data
+	val WORKING_CONDITIONS_MAX_INTERNAL_POINTS = 30.0F
+	val WORKING_CONDITIONS_TOP_SCORE = 100.0F
+	val BRAND_WORKING_CONDITIONS_MAX_INTERNAL_POINTS = 20.0F
+	val BRAND_WORKING_CONDITIONS_TOP_SCORE = 100.0F
+
+	var points = 0.0F
+	if ( input.item.certifications.length > 0 ) {
+		var workers_rights = 0
+		for ( certification <- input.item.certifications ) {
+			workers_rights = math.max(workers_rights, certification.workers_rights)
+		}
+		points = (workers_rights).toFloat * 
+					WORKING_CONDITIONS_TOP_SCORE / WORKING_CONDITIONS_MAX_INTERNAL_POINTS
+	} else if (input.item.brand.isDefined) {
+		var brand = input.item.brand.get
+		points = ((if (brand.no_sandblasting) 10 else 0) + (if (brand.members_in_CRS_organisation) 10 else 0)).toFloat * BRAND_WORKING_CONDITIONS_TOP_SCORE / BRAND_WORKING_CONDITIONS_MAX_INTERNAL_POINTS 
+	}
+	points.toFloat * weight
+  }
+
+  def calculatePackagingPoints(input: SustainaIndexInput, weight: Float): Float = {
+    // TODO move constants to certification data
+	val PACKAGING_MAX_INTERNAL_POINTS = 10.0F
+	val PACKAGING_TOP_SCORE = 100.0F
+	val BRAND_PACKAGING_MAX_INTERNAL_POINTS = 10.0F
+	val BRAND_PACKAGING_TOP_SCORE = 100.0F
+
+	var points = 0.0F
+	if ( input.item.certifications.length > 0 ) {
+		var requirements_on_packaging = 0
+		for ( certification <- input.item.certifications ) {
+			requirements_on_packaging = math.max(requirements_on_packaging, certification.requirements_on_packaging)
+		}
+		points = (requirements_on_packaging).toFloat * PACKAGING_TOP_SCORE / PACKAGING_MAX_INTERNAL_POINTS
+	} else if (input.item.brand.isDefined) {
+		var brand = input.item.brand.get
+		points = (if (brand.recycled_packaging) 10 else 0).toFloat * BRAND_PACKAGING_TOP_SCORE / BRAND_PACKAGING_MAX_INTERNAL_POINTS 
+	}
+	points.toFloat * weight
+  }
+
 }

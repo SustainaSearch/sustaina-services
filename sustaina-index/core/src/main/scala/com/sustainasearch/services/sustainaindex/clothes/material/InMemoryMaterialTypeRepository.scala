@@ -205,4 +205,24 @@ private object MaterialTypeStorage extends Enumeration {
     group = MaterialGroupStorage.group0
   )
 
+  val Polyester_Recycled = Val( // same as Polyester_ChemicallyRecycled
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
+
+  val Polyamid_Recycled = Val( // same as Polyamid_ChemicallyRecycled 
+    id = nextId,
+    group = MaterialGroupStorage.group5
+  )
+
+  val Viscose_Lenzing = Val( // same as val Viscose_FSC_or_PEFC 
+    id = nextId,
+    group = MaterialGroupStorage.group5 
+  )
+
+  val Lyocell_FSC_PEFC = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
+
 }
