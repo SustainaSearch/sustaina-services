@@ -130,4 +130,10 @@ private object CountryStorage extends Enumeration {
     crc             = 46.3F
   )
   
+  val Portugal = Val(
+    countryCode     = "PT",
+    renewableEnergy = 27.16F,
+    crc             = 84.8F
+  )
+
 }
