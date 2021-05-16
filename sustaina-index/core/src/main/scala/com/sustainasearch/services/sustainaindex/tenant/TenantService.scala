@@ -13,7 +13,7 @@ class TenantService @Inject()(tenantRepository: TenantRepository)(implicit
   def isValid(provided: Tenant): Try[Tenant] = {
     tenantRepository
       .getTenant(provided.id)
-      .collect { case retried if retried == provided => retried }
+      .collect { case retrieved if retrieved == provided => retrieved }
   }
 
 }
