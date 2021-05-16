@@ -38,6 +38,11 @@ private object TenantStorage extends Enumeration {
     host = "host_1"
   )
 
+  val DemoSustainaSearch = Val(
+    tenantId = "03bc8099-483e-4944-b664-1e8b852c5c40",
+    host = "demo.sustainasearch.space"
+  )
+
   val TheWiman = Val(
     tenantId = "547fdb4d-160a-46e9-ac17-54aeb3264389",
     host = "thewiman.com"
