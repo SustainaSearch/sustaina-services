@@ -1,41 +1,19 @@
 package com.sustainasearch.services.sustainaindex.clothes
 
+import com.sustainasearch.services.sustainaindex.Tenant
 import com.sustainasearch.services.sustainaindex.certification.InMemoryCertificationRepository
 import com.sustainasearch.services.sustainaindex.clothes.material.{Material, MaterialGroup, MaterialType}
-import com.sustainasearch.services.sustainaindex.country.{Country, CountryStorage}
-import com.sustainasearch.services.sustainaindex.{SustainaIndex, Tenant}
+import com.sustainasearch.services.sustainaindex.country.Country
 import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.{Matchers, WordSpec}
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
-import scala.util.Success
 
 class SustainaIndexCalculatorTest extends WordSpec with Matchers with ScalaFutures {
   val underTest = new SustainaIndexCalculator()
 
   classOf[SustainaIndexCalculator].getSimpleName should {
-...."calculate sustaina index for clothes with no data" in {
-      val country = Country(
-        countryCode = "NA",
-        renewableEnergy = 0.0F,
-        crc = 0.0F
-      )
-      val input = SustainaIndexInput(
-        tenant = Tenant(id = "1", host = "host_1"),
-        item = Item(
-          id = "pid1",
-          country = Option(country),
-          certifications = Seq.empty,
-          materials = Seq.empty,
-          brand = None
-        )
-      )
-      val eventualResult = underTest.calculateSustainaIndex(input)
-      whenReady(eventualResult) { result =>
-        result shouldBe Success(SustainaIndex(0.0F))
-      }
-    }
 
     "calculate sustaina index for clothes with country" in {
       val country = Country(
@@ -54,9 +32,9 @@ class SustainaIndexCalculatorTest extends WordSpec with Matchers with ScalaFutur
         )
       )
       //val eventualResult = underTest.calculateSustainaIndex(input)
-     // whenReady(eventualResult) { result =>
-//result shouldBe Success(SustainaIndex(0.2015F))
-   //   }
+      // whenReady(eventualResult) { result =>
+      //result shouldBe Success(SustainaIndex(0.2015F))
+      //   }
     }
 
     "calculate sustaina index for clothes with certification" in {
@@ -76,7 +54,7 @@ class SustainaIndexCalculatorTest extends WordSpec with Matchers with ScalaFutur
             brand = None
           )
         )
-       // val eventualResult = underTest.calculateSustainaIndex(input)
+        // val eventualResult = underTest.calculateSustainaIndex(input)
         //whenReady(eventualResult) { result =>
         //  result shouldBe Success(SustainaIndex(0.21F))
         //}
@@ -104,9 +82,9 @@ class SustainaIndexCalculatorTest extends WordSpec with Matchers with ScalaFutur
           brand = None
         )
       )
-   //   val eventualResult = underTest.calculateSustainaIndex(input)
-     // whenReady(eventualResult) { result =>
-       // result shouldBe Success(SustainaIndex(0.39999998F))
+      //   val eventualResult = underTest.calculateSustainaIndex(input)
+      // whenReady(eventualResult) { result =>
+      // result shouldBe Success(SustainaIndex(0.39999998F))
       //}
 
     }
@@ -122,10 +100,10 @@ class SustainaIndexCalculatorTest extends WordSpec with Matchers with ScalaFutur
           brand = None
         )
       )
-//      val eventualResult = underTest.calculateSustainaIndex(input)
-//      whenReady(eventualResult) { result =>
-//        result shouldBe Success(SustainaIndex(0.0F))
-//      }
+      //      val eventualResult = underTest.calculateSustainaIndex(input)
+      //      whenReady(eventualResult) { result =>
+      //        result shouldBe Success(SustainaIndex(0.0F))
+      //      }
     }
   }
 
