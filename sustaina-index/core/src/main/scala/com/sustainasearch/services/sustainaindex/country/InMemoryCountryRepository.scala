@@ -19,7 +19,7 @@ class InMemoryCountryRepository @Inject()(implicit ec: ExecutionContext) extends
 
 }
 
-private object CountryStorage extends Enumeration {
+object CountryStorage extends Enumeration {
 
   protected case class Val(
                             countryCode: String,
@@ -39,25 +39,25 @@ private object CountryStorage extends Enumeration {
 
   def fromCountryCode(countryCode: String): CountryStorage.Val = CountryStorage.withName(countryCode.toUpperCase)
 
-  // 0 SI points with energy wheight 0.2 and crcWeight 0.1
+
   val NotAvailable = Val(
     countryCode     = "NA",
     renewableEnergy = 0.0F,
     crc             = 0.0F
   )
-  // 9.13 SI points with energy wheight 0.2 and crcWeight 0.1
+
   val Bangladesh = Val(
     countryCode     = "BD",
     renewableEnergy = 34.75F,
     crc             = 21.8F
   )
-  // 11.792 SI points with energy wheight 0.2 and crcWeight 0.1
+
   val Germany = Val(
     countryCode     = "DE",
     renewableEnergy = 14.21F,
     crc             = 89.5F
   )
-  // 20.15 SI points with energy wheight 0.2 and crcWeight 0.1
+
   val Sweden = Val(
     countryCode     = "SE",
     renewableEnergy = 53.25F,
@@ -136,4 +136,34 @@ private object CountryStorage extends Enumeration {
     crc             = 84.8F
   )
 
+  val Bulgaria = Val(
+    countryCode     = "BG",
+    renewableEnergy = 17.65F,
+    crc             = 59.8F
+  )
+
+    val Austria = Val(
+    countryCode     = "AT",
+    renewableEnergy = 34.39F,
+    crc             = 91.6F
+  )
+
+
+  val EuropeanUnion = Val(
+    countryCode     = "EU",
+    renewableEnergy = fromCountryCode("BG").renewableEnergy, // Todo check worst values from EU, BG = Bulgaria
+    crc             = fromCountryCode("BG").crc
+  )
+
+  val Italy = Val(
+    countryCode     = "IT",
+    renewableEnergy = 16.52F,
+    crc             = 67.9F
+  )
+
+    val PerfectScoreCountry = Val( // used for test and if process step is skipped
+    countryCode     = "XX",
+    renewableEnergy = 100.0F,
+    crc             = 100.0F
+  )
 }

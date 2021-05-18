@@ -51,7 +51,6 @@ class ItemConverter @Inject()(countryService: CountryService,
         country = country,
         certifications = certifications,
         materials = materials,
-        garmentWeight = apiModel.garmentWeight,
         brand = brand
       )
 

@@ -38,9 +38,15 @@ private object MaterialTypeStorage extends Enumeration {
 
   implicit def valueToMaterialTypeVal(x: Value): MaterialTypeStorage.Val = x.asInstanceOf[Val]
 
-  // Cotton
-  val Cotton_NoInfo = Val(
+    val NoMaterialInfo = Val(
     id = nextId,
+    group = MaterialGroupStorage.group0
+  )
+
+  // Cotton
+  nextId=100
+  val Cotton_NoInfo = Val(
+	id = nextId,
     group = MaterialGroupStorage.group1
   )
   val Cotton_Recycled = Val(
@@ -61,6 +67,7 @@ private object MaterialTypeStorage extends Enumeration {
   )
 
   // Polyester
+  nextId=200
   val Polyester_NoInfo = Val(
     id = nextId,
     group = MaterialGroupStorage.group3
@@ -77,8 +84,14 @@ private object MaterialTypeStorage extends Enumeration {
     id = nextId,
     group = MaterialGroupStorage.group9
   )
+  val Polyester_Recycled = Val( // same as Polyester_ChemicallyRecycled
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
+
 
   // Polyamid
+  nextId=300
   val Polyamid_NoInfo = Val(
     id = nextId,
     group = MaterialGroupStorage.group1
@@ -95,8 +108,14 @@ private object MaterialTypeStorage extends Enumeration {
     id = nextId,
     group = MaterialGroupStorage.group9
   )
+  val Polyamid_Recycled = Val( // same as Polyamid_ChemicallyRecycled 
+    id = nextId,
+    group = MaterialGroupStorage.group5
+  )
+
 
   //Wool
+  nextId=400
   val Wool_NoInfo = Val(
     id = nextId,
     group = MaterialGroupStorage.group1 
@@ -119,6 +138,7 @@ private object MaterialTypeStorage extends Enumeration {
   )
 
   //Viscose
+  nextId=500
   val Viscose_NoInfo = Val(
     id = nextId,
     group = MaterialGroupStorage.group1 
@@ -135,8 +155,14 @@ private object MaterialTypeStorage extends Enumeration {
     id = nextId,
     group = MaterialGroupStorage.group7
   )
+    val Viscose_Lenzing = Val( // same as val Viscose_FSC_or_PEFC 
+    id = nextId,
+    group = MaterialGroupStorage.group5 
+  )
+
 
   //Lyocell
+  nextId=600
   val Lyocell_NoInfo = Val(
     id = nextId,
     group = MaterialGroupStorage.group3 
@@ -145,8 +171,17 @@ private object MaterialTypeStorage extends Enumeration {
     id = nextId,
     group = MaterialGroupStorage.group9
   )
+  val Lyocell_FSC_PEFC = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
+  val Lyocell_Upcycled_FSC_PEFC = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group10
+  )
 
   //Flax
+  nextId=700
   val Flax_NoInfo = Val(
     id = nextId,
     group = MaterialGroupStorage.group3 
@@ -157,6 +192,7 @@ private object MaterialTypeStorage extends Enumeration {
   )
 
   //Hemp
+  nextId=800
   val Hemp_NoInfo = Val(
     id = nextId,
     group = MaterialGroupStorage.group3 
@@ -167,24 +203,28 @@ private object MaterialTypeStorage extends Enumeration {
   )
 
   //Silk
+  nextId=900
   val Silk_NoInfo = Val(
     id = nextId,
     group = MaterialGroupStorage.group3 
   )
 
   //Modal
+  nextId=1000
   val Modal = Val(
     id = nextId,
     group = MaterialGroupStorage.group5
   )
 
   //Acrylic
+  nextId=1100
   val Acrylic_NoInfo = Val(
     id = nextId,
     group = MaterialGroupStorage.group1
   )
 
   //Elastane
+  nextId=1200
   val Elastane_NoInfo = Val(
     id = nextId,
     group = MaterialGroupStorage.group1
@@ -195,34 +235,11 @@ private object MaterialTypeStorage extends Enumeration {
   )
 
   //Bamboo
+  nextId=1300
   val Bamboo = Val(
     id = nextId,
     group = MaterialGroupStorage.group5
   )
 
-  val NoMaterialInfo = Val(
-    id = nextId,
-    group = MaterialGroupStorage.group0
-  )
-
-  val Polyester_Recycled = Val( // same as Polyester_ChemicallyRecycled
-    id = nextId,
-    group = MaterialGroupStorage.group7
-  )
-
-  val Polyamid_Recycled = Val( // same as Polyamid_ChemicallyRecycled 
-    id = nextId,
-    group = MaterialGroupStorage.group5
-  )
-
-  val Viscose_Lenzing = Val( // same as val Viscose_FSC_or_PEFC 
-    id = nextId,
-    group = MaterialGroupStorage.group5 
-  )
-
-  val Lyocell_FSC_PEFC = Val(
-    id = nextId,
-    group = MaterialGroupStorage.group7
-  )
 
 }
