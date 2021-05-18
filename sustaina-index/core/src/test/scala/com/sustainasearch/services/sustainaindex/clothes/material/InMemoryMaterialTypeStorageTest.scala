@@ -6,8 +6,8 @@ class InMemoryMaterialTypeStorageTest extends WordSpec with Matchers {
 
   "InMemoryMaterialTypeStorage" should {
     "find MaterialTypeStorage.Val with id" in {
-      MaterialTypeStorage(0) shouldBe MaterialTypeStorage.Cotton_NoInfo
-      MaterialTypeStorage(14) shouldBe MaterialTypeStorage.Wool_NonChlorine
+      MaterialTypeStorage(100) shouldBe MaterialTypeStorage.Cotton_NoInfo
+      MaterialTypeStorage(401) shouldBe MaterialTypeStorage.Wool_NonChlorine
     }
 
     "provide group" in {
@@ -16,3 +16,4 @@ class InMemoryMaterialTypeStorageTest extends WordSpec with Matchers {
     }
   }
 }
+Aa

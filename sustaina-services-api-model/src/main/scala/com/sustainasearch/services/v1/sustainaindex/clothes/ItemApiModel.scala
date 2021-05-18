@@ -8,7 +8,6 @@ case class ItemApiModel(id: String,
                         countryCode: Option[String],
                         certifications: Option[Seq[Int]],
                         materials: Option[Seq[MaterialApiModel]],
-                        garmentWeight: Option[Float],
                         brand: Option[BrandApiModel])
 
 object ItemApiModel {
