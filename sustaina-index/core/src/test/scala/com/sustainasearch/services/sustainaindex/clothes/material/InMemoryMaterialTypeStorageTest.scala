@@ -16,4 +16,3 @@ class InMemoryMaterialTypeStorageTest extends WordSpec with Matchers {
     }
   }
 }
-Aa
