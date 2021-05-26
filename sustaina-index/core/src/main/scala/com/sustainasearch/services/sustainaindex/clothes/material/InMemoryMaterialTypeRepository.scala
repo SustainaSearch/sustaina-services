@@ -51,7 +51,7 @@ private object MaterialTypeStorage extends Enumeration {
   )
   val Cotton_Recycled = Val(
     id = nextId,
-    group = MaterialGroupStorage.group9
+    group = MaterialGroupStorage.group8
   )
   val Cotton_Ecological = Val(
     id = nextId,
@@ -82,7 +82,7 @@ private object MaterialTypeStorage extends Enumeration {
   )
   val Polyester_MechanicallyRecycled = Val(
     id = nextId,
-    group = MaterialGroupStorage.group9
+    group = MaterialGroupStorage.group8
   )
   val Polyester_Recycled = Val( // same as Polyester_ChemicallyRecycled
     id = nextId,
@@ -106,7 +106,7 @@ private object MaterialTypeStorage extends Enumeration {
   )
   val Polyamid_MechanicallyRecycled = Val(
     id = nextId,
-    group = MaterialGroupStorage.group9
+    group = MaterialGroupStorage.group8
   )
   val Polyamid_Recycled = Val( // same as Polyamid_ChemicallyRecycled 
     id = nextId,
@@ -134,7 +134,7 @@ private object MaterialTypeStorage extends Enumeration {
   )
   val Wool_Recycled = Val(
     id = nextId,
-    group = MaterialGroupStorage.group9
+    group = MaterialGroupStorage.group8
   )
 
   //Viscose
@@ -169,7 +169,7 @@ private object MaterialTypeStorage extends Enumeration {
   )
   val Lyocell_Recycled = Val(
     id = nextId,
-    group = MaterialGroupStorage.group9
+    group = MaterialGroupStorage.group8
   )
   val Lyocell_FSC_PEFC = Val(
     id = nextId,
@@ -177,7 +177,7 @@ private object MaterialTypeStorage extends Enumeration {
   )
   val Lyocell_Upcycled_FSC_PEFC = Val(
     id = nextId,
-    group = MaterialGroupStorage.group10
+    group = MaterialGroupStorage.group9
   )
 
   //Flax
@@ -241,5 +241,22 @@ private object MaterialTypeStorage extends Enumeration {
     group = MaterialGroupStorage.group5
   )
 
+  //SecondHand
+  nextId=1400
+  val SecondHand_OlderThan3 = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group10
+  )
+  val SecondHand_YoungerThan3 = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group9
+  )
+
+  // Upcycled
+  nextId=1500
+  val Upcycled_Material = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group9
+  )
 
 }

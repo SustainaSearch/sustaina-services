@@ -437,8 +437,8 @@ private object BrandStorage extends Enumeration {
 				 bleach_ban = 5,
 				 chloride_treatment_ban = 5,
 				 chloric_gas_bleach_ban = 5,
-				 chemical_restriction_lists = 10, // kolla med henne
-				 water_purification = 20,  // kolla om det fargas   
+				 chemical_restriction_lists = 10,
+				 water_purification = 20,
 				 tier_traceability = 20,
 				 circularity_points = 10, 
 
@@ -465,6 +465,46 @@ private object BrandStorage extends Enumeration {
 				 weaving_country = CountryStorage.PerfectScoreCountry.toCountry,
 				 weaving_renewable_energy = 100,
 				 couture_renewable_energy = 0,
+  )
+
+  val TheWiman_preloved = Val(
+				id = nextId,
+
+				// Processes
+				 no_perfluorinated_compounds_used = 5,
+				 no_added_biocides_for_antibacterial_purpose = 5,
+				 no_pvc_with_ftalates_used = 5,
+				 bleach_ban = 5,
+				 chloride_treatment_ban = 5,
+				 chloric_gas_bleach_ban = 5,
+				 chemical_restriction_lists = 10, 
+				 water_purification = 20, 
+				 tier_traceability = 20,
+				 circularity_points = 20, 
+
+				 //packaging
+				 recycled_packaging_percent = 5,
+
+				 //quality
+				 requirements_on_quality = 5,
+				 quality_testing = 5,
+
+				 // working conditions?
+				 no_sandblasting = 10,
+				 members_in_CRS_organisation = 10,
+				 minimum_wages = 10,
+				 safety_rules = 10,
+
+				 // Other
+				 fibers_country = CountryStorage.PerfectScoreCountry.toCountry,
+				 fibers_renewable_energy = 100,
+				 dyeing_country =  CountryStorage.PerfectScoreCountry.toCountry,
+				 dyeing_renewable_energy = 100,
+				 spinning_country = CountryStorage.PerfectScoreCountry.toCountry,
+				 spinning_renewable_energy = 100,
+				 weaving_country = CountryStorage.PerfectScoreCountry.toCountry,
+				 weaving_renewable_energy = 100,
+				 couture_renewable_energy = 100,
   )
 
 }
