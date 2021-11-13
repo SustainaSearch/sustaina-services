@@ -519,7 +519,7 @@ private object BrandStorage extends Enumeration {
 				 chloric_gas_bleach_ban = 5, // full pott pga GOTS certifiering av plagg
 				 chemical_restriction_lists = 10, // full pott pga GOTS certifiering av plagg
 				 water_purification = 20, // full pott pga GOTS certifiering av plagg
-				 tier_traceability = 5, // Vet bara tier1
+				 tier_traceability = 20, // Vet alla tiers via underproducent
 				 circularity_points = 0, // Nyproduktion
 
 				 //packaging
