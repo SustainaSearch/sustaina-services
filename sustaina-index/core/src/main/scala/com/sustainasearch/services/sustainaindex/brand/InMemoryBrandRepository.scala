@@ -507,4 +507,44 @@ private object BrandStorage extends Enumeration {
 				 couture_renewable_energy = 100,
   )
 
+    val MalinWinberg = Val(
+				id = nextId,
+
+				// Processes
+				 no_perfluorinated_compounds_used = 5, // no
+				 no_added_biocides_for_antibacterial_purpose = 5, // no
+				 no_pvc_with_ftalates_used = 5, // no
+				 bleach_ban = 0, // Todo: no answer,  no question
+				 chloride_treatment_ban = 5, // full pott pga GOTS certifiering av plagg
+				 chloric_gas_bleach_ban = 5, // full pott pga GOTS certifiering av plagg
+				 chemical_restriction_lists = 10, // full pott pga GOTS certifiering av plagg
+				 water_purification = 20, // full pott pga GOTS certifiering av plagg
+				 tier_traceability = 5, // Vet bara tier1
+				 circularity_points = 0, // Nyproduktion
+
+				 //packaging
+				 recycled_packaging_percent = 5,// Todo: chansat
+
+				 //quality
+				 requirements_on_quality = 10,// full pott pga GOTS certifiering av plagg
+				 quality_testing = 10,// // full pott pga GOTS certifiering av plagg
+
+				 // working conditions?
+				 no_sandblasting = 10, // no
+				 members_in_CRS_organisation = 10, // yes
+				 minimum_wages = 10, // full pott pga GOTS certifiering av plagg
+				 safety_rules = 10, // full pott pga GOTS certifiering av plagg
+
+				 // Other
+				 fibers_country = CountryStorage.India.toCountry, // unknown
+				 fibers_renewable_energy = 0, // 0 = use 100% of country energy mix
+				 dyeing_country =  CountryStorage.India.toCountry,
+				 dyeing_renewable_energy = 0, // 0 = use 100% of country energy mix
+				 spinning_country = CountryStorage.India.toCountry,
+				 spinning_renewable_energy = 0, // 0 = use 100% of country energy mix
+				 weaving_country = CountryStorage.Bangladesh.toCountry,
+				 weaving_renewable_energy = 1,// 0 = use 100% of country energy mix
+				 couture_renewable_energy = 1, // 0 = use 100% of country (in product data) energy mix 
+  )
+
 }

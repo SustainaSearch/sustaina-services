@@ -51,5 +51,5 @@ private object CertificationStorage extends Enumeration {
   val OekoTexStep = Val(nextId,       5,  0, 10, 0)
   val Svanen      = Val(nextId,      10, 10, 10, 0)
   val MadeInGreen = Val(nextId,      10,  0, 10, 0)
-
+  val FairTrade   = Val(nextId,       0,  0, 10, 0)
 }

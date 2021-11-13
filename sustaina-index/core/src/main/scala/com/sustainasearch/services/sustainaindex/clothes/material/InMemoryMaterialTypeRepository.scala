@@ -65,6 +65,10 @@ private object MaterialTypeStorage extends Enumeration {
     id = nextId,
     group = MaterialGroupStorage.group3
   )
+  val Cotton_GOTS = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
 
   // Polyester
   nextId=200
