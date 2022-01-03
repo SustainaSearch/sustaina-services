@@ -17,7 +17,7 @@ class InMemoryMaterialGroupRepository @Inject()(implicit ec: ExecutionContext) e
 
 }
 
-private object MaterialGroupStorage extends Enumeration {
+object MaterialGroupStorage extends Enumeration {
   private val MaxGroup = 10
   private val MaxPoints = 100
   private val StartPoints = 30
