@@ -41,7 +41,7 @@ object CountryStorage extends Enumeration {
 
 
   val NotAvailable = Val(
-    countryCode     = "NA",
+    countryCode     = "--",
     renewableEnergy = 0.0F,
     crc             = 0.0F
   )
@@ -161,6 +161,20 @@ object CountryStorage extends Enumeration {
     crc             = 67.9F
   )
 
+  val Mauritius = Val(
+    countryCode     = "MU",
+    renewableEnergy = 11.54F,
+    crc             = 75.3F
+  )
+
+   val Indonesia = Val(
+    countryCode     = "ID",
+    renewableEnergy = 36.88F,
+    crc             = 45.9F
+  )
+
+  // Country code is the ISO 3166-1 alpha-2 code - https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
+  
     val PerfectScoreCountry = Val( // used for test and if process step is skipped
     countryCode     = "XX",
     renewableEnergy = 100.0F,

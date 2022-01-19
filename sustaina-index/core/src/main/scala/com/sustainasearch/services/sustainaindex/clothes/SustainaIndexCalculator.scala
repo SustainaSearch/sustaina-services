@@ -128,24 +128,76 @@ class SustainaIndexCalculator @Inject()(implicit ec: ExecutionContext) {
   // ############# Process ###########################################
   
   def calculateProcessPoints(input: SustainaIndexInput, weight: Float): Float = {
-	// TODO move constants to brand data
-	val BRAND_PROCESS_MAX_INTERNAL_POINTS = 100.0F
-	val BRAND_PROCESS_TOP_SCORE = 100.0F
+	val PROCESS_MAX_INTERNAL_POINTS = 100.0F
+	val PROCESS_TOP_SCORE = 100.0F
 	
 	var points = 0.0F
+
+	var cert_no_perfluorinated_compounds = 0.0F
+	var cert_no_added_biocides = 0.0F
+	var cert_no_pvc_with_ftalates = 0.0F
+	var cert_no_bleach = 0.0F
+	var cert_no_chloride_treatment = 0.0F
+	var cert_no_chloric_gas_bleach = 0.0F
+	var cert_chemical_restriction_lists = 0.0F
+	var cert_water_purification = 0.0F
+	var cert_tier_traceability = 0.0F
+	var cert_circularity_points = 0.0F
+
+	var brand_no_perfluorinated_compounds = 0.0F
+	var brand_no_added_biocides = 0.0F
+	var brand_no_pvc_with_ftalates = 0.0F
+	var brand_no_bleach = 0.0F
+	var brand_no_chloride_treatment = 0.0F
+	var brand_no_chloric_gas_bleach = 0.0F
+	var brand_chemical_restriction_lists = 0.0F
+	var brand_water_purification = 0.0F
+	var brand_tier_traceability = 0.0F
+	var brand_circularity_points = 0.0F
+
+	// get certification points
+	if ( input.item.certifications.length > 0 ) {
+		for ( certification <- input.item.certifications ) {
+			cert_no_perfluorinated_compounds = math.max(cert_no_perfluorinated_compounds, certification.no_perfluorinated_compounds)
+			cert_no_added_biocides           = math.max(cert_no_added_biocides,           certification.no_added_biocides)
+			cert_no_pvc_with_ftalates        = math.max(cert_no_pvc_with_ftalates,        certification.no_pvc_with_ftalates)
+			cert_no_chloride_treatment       = math.max(cert_no_chloride_treatment,       certification.no_chloride_treatment)
+			cert_no_chloric_gas_bleach       = math.max(cert_no_chloric_gas_bleach,       certification.no_chloric_gas_bleach)
+			cert_no_bleach                   = math.max(cert_no_bleach,                   certification.no_bleach)
+			cert_chemical_restriction_lists  = math.max(cert_chemical_restriction_lists,  certification.chemical_restriction_lists)
+			cert_water_purification          = math.max(cert_water_purification,          certification.water_purification)
+			cert_tier_traceability           = math.max(cert_tier_traceability,           certification.tier_traceability)
+			cert_circularity_points          = math.max(cert_circularity_points,          certification.circularity_points)
+		}
+	}
+
+	// get brand points
 	if (input.item.brand.isDefined) {
 		var brand = input.item.brand.get
-		points = (brand.no_perfluorinated_compounds_used 
-				+ brand.no_added_biocides_for_antibacterial_purpose
-				+ brand.no_pvc_with_ftalates_used
-				+ brand.bleach_ban
-				+ brand.chloride_treatment_ban
-				+ brand.chloric_gas_bleach_ban
-				+ brand.chemical_restriction_lists
-				+ brand.water_purification
-				+ brand.tier_traceability
-				+ brand.circularity_points).toFloat * BRAND_PROCESS_TOP_SCORE / BRAND_PROCESS_MAX_INTERNAL_POINTS
+		brand_no_perfluorinated_compounds = brand.no_perfluorinated_compounds 
+		brand_no_added_biocides           = brand.no_added_biocides
+		brand_no_pvc_with_ftalates        = brand.no_pvc_with_ftalates
+		brand_no_chloride_treatment       = brand.no_chloride_treatment
+		brand_no_chloric_gas_bleach       = brand.no_chloric_gas_bleach
+		brand_no_bleach                   = brand.no_bleach
+		brand_chemical_restriction_lists  = brand.chemical_restriction_lists
+		brand_water_purification          = brand.water_purification
+		brand_tier_traceability           = brand.tier_traceability
+		brand_circularity_points          = brand.circularity_points
 	}
+
+	// calculate points, use max from brand/certification in each category
+	points = (math.max(brand_no_perfluorinated_compounds, cert_no_perfluorinated_compounds)
+			+ math.max(brand_no_added_biocides,           cert_no_added_biocides)
+			+ math.max(brand_no_pvc_with_ftalates,        cert_no_pvc_with_ftalates)
+			+ math.max(brand_no_chloride_treatment,       cert_no_chloride_treatment)
+			+ math.max(brand_no_chloric_gas_bleach,       cert_no_chloric_gas_bleach)
+			+ math.max(brand_no_bleach,                   cert_no_bleach)
+			+ math.max(brand_chemical_restriction_lists,  cert_chemical_restriction_lists)
+			+ math.max(brand_water_purification,          cert_water_purification)
+			+ math.max(brand_tier_traceability,           cert_tier_traceability)
+			+ math.max(brand_circularity_points,          cert_circularity_points)
+			).toFloat * PROCESS_TOP_SCORE / PROCESS_MAX_INTERNAL_POINTS
 
 	points.toFloat * weight
   }
@@ -153,31 +205,84 @@ class SustainaIndexCalculator @Inject()(implicit ec: ExecutionContext) {
   // ############# Quality ###########################################
   
   def calculateQualityPoints(input: SustainaIndexInput, weight: Float): Float = {
-	// TODO move constants to certification data
-	val BRAND_QUALITY_MAX_INTERNAL_POINTS = 20.0F
-	val BRAND_QUALITY_TOP_SCORE = 100.0F
+	val QUALITY_MAX_INTERNAL_POINTS = 20.0F
+	val QUALITY_TOP_SCORE = 100.0F
 	
 	var points = 0.0F
-	if (input.item.brand.isDefined) {
-		var brand = input.item.brand.get
-		points = (brand.requirements_on_quality + brand.quality_testing).toFloat * BRAND_QUALITY_TOP_SCORE / BRAND_QUALITY_MAX_INTERNAL_POINTS
+
+	var cert_requirements_on_quality = 0.0F
+	var cert_requirements_quality_testing = 0.0F
+
+	var brand_requirements_on_quality = 0.0F
+	var brand_quality_testing = 0.0F
+
+	// get certification points
+	if ( input.item.certifications.length > 0 ) {
+		for ( certification <- input.item.certifications ) {
+			cert_requirements_on_quality      = math.max(cert_requirements_on_quality,      certification.requirements_on_quality)
+			cert_requirements_quality_testing = math.max(cert_requirements_quality_testing, certification.requirements_quality_testing)
+		}
 	}
 
+	// get brand points
+	if (input.item.brand.isDefined) {
+		var brand = input.item.brand.get
+		brand_requirements_on_quality = brand.requirements_on_quality
+		brand_quality_testing         = brand.quality_testing
+	}
+
+	// calculate points, use max from brand/certification in each category
+	points = (math.max(brand_requirements_on_quality, cert_requirements_on_quality)
+			+ math.max(brand_quality_testing,         cert_requirements_quality_testing)
+			 ).toFloat * QUALITY_TOP_SCORE / QUALITY_MAX_INTERNAL_POINTS
+	
 	points.toFloat * weight
   }
 
   // ############# Working Conditions ################################
   
   def calculateWorkingConditionPoints(input: SustainaIndexInput, weight: Float): Float = {
-	// TODO move constants to certification data
-	val BRAND_WORKING_CONDITIONS_MAX_INTERNAL_POINTS = 40.0F
-	val BRAND_WORKING_CONDITIONS_TOP_SCORE = 100.0F
+	
+	val WORKING_CONDITIONS_MAX_INTERNAL_POINTS = 40.0F
+	val WORKING_CONDITIONS_TOP_SCORE = 100.0F
+
+	var cert_no_sandblasting = 0.0F
+	var cert_CRS_membership = 0.0F
+	var cert_minimum_wages = 0.0F
+	var cert_safety_rules = 0.0F
+
+	var brand_no_sandblasting = 0.0F
+	var brand_CRS_membership = 0.0F
+	var brand_minimum_wages = 0.0F
+	var brand_safety_rules = 0.0F
 
 	var points = 0.0F
+	
+	// get certification points
+	if ( input.item.certifications.length > 0 ) {
+		for ( certification <- input.item.certifications ) {
+			cert_no_sandblasting = math.max(cert_no_sandblasting, certification.no_sandblasting)
+			cert_CRS_membership  = math.max(cert_CRS_membership, certification.CRS_membership)
+			cert_minimum_wages   = math.max(cert_minimum_wages, certification.minimum_wages)
+			cert_safety_rules    = math.max(cert_safety_rules, certification.safety_rules)
+		}
+	}
+
+	// get brand points
 	if (input.item.brand.isDefined) {
 		var brand = input.item.brand.get
-		points = (brand.no_sandblasting + brand.members_in_CRS_organisation + brand.minimum_wages + brand.safety_rules).toFloat * BRAND_WORKING_CONDITIONS_TOP_SCORE / BRAND_WORKING_CONDITIONS_MAX_INTERNAL_POINTS 
+		brand_no_sandblasting = brand.no_sandblasting
+		brand_CRS_membership  = brand.CRS_membership
+		brand_minimum_wages   = brand.minimum_wages
+		brand_safety_rules    = brand.safety_rules
 	}
+
+	points = (math.max(cert_no_sandblasting, brand_no_sandblasting) + 
+			  math.max(cert_CRS_membership,  brand_CRS_membership) + 
+			  math.max(cert_minimum_wages,   brand_minimum_wages) + 
+			  math.max(cert_safety_rules,    brand_safety_rules)
+			 ).toFloat * WORKING_CONDITIONS_TOP_SCORE / WORKING_CONDITIONS_MAX_INTERNAL_POINTS 
+	
 
 	points.toFloat * weight
   }
@@ -185,15 +290,29 @@ class SustainaIndexCalculator @Inject()(implicit ec: ExecutionContext) {
   // ############# Packaging #########################################
   
   def calculatePackagingPoints(input: SustainaIndexInput, weight: Float): Float = {
-    // TODO move constants to brand data
-	val BRAND_PACKAGING_MAX_INTERNAL_POINTS = 10.0F
-	val BRAND_PACKAGING_TOP_SCORE = 100.0F
+    // TODO move constants
+	val PACKAGING_MAX_INTERNAL_POINTS = 10.0F
+	val PACKAGING_TOP_SCORE = 100.0F
+
+	var cert_packaging_points = 0.0F
+	var brand_packaging_points = 0.0F
 
 	var points = 0.0F
+
+	// get certification points
+	if ( input.item.certifications.length > 0 ) {
+		for ( certification <- input.item.certifications ) {
+			cert_packaging_points = math.max(cert_packaging_points, certification.packaging_points)
+		}
+	}
+
+	// get brand points
 	if (input.item.brand.isDefined) {
 		var brand = input.item.brand.get
-		points = brand.recycled_packaging_percent.toFloat * BRAND_PACKAGING_TOP_SCORE / BRAND_PACKAGING_MAX_INTERNAL_POINTS 
+		brand_packaging_points = brand.packaging_points
 	}
+
+	points = (math.max(cert_packaging_points, brand_packaging_points)).toFloat * PACKAGING_TOP_SCORE / PACKAGING_MAX_INTERNAL_POINTS 
 	points.toFloat * weight
   }
 

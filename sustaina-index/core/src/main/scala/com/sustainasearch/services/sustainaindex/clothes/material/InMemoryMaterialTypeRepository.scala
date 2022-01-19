@@ -26,13 +26,17 @@ class InMemoryMaterialTypeRepository @Inject()(materialGroupRepository: Material
   }
 }
 
-private object MaterialTypeStorage extends Enumeration {
+object MaterialTypeStorage extends Enumeration {
 
   case class Val(
                   override val id: Int,
                   group: MaterialGroupStorage.Val
                 ) extends super.Val(id) {
 
+  def toMaterialType: MaterialType = MaterialType(
+      id = id,
+      group = group.toMaterialGroup
+    )
 
   }
 
@@ -92,7 +96,10 @@ private object MaterialTypeStorage extends Enumeration {
     id = nextId,
     group = MaterialGroupStorage.group7
   )
-
+  val Polyester_REPREVE = Val( // same as Polyester_ChemicallyRecycled
+    id = nextId,
+    group = MaterialGroupStorage.group8
+  )
 
   // Polyamid
   nextId=300
@@ -116,7 +123,14 @@ private object MaterialTypeStorage extends Enumeration {
     id = nextId,
     group = MaterialGroupStorage.group5
   )
-
+  val Polyamid_Econyl = Val( // same as Polyamid_ChemicallyRecycled 
+    id = nextId,
+    group = MaterialGroupStorage.group5
+  )
+    val Polyamid_Nylon_NoInfo = Val( 
+    id = nextId,
+    group = MaterialGroupStorage.group1
+  )
 
   //Wool
   nextId=400
@@ -140,6 +154,11 @@ private object MaterialTypeStorage extends Enumeration {
     id = nextId,
     group = MaterialGroupStorage.group8
   )
+  val Wool_ResponsibleWoolStandard = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group1
+  )
+
 
   //Viscose
   nextId=500
@@ -183,6 +202,14 @@ private object MaterialTypeStorage extends Enumeration {
     id = nextId,
     group = MaterialGroupStorage.group9
   )
+  val Lyocell_TENCEL = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
+  val Lyocell_SeaCell_LT = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
 
   //Flax
   nextId=700
@@ -219,6 +246,18 @@ private object MaterialTypeStorage extends Enumeration {
     id = nextId,
     group = MaterialGroupStorage.group5
   )
+  val Modal_SeaCell_MT = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group5
+  )
+  val Modal_TENCEL = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group5
+  )
+  val Modal_Lenzing = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group5
+  )
 
   //Acrylic
   nextId=1100
@@ -229,13 +268,21 @@ private object MaterialTypeStorage extends Enumeration {
 
   //Elastane
   nextId=1200
-  val Elastane_NoInfo = Val(
+  val Elastane_Spandex_NoInfo = Val(
     id = nextId,
     group = MaterialGroupStorage.group1
   )
-  val Elastane_Biobased = Val(
+  val Elastane_Spandex_Biobased = Val(
     id = nextId,
     group = MaterialGroupStorage.group5
+  )
+  val Elastane_Spandex_ROICA_EF = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group7
+  )
+  val Elastane_Spandex_ROICA = Val(
+    id = nextId,
+    group = MaterialGroupStorage.group3
   )
 
   //Bamboo
