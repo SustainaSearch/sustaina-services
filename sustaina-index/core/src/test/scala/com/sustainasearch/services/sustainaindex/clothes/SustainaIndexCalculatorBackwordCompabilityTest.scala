@@ -121,6 +121,34 @@ class SustainaIndexCalculatorBackwordCompatibilityTest extends WordSpec with Mat
       }
     }
 
+    "calculate sustaina index for Fairly" in {
+      val input = SustainaIndexInput(
+        tenant = Tenant(id = "1", host = "host_1"),
+        item = Item(
+          id = "pid1",
+          country = Option(CountryStorage.India.toCountry),
+          certifications = Seq.empty,
+          materials = Seq(Material(MaterialTypeStorage.Hemp_NoInfo.toMaterialType, 45.0F),
+                          Material(MaterialTypeStorage.Flax_NoInfo.toMaterialType, 20.0F),
+                          Material(MaterialTypeStorage.Lyocell_NoInfo.toMaterialType, 35.0F)),
+          brand = Option(BrandStorage.Fairly.toBrand)
+        )
+      )
+      
+    val eventualResult = underTest.calculateSustainaIndex(input)
+        whenReady(eventualResult) { result =>
+        result shouldBe Success(SustainaIndex(
+                0.36879315972328186F,
+                15.300000190734863F,
+                10F,
+                5F,
+                2.799999952316284F,
+                2.0999999046325684F,
+                0.2903200089931488F,
+                1.3889999389648438F))
+      }
+    }
+
   }
 
 }

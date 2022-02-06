@@ -79,14 +79,14 @@ object CertificationStorage extends Enumeration {
 
   implicit def valueToCertificationVal(x: Value): CertificationStorage.Val = x.asInstanceOf[Val]
   //                                [---    Process                      --][p ][Quality][working cond]
-  val BlueSign    = Val(nextId,       0,  0,  0,  0,  0,  0, 10,  0, 20,  0,  0,  0,  0,  0, 10, 10,  0)
-  val EUEcoLabel  = Val(nextId,       0,  0,  0,  0,  0,  0, 10,  0, 20,  0,  0, 10, 10,  0, 10, 10,  0)
-  val BraMiljoval = Val(nextId,       0,  0,  0,  0,  0,  0, 10,  0, 20,  0,  0, 10, 10,  0, 10, 10,  0)
-  val GOTS        = Val(nextId,       0,  0,  0,  0,  0,  0, 10,  0, 20,  0,  0, 10, 10,  0, 10, 10,  0)
-  val OekoTex100  = Val(nextId,       0,  0,  0,  0,  0,  0,  5,  0, 20,  0,  0,  0,  0,  0, 10, 10,  0)
-  val OekoTexStep = Val(nextId,       0,  0,  0,  0,  0,  0,  5,  0, 20,  0,  0,  0,  0,  0,  0,  0,  0)
-  val Svanen      = Val(nextId,       0,  0,  0,  0,  0,  0, 10,  0, 20,  0,  0, 10, 10,  0, 10, 10,  0)
-  val MadeInGreen = Val(nextId,       0,  0,  0,  0,  0,  0, 10,  0, 20,  0,  0,  0,  0,  0, 10, 10,  0)
+  val BlueSign    = Val(nextId,       0,  0,  0,  0,  0,  0, 10, 20, 20,  0,  0,  0,  0,  0, 10, 10,  0)
+  val EUEcoLabel  = Val(nextId,       5,  5,  5,  0,  0,  0, 10, 20, 20,  0,  0, 10, 10,  0, 10, 10,  0)
+  val BraMiljoval = Val(nextId,       5,  5,  5,  0,  0,  0, 10, 20, 20,  0,  0, 10, 10,  0, 10, 10,  0)
+  val GOTS        = Val(nextId,       5,  5,  5,  0,  0,  0, 10, 20, 20,  0,  0, 10, 10, 10, 10, 10,  0)
+  val OekoTex100  = Val(nextId,       0,  0,  0,  0,  0,  0,  5,  0, 20,  0,  0,  0,  0,  0,  0, 10,  0)
+  val OekoTexStep = Val(nextId,       0,  0,  0,  0,  0,  0,  5, 20, 20,  0,  0,  0,  0,  0, 10,  0,  0)
+  val Svanen      = Val(nextId,       5,  5,  5,  0,  0,  0, 10, 20,  0,  0,  0, 10, 10,  0, 10, 10,  0)
+  val MadeInGreen = Val(nextId,       0,  0,  0,  0,  0,  0, 10, 20,  0,  0,  0,  0,  0,  0, 10, 10,  0)
   val FairTrade   = Val(nextId,       0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 10, 10, 10, 10)
 
   // val BlueSign    = Val(nextId,      10,  0, 10, 0)

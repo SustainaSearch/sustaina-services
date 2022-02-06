@@ -587,4 +587,44 @@ object BrandStorage extends Enumeration {
 				 couture_renewable_energy = 0, // 0 = use 100% of country (in product data) energy mix 
   )
 
+  val Fairly = Val( 
+				id = nextId,
+
+				// Processes
+				 no_perfluorinated_compounds = 5, // no
+				 no_added_biocides = 5, // no
+				 no_pvc_with_ftalates = 5, // no
+				 no_bleach = 0, // Todo: no answer,  no question
+				 no_chloride_treatment = 0,
+				 no_chloric_gas_bleach = 0,
+				 chemical_restriction_lists = 0,
+				 water_purification = 0, 
+				 tier_traceability = 10, 
+				 circularity_points = 0, 
+
+				 //packaging
+				 packaging_points = 7,//
+
+				 //quality
+				 requirements_on_quality = 5,
+				 quality_testing = 5,
+
+				 // working conditions?
+				 no_sandblasting = 10,
+				 CRS_membership = 0,
+				 minimum_wages = 3,
+				 safety_rules = 3,
+
+				 // Other
+				 fibers_country = CountryStorage.NotAvailable.toCountry, // unknown
+				 fibers_renewable_energy = -1, // 0 = use 100% of country energy mix
+				 dyeing_country =  CountryStorage.NotAvailable.toCountry,
+				 dyeing_renewable_energy = -1, // 0 = use 100% of country energy mix
+				 spinning_country = CountryStorage.India.toCountry,
+				 spinning_renewable_energy = -1, // 0 = use 100% of country energy mix
+				 weaving_country = CountryStorage.India.toCountry,
+				 weaving_renewable_energy = 0,// 0 = use 100% of country energy mix
+				 couture_renewable_energy = 22, // 0 = use 100% of country (in product data) energy mix 
+  )
+
 }
