@@ -148,6 +148,32 @@ class SustainaIndexCalculatorBackwordCompatibilityTest extends WordSpec with Mat
                 1.3889999389648438F))
       }
     }
+    "calculate sustaina index for TheWiman_slowCollectionPart2" in {
+      val input = SustainaIndexInput(
+        tenant = Tenant(id = "1", host = "host_1"),
+        item = Item(
+          id = "pid1",
+          country = Option(CountryStorage.Sweden.toCountry),
+          certifications = Seq.empty,
+          materials = Seq(Material(MaterialTypeStorage.Wool_Recycled.toMaterialType, 80.0F),
+                          Material(MaterialTypeStorage.Polyamid_Recycled.toMaterialType, 20.0F)),
+          brand = Option(BrandStorage.TheWiman_slowCollectionPart2.toBrand)
+        )
+      )
+      
+    val eventualResult = underTest.calculateSustainaIndex(input)
+        whenReady(eventualResult) { result =>
+        result shouldBe Success(SustainaIndex(
+                0.7014749050140381F,
+                24.53999900817871F,
+                26F,
+                5F,
+                3.5F,
+                3F,
+                4.522492408752441F,
+                3.5849997997283936F))
+      }
+    }
 
   }
 
