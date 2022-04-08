@@ -387,7 +387,7 @@ object BrandStorage extends Enumeration {
   )
 
   val TheWiman_standard = Val(
-				id = nextId,
+				id = nextId, // id = 7
 
 				// Processes
 				 no_perfluorinated_compounds = 5,
@@ -428,7 +428,7 @@ object BrandStorage extends Enumeration {
   )
 
   val TheWiman_upcycled = Val(
-				id = nextId,
+				id = nextId, // id = 8
 
 				// Processes
 				 no_perfluorinated_compounds = 5,
@@ -468,7 +468,7 @@ object BrandStorage extends Enumeration {
   )
 
   val TheWiman_preloved = Val(
-				id = nextId,
+				id = nextId, // id = 9
 
 				// Processes
 				 no_perfluorinated_compounds = 5,
@@ -508,7 +508,7 @@ object BrandStorage extends Enumeration {
   )
 
     val MalinWinberg = Val(
-				id = nextId,
+				id = nextId, // id = 10
 
 				// Processes
 				 no_perfluorinated_compounds = 5, // no
@@ -548,7 +548,7 @@ object BrandStorage extends Enumeration {
   )
 
       val OnePeople = Val( // TODO check all parameters
-				id = nextId,
+				id = nextId, // id = 11
 
 				// Processes
 				 no_perfluorinated_compounds = 5, // no
@@ -559,15 +559,15 @@ object BrandStorage extends Enumeration {
 				 no_chloric_gas_bleach = 0,
 				 chemical_restriction_lists = 0,
 				 water_purification = 0, 
-				 tier_traceability = 0, 
+				 tier_traceability = 5, 
 				 circularity_points = 0, 
 
 				 //packaging
 				 packaging_points = 5,// Todo: chansat
 
 				 //quality
-				 requirements_on_quality = 0,
-				 quality_testing = 0,
+				 requirements_on_quality = 5,
+				 quality_testing = 5,
 
 				 // working conditions?
 				 no_sandblasting = 0,
@@ -588,7 +588,7 @@ object BrandStorage extends Enumeration {
   )
 
   val Fairly = Val( 
-				id = nextId,
+				id = nextId, // id = 12
 
 				// Processes
 				 no_perfluorinated_compounds = 5, // no
@@ -625,6 +625,46 @@ object BrandStorage extends Enumeration {
 				 weaving_country = CountryStorage.India.toCountry,
 				 weaving_renewable_energy = 0,// 0 = use 100% of country energy mix
 				 couture_renewable_energy = 22, // 0 = use 100% of country (in product data) energy mix 
+  )
+
+  val TheWiman_slowCollectionPart2 = Val( 
+				id = nextId, // id = 13
+
+				// Processes
+				 no_perfluorinated_compounds = 5, // no
+				 no_added_biocides = 5, // no
+				 no_pvc_with_ftalates = 5, // no
+				 no_bleach = 0, // Todo: no answer,  no question
+				 no_chloride_treatment = 0,
+				 no_chloric_gas_bleach = 0,
+				 chemical_restriction_lists = 10, // all tiers
+				 water_purification = 20, // all tiers
+				 tier_traceability = 20, // all tiers
+				 circularity_points = 0, 
+
+				 //packaging
+				 packaging_points = 10,// standard
+
+				 //quality
+				 requirements_on_quality = 5, // recycled materals (and wool)
+				 quality_testing = 5, // recycled materals (and wool)
+
+				 // working conditions?
+				 no_sandblasting = 10, // no
+				 CRS_membership = 0,
+				 minimum_wages = 5, // EU
+				 safety_rules = 5, // EU
+
+				 // Other
+				 fibers_country = CountryStorage.EuropeanUnion.toCountry, // unknown
+				 fibers_renewable_energy = 0, // 0 = use 100% of country energy mix
+				 dyeing_country =  CountryStorage.Italy.toCountry,
+				 dyeing_renewable_energy = 90, // 0 = use 100% of country energy mix
+				 spinning_country = CountryStorage.Italy.toCountry,
+				 spinning_renewable_energy = 90, // 0 = use 100% of country energy mix
+				 weaving_country = CountryStorage.Italy.toCountry,
+				 weaving_renewable_energy = 90,// 0 = use 100% of country energy mix
+				 couture_renewable_energy = 50, // 0 = use 100% of country (in product data) energy mix 
   )
 
 }
