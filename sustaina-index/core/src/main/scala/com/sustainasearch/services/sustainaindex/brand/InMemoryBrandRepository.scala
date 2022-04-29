@@ -598,7 +598,7 @@ object BrandStorage extends Enumeration {
 				 no_chloride_treatment = 0,
 				 no_chloric_gas_bleach = 0,
 				 chemical_restriction_lists = 0,
-				 water_purification = 0, 
+				 water_purification = 5,
 				 tier_traceability = 10, 
 				 circularity_points = 0, 
 
